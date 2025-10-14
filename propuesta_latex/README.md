@@ -1,10 +1,41 @@
 # Propuesta de Plataforma de Scraping - Documento LaTeX
 
-Este directorio contiene la propuesta técnica en formato LaTeX basada en el documento MVP de scraping.
+Este directorio contiene dos versiones de la propuesta en formato LaTeX basada en el documento MVP de scraping.
 
-## Archivos
+## ⭐ Versiones Disponibles
 
-- `propuesta_scraping.tex` - Documento principal en LaTeX
+### Versión 2 (Ejecutiva) - **RECOMENDADA PARA PRESENTACIÓN**
+- **Archivo:** `propuesta_scraping_v2_ejecutiva.tex`
+- **PDF:** `propuesta_scraping_v2_ejecutiva.pdf` (17 páginas, 171KB)
+- **Audiencia:** Ejecutivos, sponsors, tomadores de decisión
+- **Características:**
+  - Decisiones críticas al inicio
+  - Página de highlights con 5 beneficios
+  - Análisis de costo de inacción (\$386K-896K/año)
+  - Casos de éxito cuantificados
+  - Lenguaje ejecutivo (detalles técnicos en anexo)
+  - ROI claro: 476%-1,409% en año 2
+
+### Versión 1 (Técnica)
+- **Archivo:** `propuesta_scraping.tex`
+- **PDF:** `propuesta_scraping.pdf` (18 páginas, 175KB)
+- **Audiencia:** Equipos técnicos y de implementación
+- **Características:**
+  - Arquitectura detallada
+  - Stack tecnológico completo
+  - Modelo de datos SQL
+  - Especificaciones de implementación
+
+📄 **Ver [COMPARACION_VERSIONES.md](COMPARACION_VERSIONES.md) para análisis detallado de diferencias**
+
+## Archivos en este Directorio
+
+- `propuesta_scraping_v2_ejecutiva.tex` ⭐ - Versión ejecutiva
+- `propuesta_scraping_v2_ejecutiva.pdf` ⭐ - PDF ejecutivo
+- `propuesta_scraping.tex` - Versión técnica
+- `propuesta_scraping.pdf` - PDF técnico
+- `Makefile` - Automatización de compilación
+- `COMPARACION_VERSIONES.md` - Comparativa de versiones
 - `README.md` - Este archivo
 
 ## Compilación
