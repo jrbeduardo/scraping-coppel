@@ -198,3 +198,4 @@ Para preguntas o sugerencias sobre este proyecto, por favor contactar al equipo 
 **Última actualización**: 2025-10-13
 **Versión**: 1.0.1 (Bugfix: round() error)
 # scraping-coppel
+# scraping-coppel
