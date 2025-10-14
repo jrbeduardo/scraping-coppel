@@ -89,8 +89,8 @@
 \begin{center}
 \fbox{\begin{minipage}{0.85\textwidth}
 \centering
-\textbf{Inversión:} \$112.5K (única vez) + \$1.4K/mes\\
-\textbf{ROI:} Break-even en 2-4 meses\\
+\textbf{Inversión:} [CAPEX] (única vez) + [OPEX]/mes\\
+\textbf{ROI:} A calcular con datos de negocio\\
 \textbf{Tiempo:} 12 semanas hasta operación completa\\
 \textbf{Confianza en éxito:} Alta (80\%)
 \end{minipage}}
@@ -111,8 +111,8 @@ Captura automática de precios cada 24 horas. Datos frescos y confiables vs el p
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue, title=\textbf{2. Mejora Dramática en Cobertura}]
-\textbf{70-85\%} de productos con información de competidores vs \textbf{46\%} actual.\\
-\textcolor{successgreen}{\textbf{+52\% de mejora}} = más decisiones informadas.
+\textbf{Target: 70-85\%} de productos con información de competidores vs \textbf{46\%} actual del proveedor.\\
+\textcolor{successgreen}{\textbf{Mejora significativa}} = más decisiones informadas.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=successgreen!10, colframe=successgreen, title=\textbf{3. Reacción en Tiempo Real}]
@@ -142,10 +142,10 @@ Eliminamos dependencia de proveedor que no cumple. Pipeline propio, bajo nuestro
 
 \begin{tcolorbox}[colback=lightgray, colframe=black]
 \textbf{Requerido para:} Esta semana (18 octubre 2025)\\
-\textbf{Presupuesto:} \$112,500 USD (CAPEX) + \$17,160 USD/año (OPEX)\\
+\textbf{Presupuesto:} [CAPEX\_TOTAL] (CAPEX) + [OPEX\_ANUAL] (OPEX/año)\\
 \textbf{Impacto si se retrasa:}
 \begin{itemize}[leftmargin=*]
-    \item Cada mes = \$3,000-8,000 adicionales al proveedor deficiente
+    \item Cada mes = [COSTO\_PROVEEDOR\_MENSUAL] adicionales al proveedor deficiente
     \item Q4 2025 sin datos confiables para temporada crítica
     \item Equipo disponible puede reasignarse a otros proyectos
 \end{itemize}
@@ -225,7 +225,7 @@ Construiremos una plataforma interna que:
 \subsection{¿Por Qué Ahora?}
 
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{Costo de inacción:} Cada mes = \$3K-8K en pagos al proveedor + oportunidades perdidas
+    \item \textbf{Costo de inacción:} Cada mes = [COSTO\_PROVEEDOR\_MENSUAL] en pagos al proveedor + oportunidades perdidas
     \item \textbf{Timing crítico:} Q4 2025 es período de ventas clave - necesitamos datos confiables
     \item \textbf{Equipo listo:} Personal disponible y comprometido
     \item \textbf{Tecnología probada:} Stack técnico maduro, riesgos mitigables
@@ -275,15 +275,15 @@ Dependencia & Total & Cero & \textcolor{successgreen}{\textbf{✓}} \\
 \hline
 \textbf{COSTO ANUAL} & & & \\
 \hline
-Año 1 & \$36K-96K & \$129.7K & -- \\
+Año 1 & [COSTO\_PROVEEDOR\_ANUAL] & [CAPEX] + [OPEX] & A calcular \\
 \hline
-Año 2+ & \$36K-96K & \$17.2K & \textcolor{successgreen}{\textbf{-52\% a -82\%}} \\
+Año 2+ & [COSTO\_PROVEEDOR\_ANUAL] & [OPEX] & A calcular \\
 \hline
 \end{tabularx}
 \caption{Comparativa integral de capacidades y costos}
 \end{table}
 
-\textbf{Conclusión:} El MVP propio supera al proveedor actual en todos los aspectos operativos, con ROI positivo desde el año 2.
+\textbf{Conclusión:} El MVP propio supera al proveedor actual en todos los aspectos operativos. ROI a calcular con datos reales del negocio.
 
 % ============================================
 % COSTO DE NO ACTUAR
@@ -298,53 +298,53 @@ Año 2+ & \$36K-96K & \$17.2K & \textcolor{successgreen}{\textbf{-52\% a -82\%}}
 \begin{tabularx}{\textwidth}{|X|r|}
 \hline
 \rowcolor{dangerred!20}
-\textbf{Concepto} & \textbf{Costo Anual (USD)} \\
+\textbf{Concepto} & \textbf{Variable a Completar} \\
 \hline
-\textbf{Pagos continuos al proveedor deficiente} & \$36,000 - 96,000 \\
+\textbf{Pagos continuos al proveedor deficiente} & [COSTO\_PROVEEDOR\_ANUAL] \\
 \hline
-\textbf{Pérdida de margen por reacciones tardías} & \$200,000 - 500,000 \\
+\textbf{Pérdida de margen por reacciones tardías} & [PERDIDA\_MARGEN\_RETRASOS] \\
 \small{Retrasos de días/semanas en detectar cambios de competidores} & \\
 \hline
-\textbf{Negociaciones débiles con marcas} & \$150,000 - 300,000 \\
+\textbf{Negociaciones débiles con marcas} & [COSTO\_NEGOCIACION\_DEBIL] \\
 \small{Sin evidencia histórica sólida para justificar mejores términos} & \\
 \hline
-\textbf{Decisiones con información incompleta} & Incalculable \\
+\textbf{Decisiones con información incompleta} & [COSTO\_INFO\_INCOMPLETA] \\
 \small{54\% de productos sin comparativa = estrategias subóptimas} & \\
 \hline
 \textbf{Dependencia creciente del proveedor} & Riesgo estratégico \\
 \small{Mayor lock-in, menor poder de negociación futuro} & \\
 \hline
 \rowcolor{dangerred!30}
-\textbf{COSTO TOTAL ESTIMADO} & \textbf{\$386K - 896K+} \\
+\textbf{COSTO TOTAL ESTIMADO} & \textbf{[SUMA\_TOTAL]} \\
 \hline
 \end{tabularx}
-\caption{Análisis de costo de inacción}
+\caption{Análisis de costo de inacción - Variables a completar con finanzas}
 \end{table}
 
 \begin{tcolorbox}[colback=warningyellow!20, colframe=warningyellow, title=\textbf{Análisis de Oportunidad}]
-\textbf{Inversión MVP:} \$112.5K (única vez) + \$17.2K/año\\
-\textbf{Costo de no actuar:} \$386K - 896K/año\\
-\textbf{Beneficio neto (desde año 2):} \textcolor{successgreen}{\textbf{\$369K - 879K/año}}
+\textbf{Inversión MVP:} [CAPEX\_TOTAL] (única vez) + [OPEX\_ANUAL]/año\\
+\textbf{Costo de no actuar:} [SUMA\_TOTAL]/año\\
+\textbf{Beneficio neto (desde año 2):} \textcolor{successgreen}{\textbf{A calcular}}
 
 \vspace{0.3cm}
-\textbf{ROI:} Cada dólar invertido retorna \$3-8 anuales desde el año 2.
+\textbf{ROI:} A calcular con datos reales. Completar Anexo B con equipo de finanzas.
 \end{tcolorbox}
 
 \subsection{Casos de Uso Probados en Otras Organizaciones}
 
 \begin{tcolorbox}[colback=successgreen!10, colframe=successgreen]
 \textbf{Caso 1: Protección de Margen}\\
-``Detectamos que Competidor X bajó 15\% en categoría Refrigeradores → reaccionamos en 2 horas → protegimos \$50K en margen mensual''
+``Detectamos que competidor bajó precios [X\%] en categoría clave → reaccionamos en [Y horas] → protegimos [AHORRO\_MARGEN] en margen''
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue]
 \textbf{Caso 2: Oportunidad por Stock Out}\\
-``Identificamos 200 SKUs donde somos únicos con stock disponible → optimizamos precio dinámicamente → +\$30K adicionales en el trimestre''
+``Identificamos [N\_SKUs] SKUs donde somos únicos con stock disponible → optimizamos precio dinámicamente → +[BENEFICIO\_OOS] adicionales''
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=successgreen!10, colframe=successgreen]
 \textbf{Caso 3: Negociación con Marcas}\\
-``Mostramos a fabricante que su MAP pricing no se respeta en 3 competidores (evidencia histórica de 6 meses) → negociamos rebate adicional de 2\% = \$80K/año''
+``Mostramos a fabricante que su MAP pricing no se respeta en [N] competidores (evidencia histórica) → negociamos rebate adicional de [X\%] = [BENEFICIO\_NEGOCIACION]/año''
 \end{tcolorbox}
 
 % ============================================
@@ -432,39 +432,41 @@ Año 2+ & \$36K-96K & \$17.2K & \textcolor{successgreen}{\textbf{-52\% a -82\%}}
 \begin{tabularx}{\textwidth}{|X|r|}
 \hline
 \rowcolor{lightgray}
-\textbf{Concepto} & \textbf{Monto (USD)} \\
+\textbf{Concepto} & \textbf{Variable} \\
 \hline
 \multicolumn{2}{|l|}{\textbf{CAPEX (Inversión Única)}} \\
 \hline
-Desarrollo del MVP (3.75 FTE × 3 meses × \$10K) & \$112,500 \\
+Desarrollo del MVP ([N\_FTE] FTE × [N\_MESES] meses × [COSTO\_FTE]) & [CAPEX\_DESARROLLO] \\
+\hline
+Setup inicial (infraestructura, licencias, etc.) & [CAPEX\_SETUP] \\
 \hline
 \rowcolor{lightgray}
-\textbf{Subtotal CAPEX} & \textbf{\$112,500} \\
+\textbf{Subtotal CAPEX} & \textbf{[CAPEX\_TOTAL]} \\
 \hline
 \multicolumn{2}{|c|}{} \\
 \hline
 \multicolumn{2}{|l|}{\textbf{OPEX (Mensual Recurrente)}} \\
 \hline
-Cómputo / Workers & \$300 \\
+Cómputo / Workers & [OPEX\_COMPUTO] \\
 \hline
-Almacenamiento (S3/GCS, Parquet) & \$100 \\
+Almacenamiento (S3/GCS, Parquet) & [OPEX\_STORAGE] \\
 \hline
-Proxies / IPs rotatorias & \$800 \\
+Proxies / IPs rotatorias & [OPEX\_PROXIES] \\
 \hline
-Monitoreo (logs/métricas) & \$100 \\
+Monitoreo (logs/métricas) & [OPEX\_MONITOR] \\
 \hline
-Orquestación (Prefect Cloud) & \$0 \\
+Orquestación (Prefect Cloud / alternativa) & [OPEX\_ORQUESTACION] \\
 \hline
-Contingencia (10\%) & \$130 \\
-\hline
-\rowcolor{lightgray}
-\textbf{Subtotal OPEX Mensual} & \textbf{\$1,430} \\
+Contingencia (10\%) & [OPEX\_CONTINGENCIA] \\
 \hline
 \rowcolor{lightgray}
-\textbf{Subtotal OPEX Anual} & \textbf{\$17,160} \\
+\textbf{Subtotal OPEX Mensual} & \textbf{[OPEX\_MENSUAL]} \\
+\hline
+\rowcolor{lightgray}
+\textbf{Subtotal OPEX Anual} & \textbf{[OPEX\_ANUAL]} \\
 \hline
 \end{tabularx}
-\caption{Desglose de inversión}
+\caption{Desglose de inversión - Completar con IT/Finanzas}
 \end{table}
 
 \subsection{Análisis de Retorno de Inversión}
@@ -478,38 +480,41 @@ Contingencia (10\%) & \$130 \\
 \hline
 \textbf{Inversión/Costos} & & & \\
 \hline
-CAPEX (única vez) & \$112,500 & -- & -- \\
+CAPEX (única vez) & [CAPEX\_TOTAL] & -- & -- \\
 \hline
-OPEX & \$17,160 & \$17,160 & \$17,160 \\
+OPEX & [OPEX\_ANUAL] & [OPEX\_ANUAL] & [OPEX\_ANUAL] \\
 \hline
 \rowcolor{lightgray}
-\textbf{Total Costos} & \textbf{\$129,660} & \textbf{\$17,160} & \textbf{\$17,160} \\
+\textbf{Total Costos} & \textbf{[SUMA\_A1]} & \textbf{[OPEX\_ANUAL]} & \textbf{[OPEX\_ANUAL]} \\
 \hline
 \textbf{Ahorros/Beneficios} & & & \\
 \hline
-Eliminación proveedor actual & -- & \$36K-96K & \$36K-96K \\
+Eliminación proveedor actual & -- & [COSTO\_PROVEEDOR\_ANUAL] & [COSTO\_PROVEEDOR\_ANUAL] \\
 \hline
-Mejora en reacción táctica & -- & \$50K-100K & \$50K-100K \\
+Mejora en reacción táctica & -- & [BENEFICIO\_REACCION] & [BENEFICIO\_REACCION] \\
 \hline
-Mejor negociación marcas & -- & \$30K-80K & \$30K-80K \\
+Mejor negociación marcas & -- & [BENEFICIO\_NEGOCIACION] & [BENEFICIO\_NEGOCIACION] \\
+\hline
+Otros beneficios cuantificables & -- & [OTROS\_BENEFICIOS] & [OTROS\_BENEFICIOS] \\
 \hline
 \rowcolor{lightgray}
-\textbf{Total Beneficios} & -- & \textbf{\$116K-276K} & \textbf{\$116K-276K} \\
+\textbf{Total Beneficios} & -- & \textbf{[SUMA\_BENEFICIOS]} & \textbf{[SUMA\_BENEFICIOS]} \\
 \hline
 \rowcolor{successgreen!20}
-\textbf{Beneficio Neto} & \textbf{-\$129,660} & \textbf{+\$99K-259K} & \textbf{+\$99K-259K} \\
+\textbf{Beneficio Neto} & \textbf{[RESULTADO\_A1]} & \textbf{[RESULTADO\_A2]} & \textbf{[RESULTADO\_A3]} \\
 \hline
 \end{tabularx}
-\caption{Proyección financiera a 3 años}
+\caption{Proyección financiera a 3 años - Completar con datos de negocio}
 \end{table}
 
-\begin{tcolorbox}[colback=successgreen!20, colframe=successgreen, title=\textbf{Conclusión Financiera}]
-\textbf{Break-even:} 2-4 meses en Año 2\\
-\textbf{ROI Año 2:} 476\% - 1,409\%\\
-\textbf{Ahorro acumulado (3 años):} \$168K - 518K
+\begin{tcolorbox}[colback=successgreen!20, colframe=successgreen, title=\textbf{Instrucciones para Cálculo de ROI}]
+\textbf{Paso 1:} Completar variables de costos con IT/Finanzas\\
+\textbf{Paso 2:} Estimar beneficios con equipos Comercial y Pricing\\
+\textbf{Paso 3:} Calcular Break-even = [CAPEX\_TOTAL] / ([SUMA\_BENEFICIOS] - [OPEX\_ANUAL])\\
+\textbf{Paso 4:} Calcular ROI = ([SUMA\_BENEFICIOS] - [OPEX\_ANUAL]) / [CAPEX\_TOTAL] × 100\%
 
 \vspace{0.3cm}
-\textbf{Si el proveedor cobra >\$5,000/mes:} El MVP se paga solo en menos de 6 meses.
+\textbf{Ver Anexo B} para plantilla detallada de cálculo de ROI.
 \end{tcolorbox}
 
 % ============================================
@@ -803,5 +808,188 @@ El sistema tiene 5 capas:
     \item \texttt{precios\_historicos}: Precio, disponibilidad, vendedor por fecha
     \item \texttt{matching}: Relación entre nuestros SKUs y SKUs de competidores
 \end{itemize}
+
+% ============================================
+% ANEXO B: VARIABLES PARA ROI
+% ============================================
+\newpage
+\section{Anexo B: Plantilla de Variables para Cálculo de ROI}
+
+Esta sección debe completarse con los equipos de Finanzas, IT y Comercial para calcular el ROI específico del proyecto.
+
+\subsection{Variables de Costos (Completar con IT/Finanzas)}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Variable} & \textbf{Valor} & \textbf{Fuente} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{CAPEX (Inversión Única)}} \\
+\hline
+{[}N\_FTE{]} - Número de FTEs requeridos & \_\_\_\_ & IT/PMO \\
+\hline
+{[}N\_MESES{]} - Duración del proyecto (meses) & 3-4 & Definido \\
+\hline
+{[}COSTO\_FTE{]} - Costo promedio por FTE/mes & \_\_\_\_ & Finanzas \\
+\hline
+{[}CAPEX\_SETUP{]} - Setup inicial & \_\_\_\_ & IT \\
+\hline
+{[}CAPEX\_TOTAL{]} - Total CAPEX & \_\_\_\_ & = Suma \\
+\hline
+\multicolumn{3}{|c|}{} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{OPEX (Operación Mensual)}} \\
+\hline
+{[}OPEX\_COMPUTO{]} - Cómputo/Workers & \_\_\_\_ & IT/Cloud \\
+\hline
+{[}OPEX\_STORAGE{]} - Almacenamiento & \_\_\_\_ & IT/Cloud \\
+\hline
+{[}OPEX\_PROXIES{]} - Proxies/IPs & \_\_\_\_ & IT \\
+\hline
+{[}OPEX\_MONITOR{]} - Monitoreo & \_\_\_\_ & IT \\
+\hline
+{[}OPEX\_ORQUESTACION{]} - Orquestación & \_\_\_\_ & IT \\
+\hline
+{[}OPEX\_CONTINGENCIA{]} - Contingencia 10\% & \_\_\_\_ & = 10\% suma \\
+\hline
+{[}OPEX\_MENSUAL{]} - Total mensual & \_\_\_\_ & = Suma \\
+\hline
+{[}OPEX\_ANUAL{]} - Total anual & \_\_\_\_ & = x12 \\
+\hline
+\end{tabularx}
+\caption{Variables de inversión}
+\end{table}
+
+\subsection{Variables del Proveedor Actual (Completar con Finanzas)}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Variable} & \textbf{Valor} & \textbf{Fuente} \\
+\hline
+{[}COSTO\_PROVEEDOR\_MENSUAL{]} & \_\_\_\_ & Contrato actual \\
+\hline
+{[}COSTO\_PROVEEDOR\_ANUAL{]} & \_\_\_\_ & Contrato actual \\
+\hline
+\end{tabularx}
+\caption{Costos del proveedor actual}
+\end{table}
+
+\subsection{Variables de Beneficios (Completar con Comercial/Pricing)}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|X|c|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Variable} & \textbf{Valor} & \textbf{Método de Estimación} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Beneficio 1: Reacciones Más Rápidas}} \\
+\hline
+{[}VENTAS\_CATEGORIAS{]} - Ventas categorías objetivo & \_\_\_\_ & Finanzas \\
+\hline
+{[}PCT\_GAPS{]} - \% tiempo con gap vs competidor & \_\_\_\_ & Pricing \\
+\hline
+{[}MEJORA\_MARGEN\_BPS{]} - Mejora margen (bps) & \_\_\_\_ & Comercial \\
+\hline
+{[}FACTOR\_VELOCIDAD{]} - Factor velocidad reacción & \_\_\_\_ & Estimado \\
+\hline
+{[}BENEFICIO\_REACCION{]} & \_\_\_\_ & = Fórmula* \\
+\hline
+\multicolumn{3}{|c|}{} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Beneficio 2: Negociación con Marcas}} \\
+\hline
+{[}COMPRAS\_MARCAS\_CLAVE{]} - Compras anuales & \_\_\_\_ & Finanzas \\
+\hline
+{[}PCT\_MEJORA\_TERMINOS{]} - \% mejora términos & \_\_\_\_ & Comercial \\
+\hline
+{[}BENEFICIO\_NEGOCIACION{]} & \_\_\_\_ & = Fórmula* \\
+\hline
+\multicolumn{3}{|c|}{} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Beneficio 3: Otros Beneficios}} \\
+\hline
+{[}PERDIDA\_MARGEN\_RETRASOS{]} & \_\_\_\_ & Comercial \\
+\hline
+{[}COSTO\_NEGOCIACION\_DEBIL{]} & \_\_\_\_ & Comercial \\
+\hline
+{[}COSTO\_INFO\_INCOMPLETA{]} & \_\_\_\_ & Estimado \\
+\hline
+{[}OTROS\_BENEFICIOS{]} & \_\_\_\_ & = Suma \\
+\hline
+\end{tabularx}
+\caption{Variables de beneficios}
+\end{table}
+
+\subsection{Fórmulas de Cálculo}
+
+\subsubsection*{Beneficio por Reacciones Más Rápidas}
+\begin{equation}
+\text{{[}BENEFICIO\_REACCION{]}} = \text{{[}VENTAS\_CATEGORIAS{]}} \times \text{{[}PCT\_GAPS{]}} \times \frac{\text{{[}MEJORA\_MARGEN\_BPS{]}}}{10000} \times \text{{[}FACTOR\_VELOCIDAD{]}}
+\end{equation}
+
+\subsubsection*{Beneficio por Negociación con Marcas}
+\begin{equation}
+\text{{[}BENEFICIO\_NEGOCIACION{]}} = \text{{[}COMPRAS\_MARCAS\_CLAVE{]}} \times \frac{\text{{[}PCT\_MEJORA\_TERMINOS{]}}}{100}
+\end{equation}
+
+\subsubsection*{Cálculo de ROI}
+\begin{equation}
+\text{ROI (\%)} = \frac{\text{{[}SUMA\_BENEFICIOS{]}} - \text{{[}OPEX\_ANUAL{]}}}{\text{{[}CAPEX\_TOTAL{]}}} \times 100
+\end{equation}
+
+\subsubsection*{Break-even (meses)}
+\begin{equation}
+\text{Break-even} = \frac{\text{{[}CAPEX\_TOTAL{]}}}{\frac{\text{{[}SUMA\_BENEFICIOS{]}} - \text{{[}OPEX\_ANUAL{]}}}{12}}
+\end{equation}
+
+\subsection{Ejemplo de Cálculo (Valores Ilustrativos)}
+
+\begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue, title=\textbf{Ejemplo No Vinculante}]
+\textit{Nota: Estos valores son solo para ilustrar el método de cálculo. Deben reemplazarse con datos reales.}
+
+\vspace{0.3cm}
+\textbf{Supuestos ejemplo:}
+\begin{itemize}[leftmargin=*]
+    \item Categorías objetivo: 15\% de ventas totales (\$10M/mes)
+    \item Gap detectable: 40\% del tiempo
+    \item Mejora de margen: 50 bps al reaccionar
+    \item Reacción 2x más rápida con plataforma propia
+\end{itemize}
+
+\textbf{Beneficio anual estimado:}
+\[
+= \$10M \times 15\% \times 40\% \times 0.5\% \times 2 = \$60K/año
+\]
+
+\textit{Este es solo un ejemplo. Los valores reales pueden ser mayores o menores según las condiciones específicas del negocio.}
+\end{tcolorbox}
+
+\subsection{Responsables de Completar Variables}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|X|c|}
+\hline
+\rowcolor{lightgray}
+\textbf{Área} & \textbf{Variables a Completar} & \textbf{Deadline} \\
+\hline
+IT / PMO & CAPEX, OPEX técnico, N\_FTE & Semana 1 \\
+\hline
+Finanzas & Costos FTE, proveedor actual, ventas & Semana 1 \\
+\hline
+Comercial / Pricing & Beneficios, márgenes, gaps & Semana 2 \\
+\hline
+Equipo conjunto & Validación de cálculo final ROI & Semana 2 \\
+\hline
+\end{tabularx}
+\caption{Plan para completar análisis financiero}
+\end{table}
 
 \end{document}
