@@ -1,0 +1,48 @@
+name: webscraping-analysis
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python version
+  - python=3.11
+
+  # Core data analysis libraries
+  - pandas
+  - numpy
+  - scipy
+
+  # Visualization
+  - matplotlib
+  - seaborn
+
+  # Jupyter environment
+  - jupyter
+  - ipykernel
+  - ipywidgets
+
+  # Statistical analysis
+  - statsmodels
+  - scikit-learn
+
+  # Data processing
+  - openpyxl
+  - xlrd
+
+  # Utilities
+  - tqdm
+  - python-dotenv
+
+  # Code quality
+  - black
+  - flake8
+
+  # Web scraping (if needed for future work)
+  - beautifulsoup4
+  - requests
+  - selenium
+
+  # pip packages
+  - pip
+  - pip:
+    - plotly>=5.0.0
+    - ydata-profiling>=4.0.0
