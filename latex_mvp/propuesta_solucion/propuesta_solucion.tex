@@ -152,67 +152,56 @@ Stack Tecnológico: Playwright + Prefect + Polars + DuckDB + FastAPI + React
 \section*{Resumen Ejecutivo}
 \addcontentsline{toc}{section}{Resumen Ejecutivo}
 
-\subsection*{Nautilus: Explorando las Profundidades del Comercio Electrónico}
+\textbf{Objetivo:} Construir Nautilus, plataforma de monitoreo de precios competitivos lista para producción en 3-4 meses.
 
-\textbf{Nautilus} es el nombre propuesto para la plataforma de monitoreo de precios competitivos de Coppel. Inspirado en el submarino del Capitán Nemo en \textit{``20,000 Leguas de Viaje Submarino''} de Julio Verne, el nombre evoca la exploración de las profundidades (deep web scraping), tecnología avanzada y capacidad de descubrimiento---características centrales de nuestra solución de inteligencia competitiva.
+Proponemos un MVP usando stack tecnológico probado: Playwright para automatización de navegadores, Prefect para orquestación y estrategias de proxy optimizadas. El enfoque híbrido combina servicios de scraping administrados con coincidencia de SKU y analítica personalizadas, equilibrando velocidad, costo y capacidad.
 
-Coppel puede construir un MVP de Nautilus listo para producción en 3-4 meses utilizando un stack tecnológico probado que combina automatización de navegadores con Playwright, orquestación con Prefect y estrategias de proxy optimizadas en costos. El enfoque híbrido recomendado---aprovechando servicios de scraping administrados para infraestructura mientras se construye coincidencia de SKU personalizada y analítica---equilibra velocidad, costo y capacidad, habilitando monitoreo diario de precios de 3-4 competidores a través de 2-3 categorías de productos con 95\%+ de frescura y 97\%+ de precisión.
+\textbf{Resultados esperados:} Monitoreo diario de 3-4 competidores en 2-3 categorías de productos con 95\%+ frescura, 97\%+ precisión y 85\%+ cobertura SKU.
 
-\subsection*{Puntos Clave}
+\subsection*{Métricas Clave del Proyecto}
 
 \begin{itemize}
-	\item \textbf{Cronograma:} 16 semanas (4 meses) hasta despliegue de producción
-	\item \textbf{Presupuesto MVP:} \$90-170K USD (personal, infraestructura, herramientas)
-	\item \textbf{Costos Operacionales:} \$600-900 mensuales (infraestructura + proxies + servicios)
-	\item \textbf{Equipo Requerido:} 3.75 FTE (ingenieros backend, especialista scraping, frontend, DevOps)
-	\item \textbf{Ahorro vs Comercial:} 50-80\% comparado con plataformas comerciales
+	\item \textbf{Cronograma:} 16 semanas hasta despliegue
+	\item \textbf{Presupuesto MVP:} \$90-170K USD
+	\item \textbf{Costos Operacionales:} \$600-900/mes
+	\item \textbf{Equipo:} 3.75 FTE
+	\item \textbf{Ahorro:} 50-80\% vs plataformas comerciales
+	\item \textbf{Stack:} Playwright, Prefect, Polars, DuckDB, FastAPI, React
 \end{itemize}
-
-\subsection*{Stack Tecnológico Recomendado}
-
-\begin{enumerate}
-	\item \textbf{Playwright} + playwright-stealth para scraping y anti-detección
-	\item \textbf{Prefect} para orquestación de workflows (más simple que Airflow)
-	\item \textbf{RapidFuzz} para matching de productos con fuzzy matching
-	\item \textbf{Polars} + \textbf{DuckDB} para procesamiento y analítica de datos
-	\item \textbf{FastAPI} para API backend (2x más rápido que Django)
-	\item \textbf{ScraperAPI} para gestión de proxies (simplifica infraestructura)
-	\item \textbf{React} + \textbf{Recharts} para dashboard y visualizaciones
-\end{enumerate}
 
 \newpage
 
-\section{Panorama de Plataformas Existentes: Opciones Comerciales y de Código Abierto}
+\section{Panorama de Plataformas: Comercial vs Open Source}
 
 El mercado de monitoreo de precios competitivos ofrece tanto plataformas comerciales llave en mano como herramientas flexibles de código abierto, cada una adecuada para diferentes necesidades organizacionales y plazos.
 
-\subsection{Las plataformas comerciales entregan valor inmediato a costo premium}
+\subsection{Plataformas Comerciales}
 
 \textbf{Plataformas de nivel empresarial} como Competera, Intelligence Node y DataWeave proporcionan soluciones integrales con garantías de precisión de datos del 95-99\% y eliminan la complejidad técnica. La plataforma impulsada por IA de Competera logra 98\% de precisión SLA y afirma un potencial de mejora de margen del 6\%, mientras que DataWeave sobresale en coincidencia de SKU con 95\%+ de precisión usando extracción de atributos basada en LLM. Intelligence Node monitorea el conjunto de datos de precios más grande del mundo y sirve a grandes minoristas como Macy's y Lenovo. Estas plataformas típicamente cuestan \$750-\$5,000+ mensuales pero reducen el tiempo de desarrollo a semanas en lugar de meses.
 
 \textbf{Soluciones de mercado medio} como Prisync ofrecen puntos de entrada más accesibles a \$99-\$799 mensuales para 100-5,000 productos, proporcionando seguimiento ilimitado de competidores con 3 actualizaciones diarias y motores de precios dinámicos. Minderest, el líder europeo, logra 99\%+ de calidad de datos y sirve a 11 de los 50 minoristas más grandes del mundo. Para empresas que priorizan velocidad al mercado y carecen de recursos técnicos profundos, estas plataformas proporcionan el camino más rápido hacia inteligencia competitiva.
 
-\subsection{Los frameworks de código abierto permiten personalización pero requieren inversión de ingeniería}
+\subsection{Frameworks Open Source}
 
-\textbf{Automatización de navegadores moderna} ha convergido en Playwright como el estándar de producción, superando alternativas con 20\% de ejecución más rápida que Selenium, soporte multi-navegador (Chrome, Firefox, Safari) y capacidades sofisticadas anti-detección. Lanzado por Microsoft en 2020, Playwright ha logrado 235\% de crecimiento año tras año y procesa 3.2 millones de descargas semanales de npm. Su mecanismo de auto-espera, interceptación de red y aislamiento de contexto lo hacen ideal para sitios de e-commerce pesados en JavaScript que renderizan precios dinámicamente.
+\textbf{Automatización de navegadores:} Playwright es el estándar de producción, con soporte multi-navegador y capacidades anti-detección. Sus mecanismos de auto-espera e interceptación de red lo hacen ideal para sitios de e-commerce con JavaScript dinámico.
 
 Scrapy sigue siendo la fundación para extracción de contenido estático, ofreciendo arquitectura asíncrona madura y manejando millones de páginas eficientemente. Para el MVP de Coppel dirigido a 3-4 competidores, \textbf{combinar Playwright para sitios protegidos (20\% de objetivos) con solicitudes HTTP más ligeras para sitios no protegidos (80\%) optimiza tanto costo como rendimiento}. Este enfoque híbrido reduce costos de infraestructura en 60-70\% comparado con scraping solo con navegadores.
 
-\textbf{Opciones de orquestación de trabajos} van desde herramientas empresariales pesadas hasta alternativas amigables para MVP. Apache Airflow domina con 78\% de adopción entre equipos de datos pero requiere días de configuración y gestión compleja de clusters. Prefect emerge como la \textbf{elección recomendada para MVPs de 3-4 meses}, ofreciendo funcionalidad comparable con configuración de menos de 30 minutos, ejecución de tareas 10x más rápida (4.9s vs 56s para Airflow en 40 tareas) y diseño Python-first. Dagster proporciona término medio para equipos de ingeniería de datos, mientras que Temporal se adapta a entornos políglotas que requieren Go o Java.
+\textbf{Orquestación:} Prefect es la elección recomendada para el MVP por su configuración rápida (<30 min), rendimiento superior y diseño Python-first. Apache Airflow requiere mayor complejidad de configuración.
 
-\subsection{Los servicios de scraping administrados cierran la brecha entre construir y comprar}
+\subsection{Servicios de Scraping Administrados}
 
-\textbf{Proveedores premium} como Bright Data y Oxylabs gestionan la infraestructura completa de scraping incluyendo redes de proxies residenciales (100M+ IPs), resolución de CAPTCHA y renderizado de JavaScript. Bright Data ofrece el pool de IPs más grande a través de 195 países con precios desde \$499 mensuales más uso, mientras que Oxylabs proporciona desbloqueadores web impulsados por IA comenzando en \$49 mensuales para 17,500 resultados. Estos servicios logran tasas de éxito del 95-99\% en sitios protegidos pero agregan \$500-\$5,000 mensuales a costos operacionales.
+\textbf{Proveedores premium} (Bright Data, Oxylabs) gestionan infraestructura completa: proxies residenciales, resolución de CAPTCHA y renderizado JavaScript. Costos: \$500-\$5,000/mes con tasas de éxito del 95-99\%.
 
-\textbf{Alternativas enfocadas en desarrolladores} como ScraperAPI y ScrapingBee proporcionan acceso basado en API más simple a precios más bajos (\$49-\$599 mensuales), manejando rotación de proxies y medidas anti-bot sin requerir experiencia en gestión de proxies. El marketplace de actores de Apify ofrece scrapers pre-construidos para sitios minoristas populares, habilitando el caso de estudio del fabricante documentado abajo para implementar monitoreo de 20 sitios web en solo 30 días.
+\textbf{Alternativas económicas} (ScraperAPI, ScrapingBee) ofrecen acceso basado en API a \$49-\$599/mes, manejando rotación de proxies y anti-bot automáticamente.
 
-Para el cronograma MVP de Coppel, \textbf{comenzar con ScraperAPI o ScrapingBee para sitios desafiantes mientras se construyen scrapers más simples internamente} proporciona el equilibrio óptimo. Este enfoque limita los costos de servicio administrado a \$200-\$800 mensuales mientras se mantienen tasas de éxito del 95\%+ en competidores protegidos.
+\textbf{Recomendación MVP:} Usar ScraperAPI o ScrapingBee para sitios desafiantes y construir scrapers simples internamente. Costo estimado: \$200-\$800/mes con tasa de éxito del 95\%+.
 
-\section{Arquitectura Técnica para Monitoreo de Precios a Escala de Producción}
+\section{Arquitectura Técnica del Sistema}
 
 Las plataformas exitosas de monitoreo de precios siguen una arquitectura de microservicios con separación clara entre capas de extracción, procesamiento, almacenamiento y presentación, habilitando escalamiento independiente y aislamiento de fallas.
 
-\subsection{Patrón de arquitectura central: Microservicios basados en eventos}
+\subsection{Arquitectura de Microservicios}
 
 La \textbf{arquitectura recomendada} se organiza alrededor de cinco servicios centrales:
 
