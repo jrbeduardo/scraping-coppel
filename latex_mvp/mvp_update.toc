@@ -1,0 +1,20 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Resumen}{3}{section.1}%
+\contentsline {section}{\numberline {2}Antecedentes y problema}{3}{section.2}%
+\contentsline {section}{\numberline {3}Objetivo del MVP (3--4 meses)}{3}{section.3}%
+\contentsline {section}{\numberline {4}Alcance del MVP (incluye / no incluye)}{3}{section.4}%
+\contentsline {section}{\numberline {5}Casos de uso habilitados}{4}{section.5}%
+\contentsline {section}{\numberline {6}Requerimientos y supuestos}{4}{section.6}%
+\contentsline {section}{\numberline {7}Entrega de datos y disponibilidad}{5}{section.7}%
+\contentsline {section}{\numberline {8}Arquitectura}{5}{section.8}%
+\contentsline {section}{\numberline {9}Modelo de datos}{5}{section.9}%
+\contentsline {section}{\numberline {10}KPIs y criterios de éxito (SLOs)}{6}{section.10}%
+\contentsline {section}{\numberline {11}Plan de trabajo (12 semanas)}{7}{section.11}%
+\contentsline {section}{\numberline {12}Equipo mínimo y roles}{7}{section.12}%
+\contentsline {section}{\numberline {13}Riesgos y mitigaciones}{8}{section.13}%
+\contentsline {section}{\numberline {14}Costos (\emph {drivers} y escenarios)}{8}{section.14}%
+\contentsline {section}{\numberline {15}Gobierno, auditoría y seguridad}{8}{section.15}%
+\contentsline {section}{\numberline {16}\emph {Checklist} para arrancar}{9}{section.16}%
+\contentsline {section}{\numberline {17}Decisiones solicitadas al \emph {sponsor}}{9}{section.17}%
+\contentsline {section}{\numberline {18}Glosario breve}{9}{section.18}%
+\contentsline {section}{\numberline {19}Anexo A -- Variables para estimar ROI (llenar con negocio)}{10}{section.19}%

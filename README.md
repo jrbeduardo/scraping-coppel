@@ -7,20 +7,36 @@ Este proyecto contiene el análisis de datos obtenidos mediante web scraping de 
 ## Estructura del Proyecto
 
 ```
-webscraping/
-├── environment.yml                 # Ambiente conda con dependencias
-├── README.md                       # Documentación principal
-├── analysis_notebook.ipynb         # Notebook de análisis exploratorio
-├── exact_match_data_*.csv         # Datos de productos con match exacto
-├── analyse_item_list_*.csv        # Datos detallados de análisis de ítems
-└── mvp_scraping_platform.md       # Especificaciones de la plataforma
+scraping-coppel/
+├── config/
+│   └── environment.yml            # Configuración del ambiente conda
+├── data/
+│   ├── raw/                       # Datos originales sin procesar
+│   │   ├── exact_match_data_*.csv
+│   │   └── analyse_item_list_*.csv
+│   └── processed/                 # Datos procesados y limpios
+├── docs/
+│   ├── CHANGELOG.md               # Historial de cambios
+│   ├── DICCIONARIO_DATOS.md       # Diccionario de campos
+│   ├── ESTRUCTURA_PROYECTO.txt    # Estructura detallada
+│   ├── mvp_scraping_platform.md   # Especificaciones de la plataforma
+│   ├── PROYECTO_RESUMEN.md        # Resumen ejecutivo del proyecto
+│   └── TROUBLESHOOTING.md         # Guía de solución de problemas
+├── notebooks/
+│   └── analysis_notebook.ipynb    # Notebook de análisis exploratorio
+├── scripts/
+│   ├── quick_analysis.py          # Script de análisis rápido
+│   └── start_jupyter.sh           # Script de inicio de Jupyter
+├── .gitignore
+└── README.md                      # Documentación principal
 ```
 
 ## Archivos de Datos
 
-Para información detallada de todos los campos, consulta el **[Diccionario de Datos](DICCIONARIO_DATOS.md)** completo.
+Para información detallada de todos los campos, consulta el [Diccionario de Datos](docs/DICCIONARIO_DATOS.md).
 
 ### 1. `exact_match_data_2025-10-10_Coppel Mx_ELECTRONICS.csv`
+**Ubicación**: `data/raw/`
 - **Registros**: 200 productos
 - **Columnas**: 10
 - **Tamaño**: ~50 KB
@@ -37,6 +53,7 @@ Para información detallada de todos los campos, consulta el **[Diccionario de D
   - `Difference`: Diferencia de precio con competencia
 
 ### 2. `analyse_item_list_Coppel Mx (8).csv`
+**Ubicación**: `data/raw/`
 - **Registros**: 107 productos
 - **Columnas**: 52
 - **Tamaño**: ~79 KB
@@ -59,7 +76,7 @@ Para información detallada de todos los campos, consulta el **[Diccionario de D
     - `Shipping_time` y `Shipping_fees`
     - `Product_emi_plan` (planes de financiamiento)
 
-**📚 Documentación completa**: Ver [DICCIONARIO_DATOS.md](DICCIONARIO_DATOS.md) para descripción detallada de cada campo, tipos de datos, valores posibles y ejemplos.
+**Documentación completa**: Ver [docs/DICCIONARIO_DATOS.md](docs/DICCIONARIO_DATOS.md) para descripción detallada de cada campo, tipos de datos, valores posibles y ejemplos.
 
 ## Instalación del Ambiente
 
@@ -67,7 +84,7 @@ Para información detallada de todos los campos, consulta el **[Diccionario de D
 
 ```bash
 # Crear el ambiente desde el archivo environment.yml
-conda env create -f environment.yml
+conda env create -f config/environment.yml
 
 # Activar el ambiente
 conda activate webscraping-analysis
@@ -80,7 +97,7 @@ python -c "import pandas; print(f'Pandas: {pandas.__version__}')"
 
 ```bash
 # Actualizar ambiente existente
-conda env update -f environment.yml --prune
+conda env update -f config/environment.yml --prune
 ```
 
 ## Uso del Proyecto
@@ -89,12 +106,12 @@ conda env update -f environment.yml --prune
 
 ```bash
 # Ejecutar análisis rápido en terminal
-./quick_analysis.py
+python scripts/quick_analysis.py
 
 # O con el ambiente conda
 source ~/anaconda3/etc/profile.d/conda.sh
 conda activate webscraping-analysis
-python quick_analysis.py
+python scripts/quick_analysis.py
 ```
 
 Este script genera un reporte ejecutivo rápido con:
@@ -107,13 +124,13 @@ Este script genera un reporte ejecutivo rápido con:
 ### Opción 2: Análisis Detallado con Jupyter Notebook
 
 ```bash
-# Opción A: Usar script de inicio (más fácil)
-./start_jupyter.sh
+# Opción A: Usar script de inicio
+bash scripts/start_jupyter.sh
 
 # Opción B: Inicio manual
 source ~/anaconda3/etc/profile.d/conda.sh
 conda activate webscraping-analysis
-jupyter notebook analysis_notebook.ipynb
+jupyter notebook notebooks/analysis_notebook.ipynb
 ```
 
 El notebook incluye:
@@ -180,7 +197,7 @@ El notebook incluye los siguientes análisis:
 
 ## Solución de Problemas
 
-Si encuentras algún error al ejecutar el análisis, consulta la [Guía de Troubleshooting](TROUBLESHOOTING.md) que incluye:
+Si encuentras algún error al ejecutar el análisis, consulta la [Guía de Troubleshooting](docs/TROUBLESHOOTING.md) que incluye:
 
 - ✅ Soluciones a errores comunes en Jupyter
 - ✅ Problemas con el ambiente conda
@@ -195,7 +212,7 @@ Si encuentras algún error al ejecutar el análisis, consulta la [Guía de Troub
 Para preguntas o sugerencias sobre este proyecto, por favor contactar al equipo de Data Science.
 
 ---
-**Última actualización**: 2025-10-13
-**Versión**: 1.0.1 (Bugfix: round() error)
+**Última actualización**: Noviembre 2025
+**Versión**: 2.0.0
 # scraping-coppel
 # scraping-coppel

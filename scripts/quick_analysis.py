@@ -27,12 +27,12 @@ def load_data():
     print_header("CARGANDO DATOS")
 
     df_exact = pd.read_csv(
-        'exact_match_data_2025-10-10_Coppel Mx_ELECTRONICS.csv',
+        '../data/raw/exact_match_data_2025-10-10_Coppel Mx_ELECTRONICS.csv',
         encoding='utf-8'
     )
 
-    df_detailed = pd.read_csv(
-        'analyse_item_list_Coppel Mx (8).csv',
+    df_items = pd.read_csv(
+        '../data/raw/analyse_item_list_Coppel Mx (8).csv',
         encoding='utf-8'
     )
 

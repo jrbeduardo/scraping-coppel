@@ -34,4 +34,4 @@ python -c "import pandas as pd; import numpy as np; import plotly; print(f'  - P
 echo -e "\n${GREEN}✓ Iniciando Jupyter Notebook...${NC}"
 echo -e "${BLUE}Presiona Ctrl+C para detener el servidor${NC}\n"
 
-jupyter notebook analysis_notebook.ipynb
+jupyter notebook ../notebooks/analysis_notebook.ipynb
