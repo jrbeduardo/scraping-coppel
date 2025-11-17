@@ -20,10 +20,29 @@ scraping-coppel/
 │   ├── DICCIONARIO_DATOS.md       # Diccionario de campos
 │   ├── ESTRUCTURA_PROYECTO.txt    # Estructura detallada
 │   ├── mvp_scraping_platform.md   # Especificaciones de la plataforma
+│   ├── mvp_update.md              # Actualización MVP
+│   ├── PROYECTO_COMPLETO.md       # Proyecto completo detallado
 │   ├── PROYECTO_RESUMEN.md        # Resumen ejecutivo del proyecto
-│   └── TROUBLESHOOTING.md         # Guía de solución de problemas
+│   └── propuesta_solucion.md      # Propuesta técnica completa (29 páginas)
+├── latex_mvp/                     # Documentos LaTeX profesionales
+│   ├── assets/                    # Recursos compartidos (logos)
+│   ├── mvp_update/                # Documento LaTeX MVP Update
+│   │   ├── mvp_update.tex         # Código fuente LaTeX
+│   │   ├── mvp_update.pdf         # PDF compilado (93KB)
+│   │   ├── Makefile               # Compilación automatizada
+│   │   └── assets/                # Recursos locales
+│   ├── propuesta_solucion/        # Propuesta Técnica Completa
+│   │   ├── propuesta_solucion.tex # Código fuente LaTeX
+│   │   ├── propuesta_solucion.pdf # PDF compilado (140KB, 29 páginas)
+│   │   ├── Makefile               # Compilación automatizada
+│   │   └── assets/                # Recursos locales
+│   └── README.md                  # Documentación LaTeX
 ├── notebooks/
 │   └── analysis_notebook.ipynb    # Notebook de análisis exploratorio
+├── propuesta_latex/               # Propuesta LaTeX con variables ROI
+│   ├── propuesta_scraping*.tex    # Versiones de propuesta
+│   ├── *.pdf                      # PDFs compilados
+│   └── VARIABLES_ROI.md           # Plantilla cálculo ROI
 ├── scripts/
 │   ├── quick_analysis.py          # Script de análisis rápido
 │   └── start_jupyter.sh           # Script de inicio de Jupyter

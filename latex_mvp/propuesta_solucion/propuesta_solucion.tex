@@ -1,0 +1,1052 @@
+% Documento generado a partir de docs/propuesta_solucion.md
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\geometry{margin=0.9in, top=0.8in, bottom=1in}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\setmainfont{DejaVu Sans}
+\setsansfont{DejaVu Sans}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{setspace}
+\setstretch{1.15}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{titlesec}
+\usepackage{newunicodechar}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{fancyvrb}
+
+% Paleta de colores corporativa
+\definecolor{brandBlue}{HTML}{1C42E8}
+\definecolor{brandYellow}{HTML}{F0D224}
+\definecolor{brandMediumBlue}{HTML}{05297A}
+\definecolor{brandDarkBlue}{HTML}{081754}
+\definecolor{brandLightBlue}{HTML}{1CA8F7}
+\definecolor{brandBeige}{HTML}{EEE8E3}
+\definecolor{brandWhite}{HTML}{FFFFFF}
+\definecolor{brandLightGrey}{HTML}{C9C9C9}
+\definecolor{brandGrey}{HTML}{8C8C8C}
+\definecolor{brandDarkGrey}{HTML}{4A4A4A}
+\definecolor{brandBlack}{HTML}{000000}
+
+% Configuración de enlaces
+\hypersetup{colorlinks=true, linkcolor=brandDarkBlue, urlcolor=brandLightBlue, citecolor=brandBlue}
+
+% Formato de encabezados ejecutivos
+\titleformat{\section}
+	{\color{brandDarkBlue}\Large\sffamily\bfseries}
+	{\thesection}{1em}
+	{}
+	[\vspace{0.2em}{\color{brandBlue}\titlerule[1.2pt]}]
+
+\titleformat{\subsection}
+	{\color{brandMediumBlue}\large\sffamily\bfseries}
+	{\thesubsection}{0.8em}
+	{}
+	[\vspace{0.1em}{\color{brandMediumBlue}\titlerule[0.8pt]}]
+
+\titleformat{\subsubsection}
+	{\color{brandBlue}\normalsize\sffamily\bfseries}
+	{\thesubsubsection}{0.6em}
+	{}
+	[]
+
+% Mapeo de caracteres Unicode
+\usepackage{amssymb}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{□}{\ensuremath{\Box}}
+\newunicodechar{×}{\ensuremath{\times}}
+
+% Configuración de listas profesionales
+\setlist[itemize,1]{label={\color{brandBlue}\textbullet}, leftmargin=1.5em, itemsep=0.3em}
+\setlist[itemize,2]{label={\color{brandMediumBlue}\textendash}, leftmargin=2em, itemsep=0.2em}
+\setlist[enumerate]{leftmargin=1.5em, itemsep=0.3em}
+
+% Configuración de bloques de código
+\lstset{
+	basicstyle=\ttfamily\small,
+	backgroundcolor=\color{brandBeige},
+	frame=single,
+	rulecolor=\color{brandGrey},
+	breaklines=true,
+	columns=fullflexible,
+	keepspaces=true,
+	xleftmargin=1em,
+	xrightmargin=1em,
+	showstringspaces=false
+}
+
+\begin{document}
+
+% PORTADA EJECUTIVA
+\thispagestyle{empty}
+\begin{center}
+	\IfFileExists{assets/logo-coppel.png}{%
+		\includegraphics[width=0.35\textwidth]{assets/logo-coppel.png}%
+	}{%
+		\textcolor{brandDarkBlue}{\Huge\bfseries COPPEL}
+	}
+\end{center}
+
+\vspace{0.3cm}
+{\color{brandBlue}\noindent\rule{\linewidth}{2.5pt}}
+\vspace{0.5cm}
+
+\begin{center}
+{\Huge\sffamily\bfseries\color{brandDarkBlue}
+Plataforma de Monitoreo de\\[0.3cm]
+Precios Competitivos\\[0.3cm]
+\Large Hoja de Ruta MVP de 3-4 Meses}
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{center}
+\begin{tabularx}{0.85\textwidth}{@{}>{\bfseries\color{brandMediumBlue}}l X@{}}
+\toprule
+Versión: & 1.0 (Propuesta Técnica Completa) \\
+\midrule
+Fecha: & Noviembre 2025 \\
+\midrule
+Objetivo: & Construir MVP listo para producción en 3-4 meses \\
+\midrule
+Alcance: & 3-4 competidores, 1,000-5,000 SKUs, monitoreo diario \\
+\midrule
+Métricas: & 95\%+ frescura, 97\%+ precisión, 85\%+ cobertura SKU \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+{\color{brandDarkGrey}\large\itshape
+Stack Tecnológico: Playwright + Prefect + Polars + DuckDB + FastAPI + React
+}
+\end{center}
+
+\vfill
+
+{\color{brandDarkBlue}\noindent\rule{\linewidth}{1pt}}
+
+\newpage
+
+% TABLA DE CONTENIDOS
+\tableofcontents
+\newpage
+
+% RESUMEN EJECUTIVO
+\section*{Resumen Ejecutivo}
+\addcontentsline{toc}{section}{Resumen Ejecutivo}
+
+Coppel puede construir un MVP de monitoreo de precios competitivos listo para producción en 3-4 meses utilizando un stack tecnológico probado que combina automatización de navegadores con Playwright, orquestación con Prefect y estrategias de proxy optimizadas en costos. El enfoque híbrido recomendado---aprovechando servicios de scraping administrados para infraestructura mientras se construye coincidencia de SKU personalizada y analítica---equilibra velocidad, costo y capacidad, habilitando monitoreo diario de precios de 3-4 competidores a través de 2-3 categorías de productos con 95\%+ de frescura y 97\%+ de precisión.
+
+\subsection*{Puntos Clave}
+
+\begin{itemize}
+	\item \textbf{Cronograma:} 16 semanas (4 meses) hasta despliegue de producción
+	\item \textbf{Presupuesto MVP:} \$90-170K USD (personal, infraestructura, herramientas)
+	\item \textbf{Costos Operacionales:} \$600-900 mensuales (infraestructura + proxies + servicios)
+	\item \textbf{Equipo Requerido:} 3.75 FTE (ingenieros backend, especialista scraping, frontend, DevOps)
+	\item \textbf{Ahorro vs Comercial:} 50-80\% comparado con plataformas comerciales
+\end{itemize}
+
+\subsection*{Stack Tecnológico Recomendado}
+
+\begin{enumerate}
+	\item \textbf{Playwright} + playwright-stealth para scraping y anti-detección
+	\item \textbf{Prefect} para orquestación de workflows (más simple que Airflow)
+	\item \textbf{RapidFuzz} para matching de productos con fuzzy matching
+	\item \textbf{Polars} + \textbf{DuckDB} para procesamiento y analítica de datos
+	\item \textbf{FastAPI} para API backend (2x más rápido que Django)
+	\item \textbf{ScraperAPI} para gestión de proxies (simplifica infraestructura)
+	\item \textbf{React} + \textbf{Recharts} para dashboard y visualizaciones
+\end{enumerate}
+
+\newpage
+
+\section{Panorama de Plataformas Existentes: Opciones Comerciales y de Código Abierto}
+
+El mercado de monitoreo de precios competitivos ofrece tanto plataformas comerciales llave en mano como herramientas flexibles de código abierto, cada una adecuada para diferentes necesidades organizacionales y plazos.
+
+\subsection{Las plataformas comerciales entregan valor inmediato a costo premium}
+
+\textbf{Plataformas de nivel empresarial} como Competera, Intelligence Node y DataWeave proporcionan soluciones integrales con garantías de precisión de datos del 95-99\% y eliminan la complejidad técnica. La plataforma impulsada por IA de Competera logra 98\% de precisión SLA y afirma un potencial de mejora de margen del 6\%, mientras que DataWeave sobresale en coincidencia de SKU con 95\%+ de precisión usando extracción de atributos basada en LLM. Intelligence Node monitorea el conjunto de datos de precios más grande del mundo y sirve a grandes minoristas como Macy's y Lenovo. Estas plataformas típicamente cuestan \$750-\$5,000+ mensuales pero reducen el tiempo de desarrollo a semanas en lugar de meses.
+
+\textbf{Soluciones de mercado medio} como Prisync ofrecen puntos de entrada más accesibles a \$99-\$799 mensuales para 100-5,000 productos, proporcionando seguimiento ilimitado de competidores con 3 actualizaciones diarias y motores de precios dinámicos. Minderest, el líder europeo, logra 99\%+ de calidad de datos y sirve a 11 de los 50 minoristas más grandes del mundo. Para empresas que priorizan velocidad al mercado y carecen de recursos técnicos profundos, estas plataformas proporcionan el camino más rápido hacia inteligencia competitiva.
+
+\subsection{Los frameworks de código abierto permiten personalización pero requieren inversión de ingeniería}
+
+\textbf{Automatización de navegadores moderna} ha convergido en Playwright como el estándar de producción, superando alternativas con 20\% de ejecución más rápida que Selenium, soporte multi-navegador (Chrome, Firefox, Safari) y capacidades sofisticadas anti-detección. Lanzado por Microsoft en 2020, Playwright ha logrado 235\% de crecimiento año tras año y procesa 3.2 millones de descargas semanales de npm. Su mecanismo de auto-espera, interceptación de red y aislamiento de contexto lo hacen ideal para sitios de e-commerce pesados en JavaScript que renderizan precios dinámicamente.
+
+Scrapy sigue siendo la fundación para extracción de contenido estático, ofreciendo arquitectura asíncrona madura y manejando millones de páginas eficientemente. Para el MVP de Coppel dirigido a 3-4 competidores, \textbf{combinar Playwright para sitios protegidos (20\% de objetivos) con solicitudes HTTP más ligeras para sitios no protegidos (80\%) optimiza tanto costo como rendimiento}. Este enfoque híbrido reduce costos de infraestructura en 60-70\% comparado con scraping solo con navegadores.
+
+\textbf{Opciones de orquestación de trabajos} van desde herramientas empresariales pesadas hasta alternativas amigables para MVP. Apache Airflow domina con 78\% de adopción entre equipos de datos pero requiere días de configuración y gestión compleja de clusters. Prefect emerge como la \textbf{elección recomendada para MVPs de 3-4 meses}, ofreciendo funcionalidad comparable con configuración de menos de 30 minutos, ejecución de tareas 10x más rápida (4.9s vs 56s para Airflow en 40 tareas) y diseño Python-first. Dagster proporciona término medio para equipos de ingeniería de datos, mientras que Temporal se adapta a entornos políglotas que requieren Go o Java.
+
+\subsection{Los servicios de scraping administrados cierran la brecha entre construir y comprar}
+
+\textbf{Proveedores premium} como Bright Data y Oxylabs gestionan la infraestructura completa de scraping incluyendo redes de proxies residenciales (100M+ IPs), resolución de CAPTCHA y renderizado de JavaScript. Bright Data ofrece el pool de IPs más grande a través de 195 países con precios desde \$499 mensuales más uso, mientras que Oxylabs proporciona desbloqueadores web impulsados por IA comenzando en \$49 mensuales para 17,500 resultados. Estos servicios logran tasas de éxito del 95-99\% en sitios protegidos pero agregan \$500-\$5,000 mensuales a costos operacionales.
+
+\textbf{Alternativas enfocadas en desarrolladores} como ScraperAPI y ScrapingBee proporcionan acceso basado en API más simple a precios más bajos (\$49-\$599 mensuales), manejando rotación de proxies y medidas anti-bot sin requerir experiencia en gestión de proxies. El marketplace de actores de Apify ofrece scrapers pre-construidos para sitios minoristas populares, habilitando el caso de estudio del fabricante documentado abajo para implementar monitoreo de 20 sitios web en solo 30 días.
+
+Para el cronograma MVP de Coppel, \textbf{comenzar con ScraperAPI o ScrapingBee para sitios desafiantes mientras se construyen scrapers más simples internamente} proporciona el equilibrio óptimo. Este enfoque limita los costos de servicio administrado a \$200-\$800 mensuales mientras se mantienen tasas de éxito del 95\%+ en competidores protegidos.
+
+\section{Arquitectura Técnica para Monitoreo de Precios a Escala de Producción}
+
+Las plataformas exitosas de monitoreo de precios siguen una arquitectura de microservicios con separación clara entre capas de extracción, procesamiento, almacenamiento y presentación, habilitando escalamiento independiente y aislamiento de fallas.
+
+\subsection{Patrón de arquitectura central: Microservicios basados en eventos}
+
+La \textbf{arquitectura recomendada} se organiza alrededor de cinco servicios centrales:
+
+\begin{itemize}
+	\item \textbf{Orquestación:} Programación de flujos de trabajo
+	\item \textbf{Extracción:} Workers de automatización de navegadores
+	\item \textbf{Procesamiento:} Transformación de datos
+	\item \textbf{Almacenamiento:} Capa de persistencia
+	\item \textbf{Gestión de proxies:} Rotación de IP con verificaciones de salud
+\end{itemize}
+
+Esta separación permite que el servicio de orquestación se ejecute continuamente mientras los workers de extracción escalan de cero a docenas basados en la profundidad de la cola, optimizando costos de infraestructura.
+
+Las instancias de Playwright en contenedores desplegadas vía Docker habilitan escalamiento horizontal, con cada contenedor manejando 5-10 contextos de navegador concurrentes. RabbitMQ distribuye trabajos de scraping a través del pool de workers, proporcionando encolado de tareas confiable con manejo de dead letter para intentos fallidos. Redis cachea datos accedidos frecuentemente y gestiona limitación de tasa, mientras que PostgreSQL almacena metadatos operacionales (estado de trabajos, catálogos de productos, reglas de alertas).
+
+Los datos scrapeados en crudo fluyen a S3 en formato Parquet, proporcionando almacenamiento columnar que comprime archivos CSV de 123MB a 10-20MB mientras habilita consultas analíticas rápidas.
+
+\subsection{El pipeline de datos sigue principios de arquitectura lambda}
+
+El \textbf{enfoque de doble camino} separa procesamiento por lotes (scrapes diarios completos) del procesamiento de flujo (cambios de precio en tiempo real que exceden umbrales). Los datos scrapeados aterrizan en S3 particionados por fecha, competidor y categoría, habilitando consulta eficiente de períodos de tiempo específicos sin escanear el conjunto de datos completo.
+
+DuckDB proporciona analítica SQL directamente sobre archivos Parquet sin requerir ETL, logrando rendimiento de consultas sub-segundo en millones de registros. Polars maneja transformaciones de datos 10-50x más rápido que Pandas a través de su núcleo Rust multi-hilo, haciéndolo ideal para procesar scrapes diarios de miles de productos.
+
+Para la escala inicial de Coppel (3-4 competidores, 2-3 categorías, probablemente 1,000-5,000 SKUs), Polars elimina la complejidad de gestión de clusters Spark mientras proporciona rendimiento suficiente. Apache Spark se vuelve necesario solo al escalar más allá de 50,000 SKUs o requerir streaming en tiempo real con latencia sub-minuto.
+
+\subsection{Stack tecnológico optimizado para entrega de 3-4 meses}
+
+\subsubsection{Browser automation: Playwright}
+
+Playwright proporciona la ejecución más rápida, arquitectura moderna y herramientas de depuración listas para producción. Su soporte multi-lenguaje (JavaScript, Python, Java, .NET) ofrece flexibilidad, aunque la integración Python se adapta a las probables habilidades del equipo de datos de Coppel.
+
+\textbf{Consideración de costos:} Cada instancia de navegador requiere 2-4GB RAM; presupuestar 1-2 VMs más grandes (4 vCPU, 8GB RAM) para scraping basado en navegador mientras se usan solicitudes HTTP ligeras en micro instancias (\$5-10 mensuales) para sitios no protegidos reduce costos de infraestructura en 70\%.
+
+\subsubsection{Job orchestration: Prefect}
+
+El diseño Python-first, UI moderna y configuración rápida de Prefect lo hacen \textbf{la elección clara de MVP} sobre la complejidad de Airflow. El nivel gratuito de Prefect Cloud maneja 20,000 ejecuciones de tareas mensuales, suficiente para la escala inicial de Coppel. El servicio de orquestación define flujos de trabajo como código, habilitando control de versiones y pruebas automatizadas de lógica de scraping.
+
+\subsubsection{Data processing: Polars + DuckDB}
+
+La combinación Polars + DuckDB elimina infraestructura pesada mientras proporciona ganancias de rendimiento de 10-50x sobre herramientas Python tradicionales. Polars maneja transformaciones en memoria (limpieza, normalización, coincidencia de SKU), mientras que DuckDB habilita analítica SQL en el data lake Parquet sin mover datos. Este enfoque difiere migraciones de bases de datos costosas hasta que sea verdaderamente necesario.
+
+\subsubsection{Storage architecture}
+
+Parquet en S3 sirve como la \textbf{fundación del data lake}, almacenando snapshots históricos completos a \$0.023 por GB mensual. PostgreSQL mantiene datos operacionales (cuentas de usuario, metadatos de trabajos, catálogo de productos, reglas de alertas), mientras que Redis cachea datos calientes y gestiona características en tiempo real (actualizaciones de dashboard, alertas de umbral).
+
+Este enfoque de tres niveles separa cargas de trabajo analíticas (DuckDB consultando Parquet) de cargas de trabajo operacionales (transacciones PostgreSQL), optimizando tanto costo como rendimiento.
+
+\subsubsection{Backend API: FastAPI}
+
+FastAPI entrega desarrollo 2x más rápido que Django para aplicaciones enfocadas en API, logrando 21,000+ solicitudes por segundo versus 3,500 de Django. Su generación automática de documentación OpenAPI acelera la integración frontend, mientras que el soporte async nativo maneja solicitudes de scraping concurrentes eficientemente. La capa API expone endpoints RESTful para disparar scrapes, consultar datos de precios, gestionar alertas y exportar reportes.
+
+\subsubsection{Frontend dashboard: React}
+
+React con Recharts proporciona la arquitectura basada en componentes necesaria para interfaces de filtrado complejas y visualizaciones interactivas de series de tiempo. Recharts logra el equilibrio óptimo para MVPs: menor complejidad que D3.js, suficiente personalización para dashboards profesionales y fuerte soporte TypeScript.
+
+\subsection{Costos estimados de infraestructura y asignación de equipo}
+
+\textbf{Costos operacionales mensuales} para la escala MVP de Coppel totalizan \$600-\$900:
+
+\begin{itemize}
+	\item Infraestructura: \$142 (VMs, Redis, base de datos)
+	\item Proxies: \$397 (mezcla optimizada datacenter/residencial)
+	\item Servicios: \$80 (resolución CAPTCHA y monitoreo)
+\end{itemize}
+
+Esto representa 50-80\% de ahorro versus externalizar a servicios de scraping administrados a \$1,500-\$3,000 mensuales para volumen equivalente.
+
+\textbf{Asignación de equipo} a través de los 3.75 FTE:
+
+\begin{itemize}
+	\item 1.5 FTE ingenieros backend (FastAPI, Prefect, base de datos)
+	\item 1.0 FTE especialista en scraping (Playwright, anti-detección)
+	\item 0.75 FTE desarrollador frontend (dashboard React)
+	\item 0.5 FTE DevOps (infraestructura, monitoreo)
+\end{itemize}
+
+El rol PM coordina a través de estos flujos, gestionando requerimientos de stakeholders y priorizando el conjunto de características MVP.
+
+\section{Manejo de Medidas Anti-Bot y Mantenimiento de Confiabilidad}
+
+Los sitios modernos de e-commerce despliegan tecnologías sofisticadas anti-bot que requieren contramedidas multi-capa para mantener confiabilidad de scraping en tasas de éxito del 95\%+.
+
+\subsection{La detección anti-bot opera a través de múltiples capas de fingerprinting}
+
+\textbf{Plataformas sofisticadas} como Cloudflare Bot Management, DataDome y PerimeterX combinan:
+
+\begin{itemize}
+	\item \textbf{Detección del lado del servidor:} Reputación IP, fingerprinting TLS, patrones HTTP/2, análisis de encabezados
+	\item \textbf{Verificación del lado del cliente:} APIs de navegador, fingerprinting canvas, WebGL, seguimiento de eventos
+\end{itemize}
+
+Estos sistemas logran 95\%+ de precisión en distinguir navegadores automatizados de humanos, haciendo scrapers Selenium ingenuos detectables en segundos.
+
+\subsection{El enfoque de bypass en capas equilibra costo y efectividad}
+
+\textbf{Comience con los métodos más baratos} y escale solo cuando esté bloqueado:
+
+\begin{enumerate}
+	\item Google Cache (gratis pero sin frescura)
+	\item Navegadores headless fortificados (Puppeteer stealth, undetected-chromedriver)
+	\item Solucionadores open-source (FlareSolverr, cloudscraper)
+	\item Servicios de solución premium (\$1,000-\$5,000/millón páginas)
+\end{enumerate}
+
+\textbf{La perspectiva crítica:} Reserve soluciones costosas para el 15-20\% de sitios competidores con protección sofisticada, usando solicitudes HTTP ligeras o automatización de navegador básica para el 80\% restante.
+
+\subsection{La estrategia de proxy sigue la escalera de costos}
+
+\textbf{El principio de escalera de proxy} minimiza costos al subir solo cuando sea necesario:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Nivel} & \textbf{Costo} \\
+\midrule
+Sin proxy & Gratis \\
+Proxies datacenter & \$0.10-\$0.50/GB \\
+Proxies residenciales & \$1-\$8/GB \\
+Proxies móviles & \$8-\$40/GB \\
+Desbloqueadores premium & \$1,000-\$5,000/millón req \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Para scraping diario de 100,000 productos}, una mezcla optimizada de 80\% datacenter y 20\% residencial cuesta aproximadamente \$111 mensuales versus \$375 para todo residencial.
+
+\textbf{Proveedores de proxy recomendados} basados en benchmarks 2025:
+
+\begin{itemize}
+	\item \textbf{Decodo} (Smartproxy): Mejor valor a 99.86\% éxito y \$3.50-\$1.50/GB
+	\item \textbf{Oxylabs}: Premium (99.82\% éxito, 0.41s respuesta) a \$4-\$2/GB
+	\item \textbf{SOAX/Bright Data}: Pools más grandes (155M+ IPs) a \$4-\$5/GB
+\end{itemize}
+
+\subsection{La ingeniería de confiabilidad previene fallas silenciosas}
+
+\textbf{Sistemas de respaldo multi-nivel} cuando una solicitud falla:
+
+\begin{enumerate}
+	\item Reintento simple con el mismo método
+	\item Cambiar a proxy residencial
+	\item Escalar a navegador headless con stealth
+	\item Involucrar servicio desbloqueador premium
+	\item Encolar para intervención manual
+\end{enumerate}
+
+\textbf{Monitoreo de tasas de éxito} en tiempo real: Objetivo >95\% con alertas disparando debajo de 90\%. Rastrear tasas de éxito separadamente por sitio competidor, tipo de proxy y método de scraping para identificar patrones específicos de falla.
+
+\textbf{Validación de calidad de datos} implementa verificaciones multi-capa:
+
+\begin{itemize}
+	\item Estructural (todos los campos requeridos presentes)
+	\item Validación de tipo (precios numéricos, fechas válidas)
+	\item Verificación de rango (precios dentro de límites razonables)
+	\item Consistencia (comparar con scrapes previos, señalar cambios >50\%)
+	\item Completitud (>98\% de productos esperados capturados)
+\end{itemize}
+
+\section{Coincidencia de SKU: Algoritmos y Enfoques de Implementación}
+
+La coincidencia precisa de SKU forma la fundación del monitoreo de precios competitivos, ya que productos mal emparejados hacen comparaciones de precios sin sentido. Lograr 95\%+ de precisión de coincidencia requiere un enfoque por niveles combinando identificadores exactos, coincidencia difusa de cadenas y puntuación de confianza.
+
+\subsection{La coincidencia por niveles equilibra precisión con cobertura}
+
+\subsubsection{Tier 1: Coincidencia exacta}
+
+Usando identificadores estandarizados (EAN-13, UPC-A, GTIN, MPN, ISBN) proporciona 100\% de precisión donde esté disponible. Las búsquedas directas de base de datos en identificadores normalizados---eliminando guiones y espacios, validando dígitos de verificación, convirtiendo entre formatos---emparejan aproximadamente 60-70\% de productos con datos limpios.
+
+\subsubsection{Tier 2: Coincidencia difusa}
+
+Aborda el 30-40\% de productos de e-commerce que carecen de identificadores estandarizados. \textbf{RapidFuzz} emerge como la librería recomendada para implementación MVP, entregando rendimiento 5-10x más rápido que FuzzyWuzzy con licencia MIT y mantenimiento activo.
+
+\textbf{Estrategia de implementación} combina múltiples señales con puntuación ponderada:
+
+\begin{itemize}
+	\item Coincidencia de marca: 25\% peso
+	\item Número de modelo: 30\% peso
+	\item Nombre de producto: 25\% peso
+	\item Proximidad de precio: 10\% peso
+	\item Alineación de categoría: 10\% peso
+\end{itemize}
+
+Productos puntuando arriba de 85 disparan aprobación automática, 70-85 señalan para revisión manual y debajo de 70 rechazan como no coincidencias.
+
+\subsection{Manejar identificadores faltantes requiere estrategias de respaldo}
+
+\textbf{La cascada de prioridad} intenta múltiples métodos en secuencia:
+
+\begin{enumerate}
+	\item Coincidencia directa EAN/UPC/GTIN
+	\item Coincidencia combinada MPN + Marca
+	\item Coincidencia difusa Marca + Modelo + Atributos Clave
+	\item Solo Nombre de Producto con umbral alto (90+)
+	\item Señalar para revisión manual
+\end{enumerate}
+
+\textbf{Técnicas de bloqueo} optimizan rendimiento reduciendo complejidad de comparación de O(n²) a niveles manejables. Solo comparar productos dentro de la misma categoría y prefijo de marca, reduciendo 1 millón × 1 millón = 1 billón de comparaciones a aproximadamente 1 mil millones (reducción 1,000x).
+
+\subsection{El cronograma de implementación práctica}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l X@{}}
+\toprule
+\textbf{Período} & \textbf{Actividades} \\
+\midrule
+Semanas 1-2 & Configuración pipeline, coincidencia exacta EAN/UPC/GTIN \\
+Semanas 3-4 & Instalación RapidFuzz, coincidencia difusa básica \\
+Semanas 5-6 & Puntuación multi-factor, bloqueo, manejo identificadores faltantes \\
+Semanas 7-8 & Interfaz revisión manual, batch processing, optimización \\
+Semanas 9-12 & Pruebas, ajuste umbrales, medición precisión/recall \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Métricas de éxito} para producción:
+
+\begin{itemize}
+	\item 80\%+ tasa de coincidencia (productos emparejados exitosamente)
+	\item 95\%+ precisión (coincidencias auto-aprobadas son correctas)
+	\item <15\% tasa de revisión manual (intervención humana necesaria)
+	\item <100ms por coincidencia de producto (objetivo de rendimiento)
+\end{itemize}
+
+\section{Optimización de Costos para Rotación de IP y Conectividad}
+
+La gestión estratégica de proxies y optimización de infraestructura reducen costos operacionales en 60-85\% mientras mantienen tasas de éxito requeridas y frescura de datos.
+
+\subsection{Los costos de infraestructura escalan con complejidad}
+
+\textbf{Comparación de proveedores cloud} para la arquitectura recomendada:
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Proveedor} & \textbf{Costo Mensual} \\
+\midrule
+AWS EC2 & \$108 \\
+DigitalOcean & \$96 \\
+Vultr & \$90 \\
+Hetzner (bare metal) & \$50-200 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{El premium de costo de navegador:} Scraping basado en navegador consume 2MB promedio por página versus 50-150KB para solicitudes HTTP---una diferencia de 10-40x. Usar navegadores exclusivamente para el 15-20\% de sitios que requieren JavaScript ahorra 60-80\% en costos de ancho de banda de proxy.
+
+\subsection{El presupuesto optimizado de operación diaria}
+
+\textbf{Para 100,000 productos scrapeados diariamente} con arquitectura optimizada:
+
+\begin{center}
+\begin{tabularx}{0.9\textwidth}{@{}l X r@{}}
+\toprule
+\textbf{Componente} & \textbf{Descripción} & \textbf{Costo} \\
+\midrule
+Infraestructura & VMs, Redis, PostgreSQL & \$142 \\
+Proxies & 70\% datacenter, 25\% residencial, 5\% premium & \$397 \\
+Servicios & CAPTCHA solving, monitoreo & \$80 \\
+\midrule
+\textbf{TOTAL} & & \textbf{\$619/mes} \\
+\textbf{Por 1K req} & & \textbf{\$0.21} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Esto representa \textbf{50-80\% de ahorro} versus servicios de scraping administrados.
+
+\section{Cumplimiento Legal y Prácticas de Scraping Responsable}
+
+El web scraping para inteligencia de precios competitivos opera dentro de un marco legal complejo pero navegable que ha evolucionado significativamente a través de precedentes 2025.
+
+\subsection{El precedente hiQ v. LinkedIn establece principios centrales}
+
+El caso hito abarcando 2017-2022 estableció que \textbf{scrapear datos públicamente disponibles no viola el Computer Fraud and Abuse Act (CFAA)}, el estatuto federal anti-hackeo. La Corte del 9º Circuito afirmó que acceder información pública---datos de precios visibles sin login---no constituye ``acceso no autorizado'' bajo ley criminal.
+
+Sin embargo, el acuerdo final responsabilizando a hiQ por violaciones de Términos de Servicio demuestra que la responsabilidad civil permanece a través de reclamos de incumplimiento de contrato, especialmente con acuerdos clickwrap que requieren aceptación explícita.
+
+\subsection{Robots.txt representa preferencias expresadas, no requerimientos legales}
+
+Aunque \textbf{no legalmente vinculante}, el archivo robots.txt comunica las preferencias de los propietarios de sitios web para comportamiento de crawler. Seguir estas directivas demuestra buena fe y reduce riesgo legal.
+
+\textbf{Mejores prácticas:}
+
+\begin{itemize}
+	\item Verificar \texttt{https://[sitio-objetivo].com/robots.txt} antes de scrapear
+	\item Respetar directivas disallow para todos los user-agents
+	\item Honrar configuraciones crawl-delay
+	\item Reverificar periódicamente conforme las políticas cambian
+\end{itemize}
+
+\subsection{Las prácticas de scraping responsable minimizan exposición legal}
+
+\textbf{Mejores prácticas técnicas:}
+
+\begin{itemize}
+	\item Limitación de tasa (1-3 segundos mínimo entre solicitudes)
+	\item Respetar directivas crawl-delay
+	\item Scrapear durante horas de bajo tráfico
+	\item Usar cadenas user-agent honestas con identificación de empresa
+	\item Evitar suplantación de Googlebot o usuarios legítimos
+\end{itemize}
+
+\textbf{Límites de recolección de datos:}
+
+\begin{itemize}
+	\item Restringir alcance a información pública de precios y productos
+	\item Evitar datos personales (nombres, emails, direcciones)
+	\item Nunca bypassear páginas de login o paywalls
+	\item Abstenerse de circunvenir CAPTCHAs o protecciones técnicas
+\end{itemize}
+
+\textbf{Banderas rojas a evitar absolutamente:}
+
+\begin{itemize}
+	\item Bypassear páginas de login o crear cuentas falsas
+	\item Ignorar cartas de cese y desistimiento sin consulta legal
+	\item Scrapear datos personales
+	\item Abrumar servidores con tasas agresivas de solicitudes
+	\item Circunvenir CAPTCHAs o protecciones técnicas
+	\item Republicar contenido con derechos de autor sin permiso
+	\item Violar ToS clickwrap explícitos
+\end{itemize}
+
+\section{Patrones de Implementación Probados de Casos de Estudio}
+
+Las implementaciones del mundo real demuestran que los MVPs exitosos de 3-4 meses priorizan alcance estrecho, herramientas probadas y desarrollo iterativo sobre soluciones comprehensivas.
+
+\subsection{Implementación de 30 días: Fabricante global}
+
+El caso de estudio del fabricante de Apify logró despliegue completo de producción en solo \textbf{un mes}:
+
+\textbf{Especificaciones:}
+\begin{itemize}
+	\item 20 sitios web de e-commerce
+	\item Aproximadamente 1,000 productos cada uno (20,000 páginas diarias)
+	\item 5 atributos por producto (nombre, ID, precio, precio original, imagen)
+	\item Extracción automatizada diaria
+\end{itemize}
+
+\textbf{Resultados:}
+\begin{itemize}
+	\item Cobertura aumentó de 10\% a 100\% de productos monitoreados
+	\item Frecuencia mejoró de verificaciones manuales semanales a monitoreo automatizado diario
+	\item Detección de problemas se redujo de semanas a dentro de 24 horas
+\end{itemize}
+
+\textbf{Factores clave de éxito:}
+\begin{itemize}
+	\item Alcance limitado claro (5 puntos de datos vs inteligencia comprehensiva)
+	\item Aprovechar actores pre-construidos en lugar de construir desde cero
+	\item Externalizar mantenimiento al equipo dedicado de Apify
+\end{itemize}
+
+\subsection{Minorista australiano: 300,000 actualizaciones diarias}
+
+El caso de estudio Mobius documentó un minorista omnicanal líder:
+
+\begin{itemize}
+	\item 10,000 SKUs a través de 33 sitios web competidores
+	\item Monitoreo diario totalizando 300,000 unidades de producto
+	\item Seguimiento de precios, promociones, anuncios impresos y variaciones geográficas
+\end{itemize}
+
+\textbf{Resultados:}
+\begin{itemize}
+	\item Ventas aumentadas a través de precios competitivos
+	\item Tasas mejoradas de retención de clientes
+	\item Automatización reemplazando procesos manuales intensivos
+\end{itemize}
+
+\subsection{Minorista multinacional: 67\% aumento de ingresos}
+
+ProWebScraper (47 tiendas en Singapur, Malasia e India):
+
+\textbf{Impacto de negocio:}
+\begin{itemize}
+	\item 67\% aumento de ingresos a través de estrategia de precios optimizada
+	\item Insights de inventario en tiempo real habilitando gestión eficiente
+	\item Mejor targeting de clientes de análisis de datos mejorado
+	\item Costos de retención reducidos mientras se evitan desabastos
+\end{itemize}
+
+\subsection{Patrones comunes de implementaciones exitosas}
+
+\textbf{Priorización de características MVP:}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l X@{}}
+\toprule
+\textbf{Fase} & \textbf{Características} \\
+\midrule
+Must-have (M1-2) & 5-10 competidores, 500-1K KVIs, recolección diaria, matching básico, DB, API, alertas email \\
+\midrule
+Should-have (M2-3) & 15-20 competidores, 2-5K SKUs, detección promociones, stock, dashboard básico, notificaciones \\
+\midrule
+Nice-to-have (M3-4) & 30+ sitios, catálogo completo, reviews, recomendaciones automáticas, analítica predictiva \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Trampas comunes:}
+
+\begin{enumerate}
+	\item \textbf{Sobre-ingeniería del MVP:} Intentar 100+ sitios desde día uno
+	\item \textbf{Mala coincidencia:} Matching solo por nombres (20-30\% error)
+	\item \textbf{Estrategia anti-bot inadecuada:} Scripts simples sin stealth
+	\item \textbf{Ignorar cambios web:} Falta de monitoreo de selectores
+	\item \textbf{Lanzar en temporada pico:} Aumenta riesgos innecesariamente
+\end{enumerate}
+
+\section{Hoja de Ruta de Implementación Recomendada}
+
+Combinar insights de casos de estudio y mejores prácticas técnicas rinde una hoja de ruta práctica de 16 semanas al despliegue de producción.
+
+\subsection{Fase 1: Fundación (Semanas 1-4)}
+
+\textbf{Semanas 1-2: Planificación y evaluación}
+
+\begin{itemize}
+	\item Definir top 3-4 competidores (Elektra, Liverpool, Palacio de Hierro)
+	\item Seleccionar 2-3 categorías de productos (electrónica, electrodomésticos, muebles)
+	\item 500-1,000 SKUs inicialmente
+	\item Pilotos con 2-3 plataformas scraping (ScraperAPI, ScrapingBee, Apify)
+	\item Diseñar esquema de datos para precios, productos, competidores
+	\item Configurar ambiente desarrollo (Docker, Prefect, PostgreSQL, React)
+\end{itemize}
+
+\textbf{Semanas 3-4: Infraestructura central}
+
+\begin{itemize}
+	\item Construir scrapers para top 2-3 competidores
+	\item Configurar workflows Prefect para programación diaria
+	\item Configurar PostgreSQL y buckets S3 para Parquet
+	\item Desarrollar lógica inicial matching (EAN/UPC con fallback marca+modelo)
+	\item Crear validación básica calidad de datos
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+	\item Infraestructura monitoreando 2-3 sitios
+	\item 500 productos emparejados y recolectando diariamente
+	\item Reportes básicos calidad datos
+	\item Arquitectura documentada
+\end{itemize}
+
+\subsection{Fase 2: Expansión y Analítica (Semanas 5-8)}
+
+\textbf{Semanas 5-6: Escalar scraping}
+
+\begin{itemize}
+	\item Agregar competidores restantes (alcanzar 3-4 totales)
+	\item Expandir a 1,000 SKUs completos a través de 2-3 categorías
+	\item Implementar RapidFuzz para fuzzy matching
+	\item Configurar rotación proxy (ScraperAPI)
+	\item Establecer manejo comprehensivo errores con fallbacks multi-nivel
+	\item Configurar dashboards Grafana (tasas éxito, tiempos respuesta, completitud)
+\end{itemize}
+
+\textbf{Semanas 7-8: Fundación analítica}
+
+\begin{itemize}
+	\item Desarrollar endpoints FastAPI (consultas precios, comparaciones, tendencias, alertas)
+	\item Crear dashboard React con filtrado (competidor, categoría, fechas, umbrales)
+	\item Implementar visualizaciones series de tiempo (Recharts)
+	\item Construir funcionalidad exportación (CSV, Parquet)
+	\item Configurar alertas umbral (notificaciones equipo precios)
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+	\item 3-4 competidores y 1,000 SKUs monitoreados diariamente (95\%+ éxito)
+	\item Dashboard funcional mostrando métricas clave
+	\item API RESTful para acceso datos
+	\item Sistema alertas automatizado
+\end{itemize}
+
+\subsection{Fase 3: Integración y Refinamiento (Semanas 9-12)}
+
+\textbf{Semanas 9-10: Conectar a sistemas de negocio}
+
+\begin{itemize}
+	\item Integrar API con sistema precios Coppel
+	\item Implementar lógica detección promociones
+	\item Expandir cobertura matching SKU (85\%+ match, 95\%+ precisión)
+	\item Agregar seguimiento disponibilidad stock
+	\item Crear reportes automatizados diarios (email a equipo precios)
+\end{itemize}
+
+\textbf{Semanas 11-12: Refinar basado en feedback}
+
+\begin{itemize}
+	\item Conducir UAT con equipo precios y gerentes categoría
+	\item Mejorar algoritmo matching (análisis falsos positivos/negativos)
+	\item Mejorar características dashboard (puntos dolor usuarios)
+	\item Construir interfaz revisión manual (coincidencias inciertas)
+	\item Optimizar rendimiento consultas (loading dashboard más rápido)
+	\item Documentar especificaciones API, lógica scraping, procedimientos
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+	\item API integrada con sistemas precios
+	\item Seguimiento promociones operacional
+	\item Dashboard mejorado con feedback incorporado
+	\item Cobertura SKU 85\%+ con precisión 95\%+
+\end{itemize}
+
+\subsection{Fase 4: Lanzamiento a Producción (Semanas 13-16)}
+
+\textbf{Semanas 13-14: Preparar producción}
+
+\begin{itemize}
+	\item Optimización rendimiento (API sub-segundo para consultas comunes)
+	\item Completar documentación técnica (mantenimiento scrapers, DB, troubleshooting)
+	\item Escribir guías usuario (dashboard, reportes, alertas)
+	\item Implementar manejo comprehensivo errores (casos extremos)
+	\item Conducir revisión seguridad (autenticación API, controles acceso)
+	\item Configurar monitoreo producción (procedimientos guardia)
+\end{itemize}
+
+\textbf{Semanas 15-16: Rollout escalonado}
+
+\begin{itemize}
+	\item Desplegar a producción con usuarios piloto (5-10 personas, 1 semana)
+	\item Recoger feedback y arreglar problemas críticos
+	\item Expandir a equipos completos precios y merchandising (30-50 usuarios)
+	\item Conducir sesiones entrenamiento
+	\item Establecer canales feedback para mejoras continuas
+	\item Monitorear rendimiento, abordar bugs, planear Fase 2
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+	\item Sistema listo producción con usuarios entrenados
+	\item Procedimientos documentados
+	\item Rendimiento monitoreado
+	\item Roadmap siguiente fase
+\end{itemize}
+
+\subsection{Métricas de éxito definen preparación}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l X X@{}}
+\toprule
+\textbf{Tipo} & \textbf{KPI} & \textbf{Target} \\
+\midrule
+\multirow{4}{*}{\textbf{Técnicos}}
+& Uptime & >99\% (<7h downtime/mes) \\
+& Precisión & >95\% (matching productos) \\
+& Frescura & >95\% (datos <24h) \\
+& Cobertura & >85\% (SKUs prioritarios) \\
+\midrule
+\multirow{4}{*}{\textbf{Negocio}}
+& Adopción & >80\% (equipo usando semanal) \\
+& Insights & >50 (cambios accionables/mes) \\
+& Impacto & 3-5\% (mejora competitividad) \\
+& Eficiencia & >50\% (reducción investigación manual) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Decisión construir vs comprar para Coppel}
+
+\textbf{Enfoque híbrido recomendado:}
+
+\begin{itemize}
+	\item Usar servicios administrados (ScraperAPI/ScrapingBee) para infraestructura anti-bot
+	\item Construir matching SKU personalizado, analítica, dashboard, integraciones
+	\item Equilibra velocidad, costo (\$200-800/mes vs \$2-5K comercial), control
+\end{itemize}
+
+\textbf{Presupuesto MVP estimado:}
+
+\begin{center}
+\begin{tabularx}{0.85\textwidth}{@{}l X r@{}}
+\toprule
+\textbf{Concepto} & \textbf{Descripción} & \textbf{Monto} \\
+\midrule
+Personal & 2-3 ingenieros + PM (4 meses) & \$80-150K \\
+Plataforma scraping & Piloto y meses iniciales & \$2-10K \\
+Infraestructura & AWS/GCS, databases, monitoring & \$2-5K \\
+Herramientas/servicios & Proxies, anti-bot, analytics & \$3-5K \\
+\midrule
+\textbf{TOTAL MVP} & & \textbf{\$90-170K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Costos mensuales continuos post-MVP:}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+\textbf{Concepto} & \textbf{Monto} \\
+\midrule
+Plataforma scraping & \$2-8K \\
+Infraestructura & \$1-3K \\
+Mantenimiento (1 ing 50\%) & \$8-12K \\
+\midrule
+\textbf{TOTAL} & \textbf{\$11-23K/mes} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Resultados esperados dentro 3-4 meses:}
+
+\begin{itemize}
+	\item Monitorear 3-4 competidores clave
+	\item Rastrear 1,000-5,000 SKUs prioritarios
+	\item Actualizaciones precios diarias con frescura 95\%+
+	\item Dashboard básico y alertas
+	\item Insights simples posicionamiento precios
+	\item Demostrar mejora 3-5\% en categorías selectas
+\end{itemize}
+
+\section{Conclusión: Camino hacia Inteligencia de Precios Competitivos}
+
+Construir un MVP de monitoreo de precios competitivos en 3-4 meses demanda alcance enfocado, tecnologías probadas y desarrollo iterativo. La arquitectura recomendada---Playwright para automatización navegadores, Prefect para orquestación, Polars y DuckDB para procesamiento datos, Parquet en S3 para almacenamiento, FastAPI para backend y React para frontend---entrega capacidades listas para producción dentro restricciones cronograma y presupuesto.
+
+Comenzando con 3-4 competidores y 1,000 SKUs, usando servicios scraping administrados para infraestructura mientras se construye coincidencia y analítica personalizadas, y siguiendo la hoja de ruta implementación por fases posiciona a Coppel para lograr las métricas requeridas de cobertura SKU del 85\%, frescura del 95\% y precisión del 97\%.
+
+\subsection*{Perspectiva clave de implementaciones exitosas}
+
+\textbf{Comience estrecho, entregue valor rápidamente y expanda iterativamente.}
+
+\begin{itemize}
+	\item Fabricante logrando producción en 30 días
+	\item Minorista australiano procesando 300,000 actualizaciones diarias
+	\item Minorista multinacional aumentando ingresos 67\%
+\end{itemize}
+
+Todos siguieron este patrón. Sobre-ingeniería del MVP, intentar cobertura comprehensiva inmediatamente y construir todo desde cero representan los modos de falla primarios.
+
+Al aprovechar herramientas probadas, enfocarse en valor negocio central y planear para mantenimiento continuo, Coppel puede establecer inteligencia precios competitivos que conduce impacto financiero medible dentro de un solo trimestre.
+
+\subsection*{Marco legal y técnico}
+
+El marco legal apoya scraping ético de datos precios públicos al seguir mejores prácticas:
+
+\begin{itemize}
+	\item Respetar robots.txt
+	\item Usar identificación transparente
+	\item Implementar limitación de tasa
+	\item Evitar recolección datos personales
+	\item Mantener documentación cumplimiento
+\end{itemize}
+
+El enfoque técnico equilibrando costo y rendimiento---usar solicitudes HTTP ligeras para sitios no protegidos, reservar automatización navegador para 20\% objetivos desafiantes, optimizar mezcla proxy e implementar caché---logra la confiabilidad requerida a costos operacionales de \$600-900 mensuales.
+
+\textbf{El resultado:} Inteligencia competitiva lista para producción entregando insights precios accionables que mejoran posición mercado mientras opera dentro límites legales y éticos.
+
+\newpage
+
+\section{20 Referencias Principales con Código Accesible}
+
+\subsection{Herramientas de Web Scraping}
+
+\begin{enumerate}
+	\item \textbf{Playwright - Browser Automation} (Microsoft) \\
+	GitHub: \url{https://github.com/microsoft/playwright} \\
+	Docs: \url{https://playwright.dev/python/} \\
+	Instalación: \texttt{pip install playwright} \\
+	63.5k ⭐ en GitHub
+
+	\item \textbf{Playwright Stealth Plugin} (Anti-detección) \\
+	GitHub: \url{https://github.com/rebrowser/rebrowser-playwright} \\
+	PyPI: \url{https://pypi.org/project/playwright-stealth/} \\
+	Instalación: \texttt{pip install playwright-stealth}
+
+	\item \textbf{Scrapy Framework} \\
+	GitHub: \url{https://github.com/scrapy/scrapy} \\
+	Docs: \url{https://docs.scrapy.org/} \\
+	Instalación: \texttt{pip install scrapy} \\
+	52.8k ⭐ en GitHub
+
+	\item \textbf{FlareSolverr} (Bypass Cloudflare) \\
+	GitHub: \url{https://github.com/FlareSolverr/FlareSolverr} \\
+	Docker: \texttt{docker run -p 8191:8191 flaresolverr/flaresolverr} \\
+	7.5k ⭐ en GitHub
+\end{enumerate}
+
+\subsection{SKU Matching y Procesamiento}
+
+\begin{enumerate}[resume]
+	\item \textbf{RapidFuzz} (Fuzzy String Matching) \\
+	GitHub: \url{https://github.com/maxbachmann/RapidFuzz} \\
+	Docs: \url{https://maxbachmann.github.io/RapidFuzz/} \\
+	Instalación: \texttt{pip install rapidfuzz} \\
+	2.6k ⭐ en GitHub
+
+	\item \textbf{Dedupe} (Entity Resolution) \\
+	GitHub: \url{https://github.com/dedupeio/dedupe} \\
+	Docs: \url{https://docs.dedupe.io/} \\
+	Instalación: \texttt{pip install dedupe} \\
+	4.1k ⭐ en GitHub
+
+	\item \textbf{Polars} (DataFrame Processing) \\
+	GitHub: \url{https://github.com/pola-rs/polars} \\
+	Docs: \url{https://pola.rs/} \\
+	Instalación: \texttt{pip install polars} \\
+	30.2k ⭐ en GitHub
+\end{enumerate}
+
+\subsection{Orquestación y Workflows}
+
+\begin{enumerate}[resume]
+	\item \textbf{Prefect 2.0} \\
+	GitHub: \url{https://github.com/PrefectHQ/prefect} \\
+	Docs: \url{https://docs.prefect.io/} \\
+	Instalación: \texttt{pip install prefect} \\
+	16.1k ⭐ en GitHub
+
+	\item \textbf{Dagster} (Alternativa) \\
+	GitHub: \url{https://github.com/dagster-io/dagster} \\
+	Docs: \url{https://docs.dagster.io/} \\
+	Instalación: \texttt{pip install dagster} \\
+	11.5k ⭐ en GitHub
+\end{enumerate}
+
+\subsection{Bases de Datos y Storage}
+
+\begin{enumerate}[resume]
+	\item \textbf{DuckDB} (OLAP Database) \\
+	GitHub: \url{https://github.com/duckdb/duckdb} \\
+	Python API: \url{https://duckdb.org/docs/api/python/overview} \\
+	Instalación: \texttt{pip install duckdb} \\
+	24.1k ⭐ en GitHub
+
+	\item \textbf{Apache Parquet Python} \\
+	GitHub: \url{https://github.com/apache/arrow} \\
+	Docs: \url{https://arrow.apache.org/docs/python/parquet.html} \\
+	Instalación: \texttt{pip install pyarrow}
+\end{enumerate}
+
+\subsection{APIs y Proxies}
+
+\begin{enumerate}[resume]
+	\item \textbf{ScraperAPI Python SDK} \\
+	GitHub: \url{https://github.com/scraperapi/scraperapi-python} \\
+	Docs: \url{https://docs.scraperapi.com/} \\
+	Instalación: \texttt{pip install scraperapi-sdk}
+
+	\item \textbf{FastAPI Framework} \\
+	GitHub: \url{https://github.com/tiangolo/fastapi} \\
+	Docs: \url{https://fastapi.tiangolo.com/} \\
+	Instalación: \texttt{pip install fastapi uvicorn} \\
+	77.5k ⭐ en GitHub
+\end{enumerate}
+
+\subsection{Frontend y Visualización}
+
+\begin{enumerate}[resume]
+	\item \textbf{React + Recharts Template} \\
+	GitHub: \url{https://github.com/recharts/recharts} \\
+	Docs: \url{https://recharts.org/} \\
+	Instalación: \texttt{npm install recharts} \\
+	24k ⭐ en GitHub
+
+	\item \textbf{Grafana + Prometheus Stack} \\
+	GitHub: \url{https://github.com/prometheus/prometheus} \\
+	Docker Compose: \url{https://github.com/vegasbrianc/prometheus} \\
+	Configuración completa para monitoreo
+\end{enumerate}
+
+\subsection{Ejemplos y Tutoriales Completos}
+
+\begin{enumerate}[resume]
+	\item \textbf{Web Scraping Solution - Microservices Architecture} \\
+	GitHub: \url{https://github.com/santagar/web-scraping-solution} \\
+	Stack: Python, RabbitMQ, Docker \\
+	Arquitectura completa de microservicios
+
+	\item \textbf{Apache Airflow Scraping Pipeline} \\
+	Tutorial: \url{https://github.com/kadnan/AirflowScrapyPipeline} \\
+	Ejemplo completo con Scrapy + Airflow \\
+	Incluye configuración de DAGs
+
+	\item \textbf{Price Monitoring con Playwright} \\
+	GitHub: \url{https://github.com/apify/crawlee-python} \\
+	Framework moderno para scraping \\
+	Ejemplos de e-commerce incluidos
+\end{enumerate}
+
+\subsection{Utilidades y Optimización}
+
+\begin{enumerate}[resume]
+	\item \textbf{Python Robots Parser} \\
+	GitHub: \url{https://github.com/seomoz/reppy} \\
+	Instalación: \texttt{pip install reppy} \\
+	Para verificar robots.txt automáticamente
+
+	\item \textbf{Cloudscraper} (Bypass básico) \\
+	GitHub: \url{https://github.com/VeNoMouS/cloudscraper} \\
+	Instalación: \texttt{pip install cloudscraper} \\
+	3.6k ⭐ en GitHub
+\end{enumerate}
+
+\subsection{Código de Inicio Rápido}
+
+\begin{lstlisting}[language=Python, caption={requirements.txt para el MVP}]
+# requirements.txt para el MVP
+playwright==1.41.0
+playwright-stealth==1.0.6
+prefect==2.14.0
+fastapi==0.109.0
+uvicorn==0.27.0
+polars==0.20.0
+duckdb==0.9.2
+rapidfuzz==3.6.0
+pyarrow==14.0.0
+redis==5.0.1
+scraperapi-sdk==1.2.0
+pydantic==2.5.0
+sqlalchemy==2.0.0
+psycopg2-binary==2.9.9
+prometheus-client==0.19.0
+sentry-sdk==1.39.0
+\end{lstlisting}
+
+\subsection{Stack Recomendado para Comenzar}
+
+Para el MVP de Coppel, sugiero comenzar con:
+
+\begin{enumerate}
+	\item \textbf{Playwright} + \textbf{playwright-stealth} para scraping
+	\item \textbf{Prefect} para orquestación (más simple que Airflow)
+	\item \textbf{RapidFuzz} para matching de productos
+	\item \textbf{Polars} + \textbf{DuckDB} para procesamiento de datos
+	\item \textbf{FastAPI} para el backend
+	\item \textbf{ScraperAPI} para manejar proxies (evita complejidad inicial)
+\end{enumerate}
+
+Todos estos tienen documentación excelente, comunidades activas, y son de código abierto con licencias permisivas (MIT/Apache 2.0).
+
+\vfill
+
+{\color{brandDarkBlue}\noindent\rule{\linewidth}{1pt}}
+
+\begin{center}
+{\color{brandDarkGrey}\small
+Documento generado para Coppel --- Noviembre 2025 \\
+Propuesta Técnica MVP Plataforma Monitoreo Precios Competitivos
+}
+\end{center}
+
+\end{document}
