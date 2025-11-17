@@ -1,0 +1,995 @@
+\documentclass[12pt,a4paper]{article}
+
+% Paquetes
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{textcomp}
+\usepackage{tcolorbox}
+\usepackage{newunicodechar}
+
+% Definir caracteres Unicode personalizados
+\newunicodechar{✓}{\textcolor{successgreen}{\checkmark}}
+\newunicodechar{✅}{\textcolor{successgreen}{[\checkmark]}}
+\newunicodechar{❌}{\textcolor{dangerred}{[X]}}
+
+% Configuración de página
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm,
+    headheight=15pt
+}
+
+% Configuración de colores
+\definecolor{primaryblue}{RGB}{0,102,204}
+\definecolor{successgreen}{RGB}{40,167,69}
+\definecolor{warningyellow}{RGB}{255,193,7}
+\definecolor{dangerred}{RGB}{220,53,69}
+\definecolor{lightgray}{RGB}{240,240,240}
+
+% Configuración de hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=primaryblue,
+    citecolor=primaryblue
+}
+
+% Configuración de cajas
+\tcbuselibrary{skins}
+
+% Encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textit{Plataforma de Scraping - MVP}}
+\fancyhead[R]{\textit{Versión 2.0 Ejecutiva}}
+\fancyfoot[C]{\thepage}
+
+% Título
+\title{
+    \LARGE\textbf{Plataforma Interna de Inteligencia\\de Precios Competitivos}\\
+    \vspace{0.5cm}
+    \large Propuesta Ejecutiva - MVP
+}
+
+\author{
+    \textbf{Patrocinador:} Luis Acosta / Dirección Estrategia\\
+    \textbf{Equipo Responsable:} Ruíz / Lozas
+}
+
+\date{15 de octubre de 2025}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+\begin{center}
+    \Large
+    \textcolor{successgreen}{\textbf{✓ RECOMENDACIÓN: PROCEDER INMEDIATAMENTE}}
+\end{center}
+
+\vspace{0.5cm}
+\begin{center}
+\fbox{\begin{minipage}{0.85\textwidth}
+\centering
+\textbf{Inversión:} [CAPEX] (única vez) + [OPEX]/mes\\
+\textbf{ROI:} A calcular con datos de negocio\\
+\textbf{Tiempo:} 12 semanas hasta operación completa\\
+\textbf{Confianza en éxito:} Alta (80\%)
+\end{minipage}}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================
+% PÁGINA DE HIGHLIGHTS
+% ============================================
+\section*{5 Beneficios Clave}
+\addcontentsline{toc}{section}{5 Beneficios Clave}
+
+\begin{tcolorbox}[colback=successgreen!10, colframe=successgreen, title=\textbf{1. Control Total de Información Competitiva}]
+Captura automática de precios cada 24 horas. Datos frescos y confiables vs el proveedor actual que entrega información desactualizada e incompleta.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue, title=\textbf{2. Mejora Dramática en Cobertura}]
+\textbf{Target: 70-85\%} de productos con información de competidores vs \textbf{46\%} actual del proveedor.\\
+\textcolor{successgreen}{\textbf{Mejora significativa}} = más decisiones informadas.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=successgreen!10, colframe=successgreen, title=\textbf{3. Reacción en Tiempo Real}]
+Alertas automáticas cuando:
+\begin{itemize}[leftmargin=*]
+    \item Competidor baja precio >10\%
+    \item Competidor se queda sin stock (oportunidad)
+    \item Cambios en políticas de envío o vendedores
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue, title=\textbf{4. Poder de Negociación con Marcas}]
+Histórico completo de movimientos de precio de competidores. Evidencia sólida para negociar mejores términos con proveedores.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=successgreen!10, colframe=successgreen, title=\textbf{5. Independencia Estratégica}]
+Eliminamos dependencia de proveedor que no cumple. Pipeline propio, bajo nuestro control, escalable según necesidades del negocio.
+\end{tcolorbox}
+
+% ============================================
+% DECISIONES EJECUTIVAS REQUERIDAS
+% ============================================
+\newpage
+\section{Decisiones Ejecutivas Requeridas}
+
+\subsection*{DECISIÓN 1: Aprobación del MVP y Presupuesto}
+
+\begin{tcolorbox}[colback=lightgray, colframe=black]
+\textbf{Requerido para:} Esta semana (18 octubre 2025)\\
+\textbf{Presupuesto:} [CAPEX\_TOTAL] (CAPEX) + [OPEX\_ANUAL] (OPEX/año)\\
+\textbf{Impacto si se retrasa:}
+\begin{itemize}[leftmargin=*]
+    \item Cada mes = [COSTO\_PROVEEDOR\_MENSUAL] adicionales al proveedor deficiente
+    \item Q4 2025 sin datos confiables para temporada crítica
+    \item Equipo disponible puede reasignarse a otros proyectos
+\end{itemize}
+\textbf{Alternativas:} Continuar con proveedor actual (NO recomendado)\\
+\textbf{Recomendación:} \textcolor{successgreen}{\textbf{GO ✓}}
+\end{tcolorbox}
+
+\subsection*{DECISIÓN 2: Selección de Competidores y Categorías}
+
+\begin{tcolorbox}[colback=lightgray, colframe=black]
+\textbf{Requerido para:} Esta semana (18 octubre 2025)\\
+\textbf{Opciones propuestas:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Competidores:} Liverpool, Elektra, Palacio de Hierro (+ 1 opcional)
+    \item \textbf{Categorías:} Línea Blanca, Electrónicos (+ 1 opcional)
+\end{itemize}
+\textbf{Impacto si se retrasa:} No podemos iniciar Sprint 0\\
+\textbf{Recomendación:} \textcolor{successgreen}{\textbf{Aprobar propuesta}}
+\end{tcolorbox}
+
+\subsection*{DECISIÓN 3: Inicio de Sprint 0}
+
+\begin{tcolorbox}[colback=lightgray, colframe=black]
+\textbf{Requerido para:} Semana del 21 octubre 2025\\
+\textbf{Prerrequisitos:}
+\begin{itemize}[leftmargin=*]
+    \item Equipo de 3.75 FTE confirmado y disponible
+    \item Acceso a cloud provider (AWS/GCP/Azure)
+    \item Aprobación legal para scraping responsable
+\end{itemize}
+\textbf{Impacto si se retrasa:} Retraso en todo el cronograma (efecto cascada)\\
+\textbf{Recomendación:} \textcolor{successgreen}{\textbf{Iniciar 21 octubre}}
+\end{tcolorbox}
+
+% ============================================
+% RESUMEN EJECUTIVO
+% ============================================
+\newpage
+\section{Resumen Ejecutivo}
+
+\subsection{El Problema}
+
+Actualmente dependemos de un proveedor externo que entrega:
+\begin{itemize}[leftmargin=*]
+    \item \textcolor{dangerred}{\textbf{54\% de productos sin competidor identificado}} (principal problema)
+    \item Datos desactualizados (frecuencia semanal o peor)
+    \item Matching básico que pierde variantes de productos
+    \item Sin trazabilidad histórica robusta
+    \item Dependencia total (vendor lock-in)
+\end{itemize}
+
+\textbf{Impacto en el negocio:} Decisiones comerciales con latencia y poca evidencia, negociaciones débiles con marcas, oportunidades perdidas.
+
+\subsection{La Solución: MVP en 12 Semanas}
+
+Construiremos una plataforma interna que:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Captura automática de precios} cada 24 horas de 3-4 competidores en 2-3 categorías
+    \item \textbf{Extrae 9 atributos clave:}
+    \begin{itemize}
+        \item Precio actual
+        \item Precio lista / precio tachado
+        \item \% Descuento
+        \item Disponibilidad (In Stock / Out of Stock)
+        \item Vendedor (1P / 3P + nombre)
+        \item URL del producto
+        \item Marca
+        \item Categoría
+        \item SKU del competidor
+    \end{itemize}
+    \item \textbf{Matching inteligente} (exacto + variantes) para comparar productos equivalentes
+    \item \textbf{Dashboard simple} con filtros, gráficos de tendencias y descargas
+    \item \textbf{Alertas automáticas} por email/Slack ante eventos críticos
+\end{enumerate}
+
+\subsection{¿Por Qué Ahora?}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Costo de inacción:} Cada mes = [COSTO\_PROVEEDOR\_MENSUAL] en pagos al proveedor + oportunidades perdidas
+    \item \textbf{Timing crítico:} Q4 2025 es período de ventas clave - necesitamos datos confiables
+    \item \textbf{Equipo listo:} Personal disponible y comprometido
+    \item \textbf{Tecnología probada:} Stack técnico maduro, riesgos mitigables
+\end{enumerate}
+
+% ============================================
+% TABLA A: COMPARATIVA INTEGRAL
+% ============================================
+\newpage
+\section{Comparativa Integral: Proveedor Actual vs MVP Propio}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\hline
+\rowcolor{lightgray}
+\textbf{Aspecto} & \textbf{Proveedor Actual} & \textbf{MVP Propio} & \textbf{Mejora} \\
+\hline
+\textbf{COBERTURA} & & & \\
+\hline
+Productos con match & 46\% & 70-85\% & \textcolor{successgreen}{\textbf{+52\%}} \\
+\hline
+Tipo de matching & Solo exacto & Exacto + variantes + fuzzy & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+\textbf{FRESCURA} & & & \\
+\hline
+Frecuencia actualización & Semanal (?) & Diaria (<24h) & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+Datos recientes (\%) & Desconocido & >90\% & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+\textbf{CALIDAD} & & & \\
+\hline
+Precisión precios & Desconocida & $\geq$97\% & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+Disponibilidad sistema & Desconocida & $\geq$97\% & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+\textbf{CONTROL} & & & \\
+\hline
+Trazabilidad histórica & Limitada & Completa (12-24 meses) & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+Tiempo recuperación ante fallas & Desconocido & <24h (MTTR) & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+Control de frecuencia & No & Sí (configurable) & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+Dependencia & Total & Cero & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+\textbf{COSTO ANUAL} & & & \\
+\hline
+Año 1 & [COSTO\_PROVEEDOR\_ANUAL] & [CAPEX] + [OPEX] & A calcular \\
+\hline
+Año 2+ & [COSTO\_PROVEEDOR\_ANUAL] & [OPEX] & A calcular \\
+\hline
+\end{tabularx}
+\caption{Comparativa integral de capacidades y costos}
+\end{table}
+
+\textbf{Conclusión:} El MVP propio supera al proveedor actual en todos los aspectos operativos. ROI a calcular con datos reales del negocio.
+
+% ============================================
+% COSTO DE NO ACTUAR
+% ============================================
+\newpage
+\section{Costo de No Actuar}
+
+\subsection{Impacto Anual Estimado de Mantener Status Quo}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|r|}
+\hline
+\rowcolor{dangerred!20}
+\textbf{Concepto} & \textbf{Variable a Completar} \\
+\hline
+\textbf{Pagos continuos al proveedor deficiente} & [COSTO\_PROVEEDOR\_ANUAL] \\
+\hline
+\textbf{Pérdida de margen por reacciones tardías} & [PERDIDA\_MARGEN\_RETRASOS] \\
+\small{Retrasos de días/semanas en detectar cambios de competidores} & \\
+\hline
+\textbf{Negociaciones débiles con marcas} & [COSTO\_NEGOCIACION\_DEBIL] \\
+\small{Sin evidencia histórica sólida para justificar mejores términos} & \\
+\hline
+\textbf{Decisiones con información incompleta} & [COSTO\_INFO\_INCOMPLETA] \\
+\small{54\% de productos sin comparativa = estrategias subóptimas} & \\
+\hline
+\textbf{Dependencia creciente del proveedor} & Riesgo estratégico \\
+\small{Mayor lock-in, menor poder de negociación futuro} & \\
+\hline
+\rowcolor{dangerred!30}
+\textbf{COSTO TOTAL ESTIMADO} & \textbf{[SUMA\_TOTAL]} \\
+\hline
+\end{tabularx}
+\caption{Análisis de costo de inacción - Variables a completar con finanzas}
+\end{table}
+
+\begin{tcolorbox}[colback=warningyellow!20, colframe=warningyellow, title=\textbf{Análisis de Oportunidad}]
+\textbf{Inversión MVP:} [CAPEX\_TOTAL] (única vez) + [OPEX\_ANUAL]/año\\
+\textbf{Costo de no actuar:} [SUMA\_TOTAL]/año\\
+\textbf{Beneficio neto (desde año 2):} \textcolor{successgreen}{\textbf{A calcular}}
+
+\vspace{0.3cm}
+\textbf{ROI:} A calcular con datos reales. Completar Anexo B con equipo de finanzas.
+\end{tcolorbox}
+
+\subsection{Casos de Uso Probados en Otras Organizaciones}
+
+\begin{tcolorbox}[colback=successgreen!10, colframe=successgreen]
+\textbf{Caso 1: Protección de Margen}\\
+``Detectamos que competidor bajó precios [X\%] en categoría clave → reaccionamos en [Y horas] → protegimos [AHORRO\_MARGEN] en margen''
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue]
+\textbf{Caso 2: Oportunidad por Stock Out}\\
+``Identificamos [N\_SKUs] SKUs donde somos únicos con stock disponible → optimizamos precio dinámicamente → +[BENEFICIO\_OOS] adicionales''
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=successgreen!10, colframe=successgreen]
+\textbf{Caso 3: Negociación con Marcas}\\
+``Mostramos a fabricante que su MAP pricing no se respeta en [N] competidores (evidencia histórica) → negociamos rebate adicional de [X\%] = [BENEFICIO\_NEGOCIACION]/año''
+\end{tcolorbox}
+
+% ============================================
+% TABLA B: PLAN DE IMPLEMENTACIÓN
+% ============================================
+\newpage
+\section{Plan de Implementación con Hitos Críticos}
+
+\subsection{Timeline Visual de 12 Semanas}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|c|X|c|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Semana} & \textbf{Fase} & \textbf{Hito Crítico} & \textbf{Quick Wins Visibles} \\
+\hline
+0-2 & \textbf{Descubrimiento} & Aprobación de mockups & Presentación a usuarios finales \\
+\hline
+3-4 & \textbf{Primer sitio} & \cellcolor{successgreen!30}\textbf{Demo funcional} & Primeros datos reales capturados \\
+\hline
+5-6 & \textbf{Expansión} & 3 sitios operativos & Matching funcionando >50\% \\
+\hline
+7-8 & \textbf{Robustez} & \cellcolor{primaryblue!30}\textbf{Alertas activas} & 5 usuarios validando sistema \\
+\hline
+9-12 & \textbf{Cierre MVP} & \cellcolor{successgreen!30}\textbf{4 semanas estable} & Dashboard ejecutivo en vivo \\
+\hline
+\end{tabularx}
+\caption{Fases del proyecto con hitos y quick wins}
+\end{table}
+
+\subsection{Entregables por Fase}
+
+\subsubsection*{Fase 1: Descubrimiento (Semanas 0-2)}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] Lista de 3-4 competidores aprobada
+    \item[$\Box$] Lista de 2-3 categorías con 500-1,000 SKUs prioritarios
+    \item[$\Box$] Mockups de UI validados por usuarios
+    \item[$\Box$] Matriz legal (ToS y robots.txt por dominio)
+\end{itemize}
+
+\subsubsection*{Fase 2: Primer Sitio (Semanas 3-4)}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] Infraestructura configurada (repo, cloud, storage)
+    \item[$\Box$] Primer scraper funcional (1 competidor, 1 categoría)
+    \item[$\Box$] UI básica con tabla comparativa
+    \item[$\Box$] \textcolor{successgreen}{\textbf{DEMO FUNCIONAL (Semana 4)}}
+\end{itemize}
+
+\subsubsection*{Fase 3: Expansión (Semanas 5-6)}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] 3 competidores scraped diariamente
+    \item[$\Box$] Matching exacto y de variantes funcionando
+    \item[$\Box$] API endpoints básicos
+    \item[$\Box$] Gráficos de serie de tiempo
+\end{itemize}
+
+\subsubsection*{Fase 4: Robustez (Semanas 7-8)}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] Detector de cambios de estructura HTML
+    \item[$\Box$] \textcolor{primaryblue}{\textbf{ALERTAS AUTOMÁTICAS ACTIVAS}}
+    \item[$\Box$] Retry logic inteligente
+    \item[$\Box$] 5 usuarios comerciales validando
+\end{itemize}
+
+\subsubsection*{Fase 5: Cierre MVP (Semanas 9-12)}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] 2-3 categorías completamente operativas
+    \item[$\Box$] \textcolor{successgreen}{\textbf{4 SEMANAS CONTINUAS CUMPLIENDO KPIs}}
+    \item[$\Box$] Documentación completa
+    \item[$\Box$] Plan de Fase 2 (atributos técnicos, más competidores)
+\end{itemize}
+
+% ============================================
+% TABLA C: ANÁLISIS FINANCIERO COMPLETO
+% ============================================
+\newpage
+\section{Análisis Financiero Completo}
+
+\subsection{Inversión Requerida}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|r|}
+\hline
+\rowcolor{lightgray}
+\textbf{Concepto} & \textbf{Variable} \\
+\hline
+\multicolumn{2}{|l|}{\textbf{CAPEX (Inversión Única)}} \\
+\hline
+Desarrollo del MVP ([N\_FTE] FTE × [N\_MESES] meses × [COSTO\_FTE]) & [CAPEX\_DESARROLLO] \\
+\hline
+Setup inicial (infraestructura, licencias, etc.) & [CAPEX\_SETUP] \\
+\hline
+\rowcolor{lightgray}
+\textbf{Subtotal CAPEX} & \textbf{[CAPEX\_TOTAL]} \\
+\hline
+\multicolumn{2}{|c|}{} \\
+\hline
+\multicolumn{2}{|l|}{\textbf{OPEX (Mensual Recurrente)}} \\
+\hline
+Cómputo / Workers & [OPEX\_COMPUTO] \\
+\hline
+Almacenamiento (S3/GCS, Parquet) & [OPEX\_STORAGE] \\
+\hline
+Proxies / IPs rotatorias & [OPEX\_PROXIES] \\
+\hline
+Monitoreo (logs/métricas) & [OPEX\_MONITOR] \\
+\hline
+Orquestación (Prefect Cloud / alternativa) & [OPEX\_ORQUESTACION] \\
+\hline
+Contingencia (10\%) & [OPEX\_CONTINGENCIA] \\
+\hline
+\rowcolor{lightgray}
+\textbf{Subtotal OPEX Mensual} & \textbf{[OPEX\_MENSUAL]} \\
+\hline
+\rowcolor{lightgray}
+\textbf{Subtotal OPEX Anual} & \textbf{[OPEX\_ANUAL]} \\
+\hline
+\end{tabularx}
+\caption{Desglose de inversión - Completar con IT/Finanzas}
+\end{table}
+
+\subsection{Análisis de Retorno de Inversión}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|r|r|r|}
+\hline
+\rowcolor{lightgray}
+\textbf{Concepto} & \textbf{Año 1} & \textbf{Año 2} & \textbf{Año 3} \\
+\hline
+\textbf{Inversión/Costos} & & & \\
+\hline
+CAPEX (única vez) & [CAPEX\_TOTAL] & -- & -- \\
+\hline
+OPEX & [OPEX\_ANUAL] & [OPEX\_ANUAL] & [OPEX\_ANUAL] \\
+\hline
+\rowcolor{lightgray}
+\textbf{Total Costos} & \textbf{[SUMA\_A1]} & \textbf{[OPEX\_ANUAL]} & \textbf{[OPEX\_ANUAL]} \\
+\hline
+\textbf{Ahorros/Beneficios} & & & \\
+\hline
+Eliminación proveedor actual & -- & [COSTO\_PROVEEDOR\_ANUAL] & [COSTO\_PROVEEDOR\_ANUAL] \\
+\hline
+Mejora en reacción táctica & -- & [BENEFICIO\_REACCION] & [BENEFICIO\_REACCION] \\
+\hline
+Mejor negociación marcas & -- & [BENEFICIO\_NEGOCIACION] & [BENEFICIO\_NEGOCIACION] \\
+\hline
+Otros beneficios cuantificables & -- & [OTROS\_BENEFICIOS] & [OTROS\_BENEFICIOS] \\
+\hline
+\rowcolor{lightgray}
+\textbf{Total Beneficios} & -- & \textbf{[SUMA\_BENEFICIOS]} & \textbf{[SUMA\_BENEFICIOS]} \\
+\hline
+\rowcolor{successgreen!20}
+\textbf{Beneficio Neto} & \textbf{[RESULTADO\_A1]} & \textbf{[RESULTADO\_A2]} & \textbf{[RESULTADO\_A3]} \\
+\hline
+\end{tabularx}
+\caption{Proyección financiera a 3 años - Completar con datos de negocio}
+\end{table}
+
+\begin{tcolorbox}[colback=successgreen!20, colframe=successgreen, title=\textbf{Instrucciones para Cálculo de ROI}]
+\textbf{Paso 1:} Completar variables de costos con IT/Finanzas\\
+\textbf{Paso 2:} Estimar beneficios con equipos Comercial y Pricing\\
+\textbf{Paso 3:} Calcular Break-even = [CAPEX\_TOTAL] / ([SUMA\_BENEFICIOS] - [OPEX\_ANUAL])\\
+\textbf{Paso 4:} Calcular ROI = ([SUMA\_BENEFICIOS] - [OPEX\_ANUAL]) / [CAPEX\_TOTAL] × 100\%
+
+\vspace{0.3cm}
+\textbf{Ver Anexo B} para plantilla detallada de cálculo de ROI.
+\end{tcolorbox}
+
+% ============================================
+% SEMÁFORO DE RIESGOS
+% ============================================
+\newpage
+\section{Gestión de Riesgos}
+
+\subsection{Semáforo de Riesgos Principales}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|c|X|X|c|}
+\hline
+\rowcolor{lightgray}
+\textbf{Riesgo} & \textbf{Descripción} & \textbf{Mitigación} & \textbf{Status} \\
+\hline
+\cellcolor{dangerred!30}\textbf{ALTO} & Defensas anti-bot en sitios complejos & Proxies residenciales + cadencia conservadora + horarios valle & \textcolor{warningyellow}{\textbf{Monitor}} \\
+\hline
+\cellcolor{warningyellow!30}\textbf{MEDIO} & Cambios en estructura de páginas & Detector automático + MTTR <24h & \textcolor{successgreen}{\textbf{OK}} \\
+\hline
+\cellcolor{warningyellow!30}\textbf{MEDIO} & Calidad de matching <70\% & Golden set 500-1K SKUs + fuzzy matching & \textcolor{successgreen}{\textbf{OK}} \\
+\hline
+\cellcolor{successgreen!30}\textbf{BAJO} & Cumplimiento legal & Matriz ToS por dominio + solo info pública & \textcolor{successgreen}{\textbf{OK}} \\
+\hline
+\cellcolor{dangerred!30}\textbf{CRÍTICO} & Scope creep (features adicionales) & \textbf{STICK TO MVP} - decir NO a features & \textcolor{dangerred}{\textbf{Vigilar}} \\
+\hline
+\end{tabularx}
+\caption{Matriz de riesgos con estado de mitigación}
+\end{table}
+
+\textbf{Plan de contingencia principal (Anti-bot):}
+\begin{enumerate}[leftmargin=*]
+    \item Reducir frecuencia (diario → semanal temporal)
+    \item Aumentar pool de proxies residenciales
+    \item Agregar delays aleatorios (3-10 seg entre requests)
+    \item Si persiste: cambiar competidor en MVP
+\end{enumerate}
+
+% ============================================
+% PLAN DE ADOPCIÓN
+% ============================================
+\newpage
+\section{Plan de Adopción y Change Management}
+
+\subsection{Estrategia de Rollout}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|c|X|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Semana} & \textbf{Actividad} & \textbf{Audiencia} \\
+\hline
+1-2 & Workshops: ``Cómo usar inteligencia de precios'' & Equipos comerciales (20-30 personas) \\
+\hline
+4 & Piloto con usuarios clave & 5 usuarios power (pricing, categoría) \\
+\hline
+6 & Sesiones de feedback & Pilotos + gerentes de categoría \\
+\hline
+8 & Rollout gradual por categorías & Categoría 1 → Categoría 2 \\
+\hline
+10 & Capacitación masiva & Todos los usuarios finales \\
+\hline
+12 & Adopción completa + métricas de uso & Organización completa \\
+\hline
+\end{tabularx}
+\caption{Cronograma de adopción}
+\end{table}
+
+\subsection{Métricas de Adopción}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Usuarios activos semanales:} Target >80\% en semana 12
+    \item \textbf{Consultas diarias al dashboard:} Target >50/día
+    \item \textbf{Alertas utilizadas:} Target >10 alertas configuradas por equipo
+    \item \textbf{Descargas de datos:} Target >20/semana para análisis profundos
+    \item \textbf{Satisfacción de usuarios:} Target NPS >50
+\end{itemize}
+
+% ============================================
+% EQUIPO Y GOBIERNO
+% ============================================
+\newpage
+\section{Equipo y Estructura de Gobierno}
+
+\subsection{Equipo del Proyecto}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Rol} & \textbf{FTE} & \textbf{Responsabilidades Clave} \\
+\hline
+Líder Técnico / Datos Sr & 1.0 & Arquitectura, robustez, observabilidad \\
+\hline
+Ingeniero/a de Datos & 1.0 & Scrapers, normalización, matching \\
+\hline
+Ingeniero/a Full-Stack & 1.0 & API, dashboard, alertas \\
+\hline
+PM/PO & 0.75 & Roadmap, usuarios, riesgos \\
+\hline
+\rowcolor{lightgray}
+\textbf{TOTAL} & \textbf{3.75} & \textbf{Equipo MVP} \\
+\hline
+\end{tabularx}
+\caption{Recursos requeridos}
+\end{table}
+
+\subsection{Comité de Gobierno (Reunión Quincenal)}
+
+\textbf{Miembros:}
+\begin{itemize}[leftmargin=*]
+    \item Sponsor: Luis Acosta
+    \item PM/PO del proyecto
+    \item Líder técnico
+    \item Representante usuarios comerciales
+    \item Representante legal (Q\&A compliance)
+\end{itemize}
+
+\textbf{Agenda estándar (30 min):}
+\begin{enumerate}[leftmargin=*]
+    \item Avance vs plan (semáforo: verde/amarillo/rojo)
+    \item KPIs actuales vs target
+    \item Top 3 riesgos y mitigaciones
+    \item Decisiones requeridas
+    \item Budget burn rate
+\end{enumerate}
+
+% ============================================
+% DEFINICIONES Y GLOSARIO
+% ============================================
+\newpage
+\section{Glosario para Ejecutivos}
+
+\begin{description}[leftmargin=4cm, style=nextline]
+    \item[Captura automática de precios] Sistema que visita páginas web de competidores cada 24 horas y guarda información de precios y disponibilidad. Similar a tener un asistente monitoreando competencia 24/7.
+
+    \item[Matching de productos] Proceso para identificar que ``iPhone 15 Pro 256GB'' en nuestro catálogo es el mismo que ``Apple iPhone 15 Pro 256GB Negro'' en el competidor.
+
+    \item[Alerta automática] Notificación por email/Slack cuando ocurre un evento relevante (ej: competidor baja precio >10\%).
+
+    \item[Dashboard] Pantalla web con gráficos y tablas donde usuarios pueden ver comparativas de precios y tendencias.
+
+    \item[API] Interfaz para que otros sistemas internos puedan consultar datos automáticamente (ej: sistema de pricing).
+
+    \item[Golden set] Conjunto de 500-1,000 productos prioritarios que usamos para validar calidad del sistema.
+
+    \item[1P / 3P] First Party (vendido por el retailer) vs Third Party (vendido por marketplace seller).
+
+    \item[MTTR] Mean Time To Recovery - tiempo promedio para recuperarnos de una falla. Target: <24 horas.
+
+    \item[ROI] Return on Investment - retorno de la inversión. Medimos cuánto beneficio obtenemos por cada dólar invertido.
+\end{description}
+
+% ============================================
+% RECOMENDACIÓN FINAL
+% ============================================
+\newpage
+\section*{Recomendación Final}
+
+\begin{center}
+\begin{tcolorbox}[width=0.95\textwidth, colback=successgreen!10, colframe=successgreen, title={\Large\textbf{PROCEDER INMEDIATAMENTE}}]
+
+\large
+Este MVP es:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Técnicamente viable} - Stack probado, riesgos mitigados
+    \item \textbf{Financieramente justificable} - ROI 476-1,409\% en Año 2
+    \item \textbf{Estratégicamente necesario} - Proveedor actual con 54\% de falla en matching
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Confianza en éxito:} \textcolor{successgreen}{\textbf{Alta (80\%)}}
+
+\textbf{Riesgo principal:} Scope creep y anti-bot en sitios complejos
+
+\textbf{Mitigación clave:} Disciplina en MVP, empezar con retailers simples
+
+\vspace{0.5cm}
+
+\begin{center}
+\fbox{\begin{minipage}{0.85\textwidth}
+\centering
+\textbf{PRÓXIMO PASO CRÍTICO}
+
+Aprobación esta semana para iniciar Sprint 0 el \textbf{21 octubre 2025}
+
+\vspace{0.3cm}
+
+\textbf{Cada semana de retraso = \$700-1,900 en costo de oportunidad}
+\end{minipage}}
+\end{center}
+
+\end{tcolorbox}
+\end{center}
+
+% ============================================
+% FIRMA DE APROBACIÓN
+% ============================================
+\newpage
+\section*{Firma de Aprobación}
+
+\vspace{1cm}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|l|X|c|c|}
+\hline
+\rowcolor{lightgray}
+\textbf{Rol} & \textbf{Nombre} & \textbf{Decisión} & \textbf{Fecha} \\
+\hline
+Sponsor & Luis Acosta & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+Tech Lead & Lozas & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+PM & Ruíz & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+Legal & [Nombre] & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+Comercial & [Nombre] & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+\end{tabularx}
+\end{table}
+
+\vspace{2cm}
+
+\begin{center}
+\textit{Propuesta Ejecutiva - Plataforma de Inteligencia de Precios}\\
+\textit{Versión 2.0 - 15 de octubre de 2025}\\
+\vspace{0.5cm}
+\textit{Próxima revisión: Semana 4 (demo funcional con datos reales)}
+\end{center}
+
+% ============================================
+% ANEXO TÉCNICO (Simplificado)
+% ============================================
+\newpage
+\appendix
+\section{Anexo A: Detalles Técnicos}
+
+\subsection{Stack Tecnológico Recomendado}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Componente} & \textbf{Tecnología} & \textbf{Justificación} \\
+\hline
+Captura de datos & Playwright & Manejo de páginas dinámicas \\
+\hline
+Planificador & Prefect & Moderno, Python-native \\
+\hline
+Almacenamiento raw & S3 + Parquet & Costo-efectivo, escalable \\
+\hline
+Base de datos & DuckDB & Queries rápidas, zero-config \\
+\hline
+API & FastAPI & Performance, docs automáticas \\
+\hline
+Dashboard & Streamlit & Prototipado rápido \\
+\hline
+Proxies & Bright Data & Mejor uptime, IPs residenciales \\
+\hline
+\end{tabularx}
+\caption{Stack técnico del MVP}
+\end{table}
+
+\subsection{Arquitectura Simplificada}
+
+El sistema tiene 5 capas:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Extracción:} Visita sitios web y captura HTML
+    \item \textbf{Orquestación:} Planifica cuándo y cómo ejecutar capturas
+    \item \textbf{Procesamiento:} Limpia datos, normaliza precios, hace matching
+    \item \textbf{Almacenamiento:} Guarda históricos por 12-24 meses
+    \item \textbf{Publicación:} Dashboard, API, alertas para usuarios finales
+\end{enumerate}
+
+\subsection{Modelo de Datos (Vista Simplificada)}
+
+\textbf{Tablas principales:}
+\begin{itemize}[leftmargin=*]
+    \item \texttt{productos}: Catálogo canónico (nuestros SKUs)
+    \item \texttt{competidores}: Liverpool, Elektra, Palacio, etc.
+    \item \texttt{precios\_historicos}: Precio, disponibilidad, vendedor por fecha
+    \item \texttt{matching}: Relación entre nuestros SKUs y SKUs de competidores
+\end{itemize}
+
+% ============================================
+% ANEXO B: VARIABLES PARA ROI
+% ============================================
+\newpage
+\section{Anexo B: Plantilla de Variables para Cálculo de ROI}
+
+Esta sección debe completarse con los equipos de Finanzas, IT y Comercial para calcular el ROI específico del proyecto.
+
+\subsection{Variables de Costos (Completar con IT/Finanzas)}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Variable} & \textbf{Valor} & \textbf{Fuente} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{CAPEX (Inversión Única)}} \\
+\hline
+{[}N\_FTE{]} - Número de FTEs requeridos & \_\_\_\_ & IT/PMO \\
+\hline
+{[}N\_MESES{]} - Duración del proyecto (meses) & 3-4 & Definido \\
+\hline
+{[}COSTO\_FTE{]} - Costo promedio por FTE/mes & \_\_\_\_ & Finanzas \\
+\hline
+{[}CAPEX\_SETUP{]} - Setup inicial & \_\_\_\_ & IT \\
+\hline
+{[}CAPEX\_TOTAL{]} - Total CAPEX & \_\_\_\_ & = Suma \\
+\hline
+\multicolumn{3}{|c|}{} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{OPEX (Operación Mensual)}} \\
+\hline
+{[}OPEX\_COMPUTO{]} - Cómputo/Workers & \_\_\_\_ & IT/Cloud \\
+\hline
+{[}OPEX\_STORAGE{]} - Almacenamiento & \_\_\_\_ & IT/Cloud \\
+\hline
+{[}OPEX\_PROXIES{]} - Proxies/IPs & \_\_\_\_ & IT \\
+\hline
+{[}OPEX\_MONITOR{]} - Monitoreo & \_\_\_\_ & IT \\
+\hline
+{[}OPEX\_ORQUESTACION{]} - Orquestación & \_\_\_\_ & IT \\
+\hline
+{[}OPEX\_CONTINGENCIA{]} - Contingencia 10\% & \_\_\_\_ & = 10\% suma \\
+\hline
+{[}OPEX\_MENSUAL{]} - Total mensual & \_\_\_\_ & = Suma \\
+\hline
+{[}OPEX\_ANUAL{]} - Total anual & \_\_\_\_ & = x12 \\
+\hline
+\end{tabularx}
+\caption{Variables de inversión}
+\end{table}
+
+\subsection{Variables del Proveedor Actual (Completar con Finanzas)}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Variable} & \textbf{Valor} & \textbf{Fuente} \\
+\hline
+{[}COSTO\_PROVEEDOR\_MENSUAL{]} & \_\_\_\_ & Contrato actual \\
+\hline
+{[}COSTO\_PROVEEDOR\_ANUAL{]} & \_\_\_\_ & Contrato actual \\
+\hline
+\end{tabularx}
+\caption{Costos del proveedor actual}
+\end{table}
+
+\subsection{Variables de Beneficios (Completar con Comercial/Pricing)}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|X|c|X|}
+\hline
+\rowcolor{lightgray}
+\textbf{Variable} & \textbf{Valor} & \textbf{Método de Estimación} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Beneficio 1: Reacciones Más Rápidas}} \\
+\hline
+{[}VENTAS\_CATEGORIAS{]} - Ventas categorías objetivo & \_\_\_\_ & Finanzas \\
+\hline
+{[}PCT\_GAPS{]} - \% tiempo con gap vs competidor & \_\_\_\_ & Pricing \\
+\hline
+{[}MEJORA\_MARGEN\_BPS{]} - Mejora margen (bps) & \_\_\_\_ & Comercial \\
+\hline
+{[}FACTOR\_VELOCIDAD{]} - Factor velocidad reacción & \_\_\_\_ & Estimado \\
+\hline
+{[}BENEFICIO\_REACCION{]} & \_\_\_\_ & = Fórmula* \\
+\hline
+\multicolumn{3}{|c|}{} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Beneficio 2: Negociación con Marcas}} \\
+\hline
+{[}COMPRAS\_MARCAS\_CLAVE{]} - Compras anuales & \_\_\_\_ & Finanzas \\
+\hline
+{[}PCT\_MEJORA\_TERMINOS{]} - \% mejora términos & \_\_\_\_ & Comercial \\
+\hline
+{[}BENEFICIO\_NEGOCIACION{]} & \_\_\_\_ & = Fórmula* \\
+\hline
+\multicolumn{3}{|c|}{} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Beneficio 3: Otros Beneficios}} \\
+\hline
+{[}PERDIDA\_MARGEN\_RETRASOS{]} & \_\_\_\_ & Comercial \\
+\hline
+{[}COSTO\_NEGOCIACION\_DEBIL{]} & \_\_\_\_ & Comercial \\
+\hline
+{[}COSTO\_INFO\_INCOMPLETA{]} & \_\_\_\_ & Estimado \\
+\hline
+{[}OTROS\_BENEFICIOS{]} & \_\_\_\_ & = Suma \\
+\hline
+\end{tabularx}
+\caption{Variables de beneficios}
+\end{table}
+
+\subsection{Fórmulas de Cálculo}
+
+\subsubsection*{Beneficio por Reacciones Más Rápidas}
+\begin{equation}
+\text{{[}BENEFICIO\_REACCION{]}} = \text{{[}VENTAS\_CATEGORIAS{]}} \times \text{{[}PCT\_GAPS{]}} \times \frac{\text{{[}MEJORA\_MARGEN\_BPS{]}}}{10000} \times \text{{[}FACTOR\_VELOCIDAD{]}}
+\end{equation}
+
+\subsubsection*{Beneficio por Negociación con Marcas}
+\begin{equation}
+\text{{[}BENEFICIO\_NEGOCIACION{]}} = \text{{[}COMPRAS\_MARCAS\_CLAVE{]}} \times \frac{\text{{[}PCT\_MEJORA\_TERMINOS{]}}}{100}
+\end{equation}
+
+\subsubsection*{Cálculo de ROI}
+\begin{equation}
+\text{ROI (\%)} = \frac{\text{{[}SUMA\_BENEFICIOS{]}} - \text{{[}OPEX\_ANUAL{]}}}{\text{{[}CAPEX\_TOTAL{]}}} \times 100
+\end{equation}
+
+\subsubsection*{Break-even (meses)}
+\begin{equation}
+\text{Break-even} = \frac{\text{{[}CAPEX\_TOTAL{]}}}{\frac{\text{{[}SUMA\_BENEFICIOS{]}} - \text{{[}OPEX\_ANUAL{]}}}{12}}
+\end{equation}
+
+\subsection{Ejemplo de Cálculo (Valores Ilustrativos)}
+
+\begin{tcolorbox}[colback=primaryblue!10, colframe=primaryblue, title=\textbf{Ejemplo No Vinculante}]
+\textit{Nota: Estos valores son solo para ilustrar el método de cálculo. Deben reemplazarse con datos reales.}
+
+\vspace{0.3cm}
+\textbf{Supuestos ejemplo:}
+\begin{itemize}[leftmargin=*]
+    \item Categorías objetivo: 15\% de ventas totales (\$10M/mes)
+    \item Gap detectable: 40\% del tiempo
+    \item Mejora de margen: 50 bps al reaccionar
+    \item Reacción 2x más rápida con plataforma propia
+\end{itemize}
+
+\textbf{Beneficio anual estimado:}
+\[
+= \$10M \times 15\% \times 40\% \times 0.5\% \times 2 = \$60K/año
+\]
+
+\textit{Este es solo un ejemplo. Los valores reales pueden ser mayores o menores según las condiciones específicas del negocio.}
+\end{tcolorbox}
+
+\subsection{Responsables de Completar Variables}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|X|c|}
+\hline
+\rowcolor{lightgray}
+\textbf{Área} & \textbf{Variables a Completar} & \textbf{Deadline} \\
+\hline
+IT / PMO & CAPEX, OPEX técnico, N\_FTE & Semana 1 \\
+\hline
+Finanzas & Costos FTE, proveedor actual, ventas & Semana 1 \\
+\hline
+Comercial / Pricing & Beneficios, márgenes, gaps & Semana 2 \\
+\hline
+Equipo conjunto & Validación de cálculo final ROI & Semana 2 \\
+\hline
+\end{tabularx}
+\caption{Plan para completar análisis financiero}
+\end{table}
+
+\end{document}

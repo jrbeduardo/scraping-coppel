@@ -1,0 +1,894 @@
+\documentclass[12pt,a4paper]{article}
+
+% Paquetes
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+
+% Definir caracteres Unicode personalizados
+\newunicodechar{✓}{\textcolor{successgreen}{\checkmark}}
+\newunicodechar{✅}{\textcolor{successgreen}{[\checkmark]}}
+\newunicodechar{❌}{\textcolor{dangerred}{[X]}}
+\newunicodechar{⚠}{\textcolor{warningyellow}{/!$\backslash$}}
+\newunicodechar{📊}{[Graf]}
+\newunicodechar{📉}{[Down]}
+\newunicodechar{📈}{[Up]}
+\newunicodechar{🎯}{[Target]}
+\newunicodechar{🔧}{[Tool]}
+\newunicodechar{💰}{[\$]}
+\newunicodechar{🔍}{[Search]}
+\newunicodechar{💡}{[Idea]}
+\newunicodechar{🚨}{[Alert]}
+\newunicodechar{◯}{$\circ$}
+\newunicodechar{🚀}{[Go]}
+\newunicodechar{🛠}{[Build]}
+\newunicodechar{📞}{[Tel]}
+
+% Configuración de página
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm,
+    headheight=15pt
+}
+
+% Configuración de colores
+\definecolor{primaryblue}{RGB}{0,102,204}
+\definecolor{successgreen}{RGB}{40,167,69}
+\definecolor{warningyellow}{RGB}{255,193,7}
+\definecolor{dangerred}{RGB}{220,53,69}
+
+% Configuración de hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=primaryblue,
+    citecolor=primaryblue
+}
+
+% Encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textit{Plataforma de Scraping - MVP}}
+\fancyhead[R]{\textit{Versión 0.2}}
+\fancyfoot[C]{\thepage}
+
+% Título
+\title{
+    \LARGE\textbf{Plataforma Interna de Scraping y Análisis\\Competitivo de Precios (MVP)}\\
+    \vspace{0.5cm}
+    \large Propuesta Técnica y de Negocio
+}
+
+\author{
+    \textbf{Patrocinador:} Luis Acosta / Dirección Estrategia\\
+    \textbf{Equipo Responsable:} Ruíz / Lozas
+}
+
+\date{15 de octubre de 2025}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+\begin{center}
+    \Large
+    \textcolor{successgreen}{\textbf{✓ RECOMENDADO - GO}}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================
+% RESUMEN EJECUTIVO
+% ============================================
+\section{Resumen Ejecutivo}
+
+Construiremos una plataforma interna que extrae de forma programada información pública de competidores (precio, promoción, disponibilidad y vendedor), la normaliza y la disponibiliza en una interfaz simple y mediante descargas/API.
+
+El MVP (3/4 meses) se acota a \textbf{3/4 competidores} y \textbf{2/3 categorías} con frecuencia diaria (o menor solo si es responsable y viable), y comparación por SKU con matching básico (exacto/variante). Sitios de alta fricción entran en Fase 2 con ventanas y frecuencia reducidas.
+
+\subsection*{Beneficio Esperado}
+
+Habilitar playbooks de precio y reacción táctica ante movimientos de mercado, ganar trazabilidad histórica para negociar con marcas, reducir dependencia de un proveedor que hoy no cumple capacidades/SLAs.
+
+\subsection*{Evaluación de Viabilidad Técnica}
+
+\textbf{Status:} \textcolor{successgreen}{ALTAMENTE VIABLE - Se recomienda proceder}
+
+\subsubsection*{Análisis del Proveedor Actual}
+
+\begin{itemize}[leftmargin=*]
+    \item \textcolor{dangerred}{Cobertura deficiente:} 54\% de productos sin competidor identificado
+    \item \textcolor{dangerred}{Matching limitado:} Solo coincidencias exactas, sin variantes
+    \item \textcolor{successgreen}{Extracción rica:} $\sim$50 atributos por producto (ventaja temporal)
+    \item \textcolor{dangerred}{Sin trazabilidad:} No hay evidencia de históricos robustos
+\end{itemize}
+
+\subsubsection*{Ventajas Competitivas del MVP}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Matching mejorado:} Target 70-85\% vs 46\% actual
+    \item \textbf{Frescura garantizada:} Datos <24h en >90\% SKUs
+    \item \textbf{Control total:} Pipeline propio, sin dependencias
+    \item \textbf{ROI positivo:} Break-even en 2-4 meses
+\end{itemize}
+
+% ============================================
+% ANTECEDENTES Y PROBLEMA
+% ============================================
+\section{Antecedentes y Problema}
+
+\subsection{Situación Actual}
+
+\begin{itemize}[leftmargin=*]
+    \item Dependencia de un tercero con resultados irregulares en frescura, cobertura y precisión
+    \item Decisiones comerciales con latencia y poca evidencia histórica
+    \item Necesitamos un pipeline propio con alcance realista, riesgos controlados y KPIs claros
+\end{itemize}
+
+\subsection{Análisis de Datos del Proveedor Actual}
+
+\subsubsection*{Archivo 1 - analyse\_item\_list (107 productos)}
+\begin{itemize}[leftmargin=*]
+    \item Extracción detallada con $\sim$50 atributos específicos por categoría
+    \item Incluye: precio, descuento, marca, seller, disponibilidad, envío, planes EMI
+    \item Atributos técnicos: capacidad, modelo, tecnología, certificaciones
+\end{itemize}
+
+\subsubsection*{Archivo 2 - exact\_match\_data (200 productos de electrónicos)}
+\begin{itemize}[leftmargin=*]
+    \item \textcolor{warningyellow}{46\% productos ``Out Of Stock''}
+    \item \textcolor{dangerred}{54\% productos ``No Competitor''} $\leftarrow$ Principal problema
+    \item Solo matching básico (campo ``Difference'' = 0 en todos los casos)
+    \item Categoría: Refrigeradores (Samsung 41, LG 31, Mabe 25, Whirlpool 24)
+    \item Rango de precios: \$4,599 - \$91,999 MXN
+\end{itemize}
+
+\textbf{Conclusión:} El proveedor actual \textcolor{dangerred}{NO} está cumpliendo con las expectativas de cobertura y matching.
+
+% ============================================
+% OBJETIVO DEL MVP
+% ============================================
+\section{Objetivo del MVP (3/4 meses)}
+
+\begin{enumerate}[leftmargin=*]
+    \item Disponibilizar snapshots programados (diarios; sub-diarios cuando sea viable)
+    \item Comparar por SKU: precio, precio lista, \% descuento, envío (si es visible), disponibilidad y tipo de vendedor (1P/3P)
+    \item UI simple (filtros, tabla comparativa, series de tiempo) + descargar (CSV/Parquet) + API interna + alertas por umbrales
+    \item Matching v1 (exacto/variante) usando claves duras (EAN/UPC/MPN/SKU) y reglas simples (pack/talla/color)
+\end{enumerate}
+
+\subsection{KPIs Objetivo vs Proveedor Actual}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{Proveedor Actual} & \textbf{Target MVP} & \textbf{Mejora} \\
+\hline
+Cobertura efectiva & $\sim$46\% & $\geq$70\% & +52\% \\
+\hline
+Frescura (<24h) & ¿Semanal? & $\geq$90\% & \textcolor{successgreen}{✓} \\
+\hline
+Precisión precio & ¿? & $\geq$97\% & \textcolor{successgreen}{✓} \\
+\hline
+Disponibilidad sistema & ¿? & $\geq$97\% & \textcolor{successgreen}{✓} \\
+\hline
+\end{tabularx}
+\caption{Comparativa de métricas: Proveedor Actual vs MVP}
+\end{table}
+
+% ============================================
+% ALCANCE DEL MVP
+% ============================================
+\section{Alcance del MVP}
+
+\subsection{Incluye}
+
+\subsubsection*{Funcionalidad Core}
+\begin{itemize}[leftmargin=*]
+    \item Extracción de listados de búsqueda y páginas de producto en 3/4 competidores y 2/3 categorías
+    \item Normalización de moneda, marca, pack/talla, categoría estándar
+    \item Matching v1: exacto/variante
+    \item UI con filtros, tabla comparativa, serie de tiempo y detalle con evidencias (URL y mini-captura)
+    \item API/exports y alertas (p. ej., caída/subida de precio >x\% o cambio de disponibilidad)
+\end{itemize}
+
+\subsubsection*{Atributos a Extraer (MVP)}
+\begin{enumerate}[leftmargin=*]
+    \item Precio actual
+    \item Precio lista / precio tachado
+    \item \% Descuento
+    \item Disponibilidad (In Stock / Out of Stock)
+    \item Vendedor (1P / 3P + nombre si aplica)
+    \item URL del producto
+    \item Marca
+    \item Categoría
+    \item SKU del competidor
+\end{enumerate}
+
+\subsection{No Incluye (Fase 2)}
+
+\subsubsection*{Fuera de Alcance MVP}
+\begin{itemize}[leftmargin=*]
+    \item Similaridad avanzada (texto/imagen con ML)
+    \item Share of search
+    \item Ratings/reviews
+    \item Cobertura masiva de todos los sitios y categorías
+    \item Sitios con alta fricción (ej.: algunos marketplaces globales)
+    \item \textbf{Atributos técnicos detallados} (capacidad, color, tecnología, etc.) $\leftarrow$ El proveedor actual los tiene
+\end{itemize}
+
+\subsection{Recomendación: Plan para Fase 2}
+
+\textbf{Atributos técnicos (Semanas 13-20):}
+\begin{itemize}[leftmargin=*]
+    \item Implementar extracción de especificaciones por categoría
+    \item Usar selectores CSS específicos + plantillas configurables
+    \item Considerar LLM API (GPT-4o/Claude) para extracción de atributos no estructurados
+    \item \textbf{Prioridad:} Solo si el negocio lo requiere para decisiones comerciales
+\end{itemize}
+
+% ============================================
+% CASOS DE USO
+% ============================================
+\section{Casos de Uso Habilitados}
+
+\subsection{Playbooks Operativos}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Playbooks de precio:} detectar gaps y definir respuesta (mantener/igualar/contraatacar)
+    \item \textbf{Oportunidad por OOS competidor:} cuando el competidor queda sin stock
+    \item \textbf{Negociación con marcas:} evidencia histórica de movimientos de precio/promoción
+    \item \textbf{Alertas operativas:} eventos relevantes para equipos comerciales
+\end{itemize}
+
+\subsection{Casos de Uso Adicionales Identificados}
+
+Basados en el análisis de datos:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Detección de cambios de seller:} Competidor cambia de 1P a 3P
+    \item \textbf{Alertas de reposición:} Competidor recupera stock después de OOS
+    \item \textbf{Análisis de planes de financiamiento:} Si competidor ofrece MSI o planes EMI más agresivos
+    \item \textbf{Monitoreo de envío:} Cambios en costos/tiempos de envío
+\end{itemize}
+
+% ============================================
+% ARQUITECTURA
+% ============================================
+\section{Arquitectura del Sistema}
+
+\subsection{Componentes Principales}
+
+La arquitectura propuesta se organiza en cinco capas principales:
+
+\subsubsection*{1. Capa de Extracción}
+\begin{itemize}[leftmargin=*]
+    \item Playwright/Puppeteer para renderizado de JavaScript
+    \item Pool de workers con límites por dominio
+    \item Proxy rotatorio (Bright Data/Smartproxy)
+    \item Detección de cambios (hash estructura HTML)
+\end{itemize}
+
+\subsubsection*{2. Orquestación}
+\begin{itemize}[leftmargin=*]
+    \item Prefect/Dagster/Airflow para planificación de tareas
+    \item DAGs por competidor/categoría
+    \item Retry logic inteligente
+    \item Rate limiting por dominio
+\end{itemize}
+
+\subsubsection*{3. Procesamiento y Matching}
+\begin{itemize}[leftmargin=*]
+    \item Normalización (precios, moneda, unidades)
+    \item Matching v1: exacto (EAN/UPC) + variante
+    \item Fuzzy matching (fuzzywuzzy/rapidfuzz)
+    \item Validaciones (precios, outliers)
+\end{itemize}
+
+\subsubsection*{4. Almacenamiento}
+\begin{itemize}[leftmargin=*]
+    \item Raw: S3/GCS + Parquet (fecha/competidor)
+    \item Procesado: DuckDB/ClickHouse
+    \item Histórico: retención 12-24 meses
+\end{itemize}
+
+\subsubsection*{5. Capa de Publicación}
+\begin{itemize}[leftmargin=*]
+    \item API: FastAPI (endpoints REST)
+    \item UI: Streamlit/Retool
+    \item Alertas: Email/Slack
+\end{itemize}
+
+\subsection{Recomendaciones Tecnológicas}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|X|c|X|}
+\hline
+\textbf{Componente} & \textbf{Recomendado} & \textbf{Justificación} \\
+\hline
+Scraping & Playwright & Mejor manejo de SPA, APIs más limpias \\
+\hline
+Orquestación & Prefect & Más moderno, mejor DX, Python-native \\
+\hline
+Storage (raw) & S3 + Parquet & Costo, integración \\
+\hline
+Storage (queries) & DuckDB & OLAP sobre Parquet, zero-config \\
+\hline
+API & FastAPI & Performance, docs automáticas, async \\
+\hline
+UI & Streamlit & Prototipado rápido, Python-only \\
+\hline
+Proxies & Bright Data & Mejor uptime, más IPs residenciales \\
+\hline
+Matching & rapidfuzz & Más rápido que fuzzywuzzy \\
+\hline
+Monitoring & Grafana + Loki & Open-source, menor costo \\
+\hline
+\end{tabularx}
+\caption{Stack tecnológico recomendado}
+\end{table}
+
+% ============================================
+% MODELO DE DATOS
+% ============================================
+\section{Modelo de Datos}
+
+\subsection{Dimensiones (Catálogos)}
+
+\subsubsection*{Producto Canónico}
+\begin{lstlisting}[language=SQL, basicstyle=\small\ttfamily, frame=single]
+dim_producto:
+  - producto_id (PK)
+  - ean / upc / mpn
+  - marca
+  - familia
+  - clase
+  - departamento
+  - pack / talla / color
+  - categoria_estandar
+\end{lstlisting}
+
+\subsubsection*{Competidor}
+\begin{lstlisting}[language=SQL, basicstyle=\small\ttfamily, frame=single]
+dim_competidor:
+  - competidor_id (PK)
+  - nombre
+  - dominio
+  - tipo (retailer/marketplace)
+  - limite_rpm (rate limit)
+\end{lstlisting}
+
+\subsubsection*{Vendedor}
+\begin{lstlisting}[language=SQL, basicstyle=\small\ttfamily, frame=single]
+dim_vendedor:
+  - vendedor_id (PK)
+  - nombre
+  - tipo (1P/3P)
+  - competidor_id (FK)
+\end{lstlisting}
+
+\subsection{Hechos (Mediciones)}
+
+\subsubsection*{Precio Histórico}
+\begin{lstlisting}[language=SQL, basicstyle=\small\ttfamily, frame=single]
+fact_precio:
+  - precio_id (PK)
+  - producto_id (FK)
+  - competidor_id (FK)
+  - vendedor_id (FK)
+  - fecha_id (FK)
+  - precio_actual
+  - precio_lista
+  - descuento_monto
+  - descuento_porcentaje
+  - disponibilidad (boolean)
+  - moneda
+  - url
+  - timestamp_extraccion
+  - hash_evidencia (mini-captura)
+\end{lstlisting}
+
+\subsection{Tabla de Matching}
+
+\begin{lstlisting}[language=SQL, basicstyle=\small\ttfamily, frame=single]
+rel_matching:
+  - matching_id (PK)
+  - producto_canonico_id (FK)
+  - competidor_id (FK)
+  - sku_competidor
+  - tipo_match (exacto/variante/fuzzy)
+  - score_similitud (0-100)
+  - fecha_validacion
+  - validado_manualmente (boolean)
+\end{lstlisting}
+
+\textbf{Tipos de match:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Exacto:} EAN/UPC/MPN coincide 100\%
+    \item \textbf{Variante:} Mismo producto, diferente talla/color/pack
+    \item \textbf{Fuzzy:} Similitud >85\% en nombre normalizado (Fase MVP tardía)
+\end{itemize}
+
+% ============================================
+% KPIs Y CRITERIOS DE ÉXITO
+% ============================================
+\section{KPIs y Criterios de Éxito (SLOs)}
+
+\subsection{Métricas Core del MVP}
+
+\begin{longtable}{|p{3cm}|p{3cm}|p{7cm}|}
+\hline
+\textbf{KPI} & \textbf{Target MVP} & \textbf{Método de medición} \\
+\hline
+\endfirsthead
+\hline
+\textbf{KPI} & \textbf{Target MVP} & \textbf{Método de medición} \\
+\hline
+\endhead
+Cobertura & $\geq$70\% de SKUs prioritarios con $\geq$1 coincidencia & \texttt{COUNT(DISTINCT matched\_skus) / COUNT(golden\_set)} \\
+\hline
+Frescura & $\geq$90\% de SKUs con datos de las últimas 24h & \texttt{COUNT(WHERE timestamp > NOW()-24h) / total\_skus} \\
+\hline
+Precisión (precio/promo) & $\geq$97\% en muestreo estratificado & Validación manual semanal (50 SKUs) \\
+\hline
+Disponibilidad de procesos & $\geq$97\% & Uptime de procesos de extracción \\
+\hline
+Tiempo de recuperación ante cambio de página & <24h & MTTR desde detección hasta fix \\
+\hline
+\caption{Métricas y objetivos del MVP}
+\end{longtable}
+
+\subsection{Definición de Éxito del MVP}
+
+Cumplir estos indicadores en \textbf{$\geq$2 competidores} y \textbf{$\geq$2 categorías} durante \textbf{4 semanas continuas}.
+
+\subsection{Comparativa con Proveedor Actual}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\hline
+\textbf{Aspecto} & \textbf{Proveedor Actual} & \textbf{Target MVP} & \textbf{Mejora} \\
+\hline
+Matching efectivo & $\sim$46\% & $\geq$70\% & \textcolor{successgreen}{\textbf{+52\%}} \\
+\hline
+Frescura & Semanal (?) & Diaria (>90\%) & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+Precisión & Desconocida & $\geq$97\% & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+MTTR cambios & Desconocido & <24h & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+Trazabilidad & Limitada & Completa & \textcolor{successgreen}{\textbf{✓}} \\
+\hline
+\end{tabularx}
+\caption{Comparativa de mejoras respecto al proveedor actual}
+\end{table}
+
+% ============================================
+% PLAN DE TRABAJO
+% ============================================
+\section{Plan de Trabajo (12 semanas)}
+
+\subsection{Semanas 0-2: Descubrimiento y Base}
+
+\textbf{Objetivos:}
+\begin{itemize}[leftmargin=*]
+    \item Validar competidores y categorías; levantar golden set (500/1,000 SKUs)
+    \item Diseñar modelo de datos y mockups de UI; revisar términos y robots por dominio
+    \item Definir KPIs y ``Definition of Done''
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] Lista de 3-4 competidores aprobada
+    \item[$\Box$] Lista de 2-3 categorías con palabras de búsqueda
+    \item[$\Box$] Golden set con EAN/UPC/MPN cuando exista
+    \item[$\Box$] Mockups de UI
+    \item[$\Box$] Matriz legal (ToS y robots.txt por dominio)
+\end{itemize}
+
+\textbf{\textcolor{successgreen}{Quick win:}} Presentación de mockups a usuarios finales
+
+\subsection{Semanas 3-4: Infraestructura y Primer Sitio}
+
+\textbf{Objetivos:}
+\begin{itemize}[leftmargin=*]
+    \item Configurar repos, planificador, bitácoras y almacenamiento
+    \item Implementar primer sitio (búsquedas + producto) y normalización
+    \item UI v0 (tabla + filtros) y descarga básica
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] Repo configurado + CI/CD básico
+    \item[$\Box$] Primer scraper funcional (1 competidor, 1 categoría)
+    \item[$\Box$] Storage en Parquet funcionando
+    \item[$\Box$] UI v0 con tabla comparativa básica
+\end{itemize}
+
+\textbf{\textcolor{primaryblue}{Hito crítico (Semana 4):}} Demo funcional con datos reales de 1 competidor
+
+\subsection{Semanas 5-6: Más Sitios y Matching}
+
+\textbf{Objetivos:}
+\begin{itemize}[leftmargin=*]
+    \item Implementar sitio 2 y sitio 3; control de calidad por muestreo
+    \item Matching v1 (exacto/variante); API y UI v1 (serie de tiempo)
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] 3 competidores scraped diariamente
+    \item[$\Box$] Matching exacto por EAN/UPC
+    \item[$\Box$] Matching de variantes (talla/color/pack)
+    \item[$\Box$] API endpoints básicos
+    \item[$\Box$] UI con serie de tiempo
+\end{itemize}
+
+\textbf{\textcolor{successgreen}{KPI checkpoint:}} Cobertura >50\% en golden set
+
+\subsection{Semanas 7-8: Robustez y Alertas}
+
+\textbf{Objetivos:}
+\begin{itemize}[leftmargin=*]
+    \item Detector de cambios de página; reintentos inteligentes; alertas por umbrales
+    \item Demostración con usuarios comerciales y ajustes
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] Detector de cambios de estructura
+    \item[$\Box$] Sistema de alertas configurables
+    \item[$\Box$] Retry logic inteligente
+    \item[$\Box$] Demo con usuarios comerciales
+    \item[$\Box$] Feedback documentado
+\end{itemize}
+
+\textbf{\textcolor{successgreen}{Validación de usuarios:}} 5 usuarios clave validan la plataforma
+
+\subsection{Semanas 9-12: Ampliación y Cierre del MVP}
+
+\textbf{Objetivos:}
+\begin{itemize}[leftmargin=*]
+    \item Sumar categoría \#2 (y \#3 si aplica); pruebas de carga
+    \item Monitoreo de KPIs 4 semanas; decisión Go/No-Go y backlog de Fase 2
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}[leftmargin=*]
+    \item[$\Box$] 2-3 categorías completamente operativas
+    \item[$\Box$] 4 semanas continuas cumpliendo KPIs
+    \item[$\Box$] Documentación completa
+    \item[$\Box$] Plan de Fase 2
+    \item[$\Box$] Decisión Go/No-Go para escalamiento
+\end{itemize}
+
+\textbf{\textcolor{primaryblue}{Decisión final:}} ¿Proceder con Fase 2 o ajustar?
+
+% ============================================
+% EQUIPO Y ROLES
+% ============================================
+\section{Equipo Mínimo y Roles}
+
+\begin{longtable}{|p{4cm}|c|p{7cm}|}
+\hline
+\textbf{Rol} & \textbf{Dedicación} & \textbf{Responsabilidades} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Rol} & \textbf{Dedicación} & \textbf{Responsabilidades} \\
+\hline
+\endhead
+Líder técnico / Datos Sr & 1.0 FTE & Arquitectura, orquestación, observabilidad, robustez \\
+\hline
+Ingeniero/a de datos & 1.0 FTE & Extracción, normalización, procesos, matching \\
+\hline
+Ingeniero/a back/frontend & 1.0 FTE & API, autenticación, interfaz, descargas, alertas \\
+\hline
+PM/PO & 0.75 FTE & Roadmap, riesgos, relación con usuarios y sponsors \\
+\hline
+\textbf{TOTAL} & \textbf{3.75 FTE} & \textbf{Equipo MVP} \\
+\hline
+\caption{Equipo y dedicación requerida}
+\end{longtable}
+
+\textbf{Fase 2 (opcional):} +0.5–1.0 analista/ML para similaridad avanzada
+
+% ============================================
+% RIESGOS Y MITIGACIONES
+% ============================================
+\section{Riesgos y Mitigaciones}
+
+\begin{longtable}{|c|p{3.5cm}|c|c|p{5cm}|}
+\hline
+\textbf{\#} & \textbf{Riesgo} & \textbf{Prob.} & \textbf{Impacto} & \textbf{Mitigación} \\
+\hline
+\endfirsthead
+\hline
+\textbf{\#} & \textbf{Riesgo} & \textbf{Prob.} & \textbf{Impacto} & \textbf{Mitigación} \\
+\hline
+\endhead
+1 & Defensas anti-extracción en sitios & Alta & Alto & Proxies residenciales + cadencia conservadora + headers realistas \\
+\hline
+2 & Cambios en estructura de páginas & Media & Alto & Detector de cambios automático. MTTR <24h \\
+\hline
+3 & Calidad de matching baja & Media & Medio & Golden set robusto (500-1K SKUs). Fuzzy matching \\
+\hline
+4 & Cumplimiento legal/operativo & Baja & Alto & Matriz por dominio (ToS y robots.txt). Solo info pública \\
+\hline
+5 & Costo de conectividad/IPs & Media & Medio & Medición por dominio. Budget cap mensual \\
+\hline
+6 & Scope creep (features adicionales) & Alta & Medio & \textbf{Stick to MVP.} Decir NO a features \\
+\hline
+7 & Cambios frecuentes en marketplaces & Alta & Alto & Empezar con retailers directos \\
+\hline
+8 & Equipo no completo a tiempo & Media & Alto & Pre-asignar equipo antes de Sprint 0 \\
+\hline
+\caption{Matriz de riesgos y estrategias de mitigación}
+\end{longtable}
+
+% ============================================
+% COSTOS
+% ============================================
+\section{Costos y ROI}
+
+\subsection{Inversión Inicial (CAPEX)}
+
+\begin{itemize}[leftmargin=*]
+    \item Desarrollo del MVP: 3.75 FTE $\times$ 3 meses $\times$ \$10,000 USD promedio
+    \item \textbf{Total CAPEX: $\sim$\$112,500 USD}
+\end{itemize}
+
+\subsection{Costos Operativos (OPEX Mensual)}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\hline
+\textbf{Concepto} & \textbf{Conservador} & \textbf{Base} & \textbf{Ambicioso} \\
+\hline
+Cómputo/workers & \$150 & \$300 & \$500 \\
+\hline
+Almacenamiento (S3/GCS) & \$50 & \$100 & \$200 \\
+\hline
+Proxies/IPs rotatorias & \$300 & \$800 & \$1,500 \\
+\hline
+Monitoreo (logs/métricas) & \$50 & \$100 & \$150 \\
+\hline
+Orquestación (Prefect Cloud) & \$0 & \$0 & \$200 \\
+\hline
+Contingencia (10\%) & \$55 & \$130 & \$255 \\
+\hline
+\textbf{TOTAL MENSUAL} & \textbf{\$605} & \textbf{\$1,430} & \textbf{\$2,805} \\
+\hline
+\textbf{TOTAL ANUAL} & \textbf{\$7,260} & \textbf{\$17,160} & \textbf{\$33,660} \\
+\hline
+\end{tabularx}
+\caption{Costos operativos en diferentes escenarios}
+\end{table}
+
+\subsection{Comparativa Financiera}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\hline
+\textbf{Concepto} & \textbf{Proveedor Actual} & \textbf{MVP Año 1} & \textbf{MVP Año 2+} \\
+\hline
+Costo total & \$36,000-96,000 & \$129,660 & \$17,160 \\
+\hline
+Control & \textcolor{dangerred}{Nulo} & \textcolor{successgreen}{Total} & \textcolor{successgreen}{Total} \\
+\hline
+Cobertura & $\sim$46\% & 70-85\% & 70-85\%+ \\
+\hline
+\end{tabularx}
+\caption{Análisis financiero comparativo}
+\end{table}
+
+\textbf{Break-even:} Si el proveedor cobra >\$5,000/mes $\rightarrow$ \textcolor{successgreen}{\textbf{ROI positivo en 2-4 meses}}
+
+\textbf{Ahorro anual (desde Año 2):} \$36,000-96,000 - \$17,160 = \textcolor{successgreen}{\textbf{\$18,840-78,840 USD/año}}
+
+% ============================================
+% GOBIERNO Y SEGURIDAD
+% ============================================
+\section{Gobierno, Auditoría y Seguridad}
+
+\subsection{Gobierno del Proyecto}
+
+\textbf{Comité quincenal:}
+\begin{itemize}[leftmargin=*]
+    \item Sponsor (Luis Acosta)
+    \item PM/PO
+    \item Líder técnico
+    \item Representante usuarios comerciales
+    \item Representante legal (Q\&A sobre compliance)
+\end{itemize}
+
+\textbf{Agenda estándar:}
+\begin{itemize}[leftmargin=*]
+    \item Avance vs plan (semáforo)
+    \item KPIs actuales
+    \item Riesgos top 3
+    \item Decisiones requeridas
+    \item Budget burn rate
+\end{itemize}
+
+\subsection{Seguridad}
+
+\subsubsection*{Acceso}
+\begin{itemize}[leftmargin=*]
+    \item SSO corporativo (Azure AD / Okta)
+    \item RBAC (roles: admin, comercial, analista, auditor)
+    \item MFA obligatorio para admins
+\end{itemize}
+
+\subsubsection*{Datos}
+\begin{itemize}[leftmargin=*]
+    \item Cifrado en tránsito (TLS 1.3)
+    \item Cifrado en reposo (S3 server-side encryption)
+    \item Sin PII de clientes
+    \item Logs de acceso a datos sensibles
+\end{itemize}
+
+\subsubsection*{Compliance}
+\begin{itemize}[leftmargin=*]
+    \item Revisión legal de ToS por dominio (cada 6 meses)
+    \item Respeto de robots.txt
+    \item Rate limiting documentado
+    \item Proceso de opt-out si un competidor lo solicita
+\end{itemize}
+
+% ============================================
+% DECISIONES SOLICITADAS
+% ============================================
+\section{Decisiones Solicitadas al Sponsor}
+
+\subsection{Decisiones Críticas (Esta Semana)}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textcolor{successgreen}{✓} \textbf{Aprobación del alcance del MVP}
+    \item \textcolor{dangerred}{◯} \textbf{Definición de competidores y categorías} (deadline: esta semana)
+    \begin{itemize}
+        \item Propuesta: Liverpool, Elektra, Palacio de Hierro
+        \item Categorías: Línea Blanca, Electrónicos
+    \end{itemize}
+    \item \textcolor{warningyellow}{◯} \textbf{Inicio del Sprint 0} (2 semanas): descubrimiento, legal y base técnica
+    \item \textcolor{warningyellow}{◯} \textbf{Primer hito visible} (Semana 4): tabla comparativa funcional con 1 sitio
+\end{enumerate}
+
+\subsection{Decisiones Secundarias (2 Semanas)}
+
+\begin{enumerate}[leftmargin=*, start=5]
+    \item Plan de comunicación a equipos comerciales
+    \item Proceso de feedback de usuarios durante MVP
+    \item Criterios de éxito para aprobar Fase 2
+\end{enumerate}
+
+% ============================================
+% PRÓXIMOS PASOS
+% ============================================
+\section{Próximos Pasos Inmediatos}
+
+\subsection{Esta Semana}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Sponsor aprueba documento y presupuesto}
+    \item \textbf{Definir competidores finales} (Liverpool, Elektra, Palacio + 1?)
+    \item \textbf{Definir categorías finales} (Línea Blanca, Electrónicos + 1?)
+    \item \textbf{Pre-asignar equipo} (4 personas con nombres)
+\end{enumerate}
+
+\subsection{Semana Próxima (Semana 0 - Inicio)}
+\begin{enumerate}[leftmargin=*, start=5]
+    \item \textbf{Kickoff del proyecto} con equipo completo
+    \item \textbf{Construir golden set} (500 SKUs prioritarios)
+    \item \textbf{Revisar ToS y robots.txt} de competidores
+    \item \textbf{Setup técnico inicial} (repo, cloud, proxies trial)
+\end{enumerate}
+
+\subsection{Semana 4 (Primer Hito)}
+\begin{enumerate}[leftmargin=*, start=9]
+    \item \textbf{Demo funcional} con datos reales de 1 competidor
+    \item \textbf{Validación con usuarios} (5 personas comerciales)
+\end{enumerate}
+
+% ============================================
+% GLOSARIO
+% ============================================
+\section{Glosario}
+
+\begin{description}[leftmargin=!, labelwidth=4cm]
+    \item[Extracción (scraping)] Obtención automatizada de información pública mostrada en páginas web
+    \item[Snapshot] Captura de estado (precio/stock) en una fecha/hora específica
+    \item[SKU canónico] Identificador interno para comparar ``manzanas con manzanas'' entre competidores
+    \item[Matching exacto] Mismo producto identificado por EAN/UPC/MPN
+    \item[Matching variante] Misma referencia con diferencias (talla, color, pack)
+    \item[Matching fuzzy] Similitud aproximada basada en texto (>85\% similitud)
+    \item[1P (First Party)] Producto vendido directamente por el retailer
+    \item[3P (Third Party)] Producto vendido por un seller externo en marketplace
+    \item[Golden set] Conjunto de SKUs prioritarios para QA y validación
+    \item[MTTR] Mean Time To Recovery - tiempo promedio de recuperación ante fallas
+    \item[SLO] Service Level Objective - objetivo de nivel de servicio
+\end{description}
+
+% ============================================
+% RECOMENDACIÓN FINAL
+% ============================================
+\section*{Recomendación Final}
+
+\begin{center}
+\fbox{\begin{minipage}{0.9\textwidth}
+\vspace{0.5cm}
+\begin{center}
+\LARGE\textcolor{successgreen}{\textbf{✓ RECOMENDACIÓN: GO}}
+\end{center}
+\vspace{0.5cm}
+
+Este MVP es técnicamente viable, financieramente justificable, y estratégicamente necesario dado el desempeño deficiente del proveedor actual (54\% sin matching).
+
+\vspace{0.3cm}
+\textbf{Confianza en éxito:} Alta (80\%)
+
+\textbf{Riesgo principal:} Scope creep y anti-bot en sitios complejos
+
+\textbf{Mitigación clave:} Disciplina en MVP, empezar con retailers simples
+
+\vspace{0.3cm}
+\begin{center}
+\Large\textbf{¡Es momento de construir!}
+\end{center}
+\vspace{0.5cm}
+\end{minipage}}
+\end{center}
+
+% ============================================
+% FIRMA DE APROBACIÓN
+% ============================================
+\newpage
+\section*{Firma de Aprobación}
+
+\vspace{2cm}
+
+\begin{tabularx}{\textwidth}{|l|X|c|c|}
+\hline
+\textbf{Rol} & \textbf{Nombre} & \textbf{Aprobación} & \textbf{Fecha} \\
+\hline
+Sponsor & Luis Acosta & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+Tech Lead & Lozas & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+PM & Ruíz & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+Legal & [Nombre] & $\Box$ Apruebo & \_\_/\_\_/\_\_ \\
+\hline
+\end{tabularx}
+
+\vspace{2cm}
+
+\begin{center}
+\textit{Versión 0.2 - 15 de octubre de 2025}\\
+\textit{Próxima revisión: Semana 4 (hito de demo funcional)}
+\end{center}
+
+\end{document}
