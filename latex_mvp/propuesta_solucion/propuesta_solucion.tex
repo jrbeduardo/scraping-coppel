@@ -102,9 +102,14 @@
 
 \begin{center}
 {\Huge\sffamily\bfseries\color{brandDarkBlue}
+Nautilus\\[0.2cm]
 Plataforma de Monitoreo de\\[0.3cm]
 Precios Competitivos\\[0.3cm]
 \Large Hoja de Ruta MVP de 3-4 Meses}
+
+\vspace{0.5cm}
+{\large\color{brandMediumBlue}\itshape
+``Explorando las profundidades del comercio electrónico''}
 \end{center}
 
 \vspace{0.8cm}
@@ -147,7 +152,11 @@ Stack Tecnológico: Playwright + Prefect + Polars + DuckDB + FastAPI + React
 \section*{Resumen Ejecutivo}
 \addcontentsline{toc}{section}{Resumen Ejecutivo}
 
-Coppel puede construir un MVP de monitoreo de precios competitivos listo para producción en 3-4 meses utilizando un stack tecnológico probado que combina automatización de navegadores con Playwright, orquestación con Prefect y estrategias de proxy optimizadas en costos. El enfoque híbrido recomendado---aprovechando servicios de scraping administrados para infraestructura mientras se construye coincidencia de SKU personalizada y analítica---equilibra velocidad, costo y capacidad, habilitando monitoreo diario de precios de 3-4 competidores a través de 2-3 categorías de productos con 95\%+ de frescura y 97\%+ de precisión.
+\subsection*{Nautilus: Explorando las Profundidades del Comercio Electrónico}
+
+\textbf{Nautilus} es el nombre propuesto para la plataforma de monitoreo de precios competitivos de Coppel. Inspirado en el submarino del Capitán Nemo en \textit{``20,000 Leguas de Viaje Submarino''} de Julio Verne, el nombre evoca la exploración de las profundidades (deep web scraping), tecnología avanzada y capacidad de descubrimiento---características centrales de nuestra solución de inteligencia competitiva.
+
+Coppel puede construir un MVP de Nautilus listo para producción en 3-4 meses utilizando un stack tecnológico probado que combina automatización de navegadores con Playwright, orquestación con Prefect y estrategias de proxy optimizadas en costos. El enfoque híbrido recomendado---aprovechando servicios de scraping administrados para infraestructura mientras se construye coincidencia de SKU personalizada y analítica---equilibra velocidad, costo y capacidad, habilitando monitoreo diario de precios de 3-4 competidores a través de 2-3 categorías de productos con 95\%+ de frescura y 97\%+ de precisión.
 
 \subsection*{Puntos Clave}
 
@@ -857,7 +866,107 @@ El enfoque técnico equilibrando costo y rendimiento---usar solicitudes HTTP lig
 
 \newpage
 
-\section{20 Referencias Principales con Código Accesible}
+\section{Glosario de Términos Técnicos}
+
+\subsection{Términos de Web Scraping}
+
+\begin{description}[labelwidth=4cm,leftmargin=4.5cm,style=nextline]
+	\item[\textbf{Web Scraping}] Proceso automatizado de extracción de datos de sitios web mediante programas que simulan la navegación humana o analizan el código HTML.
+
+	\item[\textbf{Headless Browser}] Navegador web sin interfaz gráfica que se ejecuta en segundo plano, utilizado para automatizar la navegación y extraer contenido dinámico renderizado con JavaScript.
+
+	\item[\textbf{Proxy}] Servidor intermediario que actúa como puente entre el scraper y el sitio objetivo, ocultando la IP real y permitiendo rotación de direcciones para evitar bloqueos.
+
+	\item[\textbf{User-Agent}] Cadena de texto que identifica el navegador y sistema operativo en las solicitudes HTTP. Los scrapers deben usar user-agents realistas para evitar detección.
+
+	\item[\textbf{Rate Limiting}] Técnica que limita la cantidad de solicitudes por unidad de tiempo para evitar sobrecargar servidores y reducir probabilidad de ser bloqueado.
+
+	\item[\textbf{CAPTCHA}] Sistema de desafío-respuesta para distinguir humanos de bots, común en sitios protegidos contra scraping automatizado.
+
+	\item[\textbf{Robots.txt}] Archivo en la raíz del sitio web que especifica qué páginas pueden ser accedidas por crawlers automatizados.
+\end{description}
+
+\subsection{Arquitectura y Orquestación}
+
+\begin{description}[labelwidth=4cm,leftmargin=4.5cm,style=nextline]
+	\item[\textbf{Microservicios}] Arquitectura donde la aplicación se descompone en servicios pequeños e independientes que se comunican mediante APIs.
+
+	\item[\textbf{Orquestación}] Coordinación y gestión automatizada de flujos de trabajo complejos, programando y monitoreando la ejecución de tareas de scraping.
+
+	\item[\textbf{Worker}] Proceso que ejecuta tareas específicas de forma independiente, como scrapear un sitio o procesar datos extraídos.
+
+	\item[\textbf{Queue (Cola)}] Sistema de almacenamiento temporal de tareas pendientes que distribuye trabajo entre múltiples workers.
+
+	\item[\textbf{ETL}] Extract, Transform, Load---proceso de extraer datos de fuentes, transformarlos a formato deseado y cargarlos en destino final.
+
+	\item[\textbf{API REST}] Interfaz de programación que permite comunicación entre sistemas mediante protocolo HTTP con operaciones estándar (GET, POST, PUT, DELETE).
+\end{description}
+
+\subsection{Procesamiento y Almacenamiento de Datos}
+
+\begin{description}[labelwidth=4cm,leftmargin=4.5cm,style=nextline]
+	\item[\textbf{DataFrame}] Estructura de datos tabular bidimensional similar a hoja de cálculo, optimizada para análisis y transformaciones de datos.
+
+	\item[\textbf{Parquet}] Formato de archivo columnar comprimido que optimiza el almacenamiento y consulta de grandes volúmenes de datos.
+
+	\item[\textbf{Data Lake}] Repositorio centralizado que almacena datos estructurados y no estructurados en su formato original para análisis posterior.
+
+	\item[\textbf{OLAP}] Online Analytical Processing---sistemas optimizados para consultas analíticas complejas sobre grandes volúmenes de datos históricos.
+
+	\item[\textbf{Redis}] Base de datos en memoria de tipo clave-valor, utilizada para caché y gestión de datos de alta velocidad.
+
+	\item[\textbf{PostgreSQL}] Sistema de gestión de bases de datos relacional de código abierto, robusto y extensible.
+\end{description}
+
+\subsection{Matching y Análisis}
+
+\begin{description}[labelwidth=4cm,leftmargin=4.5cm,style=nextline]
+	\item[\textbf{SKU}] Stock Keeping Unit---identificador único de producto en sistemas de inventario y comercio.
+
+	\item[\textbf{Fuzzy Matching}] Técnica de coincidencia aproximada que encuentra similitudes entre cadenas de texto incluso con errores o variaciones.
+
+	\item[\textbf{EAN/UPC/GTIN}] Códigos de barras estandarizados internacionalmente para identificación única de productos.
+
+	\item[\textbf{MPN}] Manufacturer Part Number---número de parte asignado por el fabricante para identificar productos.
+
+	\item[\textbf{Entity Resolution}] Proceso de identificar y vincular registros que se refieren a la misma entidad del mundo real a través de múltiples fuentes de datos.
+
+	\item[\textbf{Precision/Recall}] Métricas de calidad: precisión mide exactitud de coincidencias positivas, recall mide cobertura de coincidencias relevantes.
+\end{description}
+
+\subsection{Anti-Bot y Seguridad}
+
+\begin{description}[labelwidth=4cm,leftmargin=4.5cm,style=nextline]
+	\item[\textbf{Fingerprinting}] Técnica de identificación de navegadores mediante análisis de características únicas (canvas, WebGL, fuentes, configuraciones).
+
+	\item[\textbf{Cloudflare}] Plataforma de seguridad web que proporciona protección contra bots, DDoS y otros ataques.
+
+	\item[\textbf{TLS Fingerprinting}] Identificación de clientes mediante análisis de configuración SSL/TLS en el handshake de conexión.
+
+	\item[\textbf{Residential Proxy}] Proxy que usa direcciones IP asignadas a dispositivos residenciales reales, más difíciles de detectar que IPs de datacenter.
+
+	\item[\textbf{Stealth Mode}] Técnicas para hacer que navegadores automatizados sean indistinguibles de navegadores controlados por humanos.
+\end{description}
+
+\subsection{Métricas y Monitoreo}
+
+\begin{description}[labelwidth=4cm,leftmargin=4.5cm,style=nextline]
+	\item[\textbf{Uptime}] Porcentaje de tiempo que el sistema está operacional y disponible.
+
+	\item[\textbf{SLA}] Service Level Agreement---acuerdo de nivel de servicio que especifica métricas garantizadas de rendimiento.
+
+	\item[\textbf{Frescura}] Porcentaje de datos actualizados dentro del período objetivo (típicamente <24 horas).
+
+	\item[\textbf{Cobertura}] Porcentaje de productos objetivo que son exitosamente monitoreados.
+
+	\item[\textbf{Tasa de Éxito}] Porcentaje de intentos de scraping que completan exitosamente sin errores o bloqueos.
+
+	\item[\textbf{KVI}] Key Value Item---productos estratégicos más importantes para monitorear competitivamente.
+\end{description}
+
+\newpage
+
+\section{Referencias Principales con Código Accesible}
 
 \subsection{Herramientas de Web Scraping}
 
@@ -1045,7 +1154,8 @@ Todos estos tienen documentación excelente, comunidades activas, y son de códi
 \begin{center}
 {\color{brandDarkGrey}\small
 Documento generado para Coppel --- Noviembre 2025 \\
-Propuesta Técnica MVP Plataforma Monitoreo Precios Competitivos
+\textbf{Nautilus} --- Propuesta Técnica MVP Plataforma Monitoreo Precios Competitivos \\
+\textit{``Explorando las profundidades del comercio electrónico''}
 }
 \end{center}
 
