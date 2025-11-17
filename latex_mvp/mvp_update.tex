@@ -1,0 +1,404 @@
+% Documento generado a partir de docs/mvp_update.md
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\geometry{margin=0.9in, top=0.8in, bottom=1in}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\setmainfont{Segoe UI}
+\setsansfont{Segoe UI}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{setspace}
+\setstretch{1.15}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{titlesec}
+\usepackage{newunicodechar}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Paleta de colores corporativa
+\definecolor{brandBlue}{HTML}{1C42E8}
+\definecolor{brandYellow}{HTML}{F0D224}
+\definecolor{brandMediumBlue}{HTML}{05297A}
+\definecolor{brandDarkBlue}{HTML}{081754}
+\definecolor{brandLightBlue}{HTML}{1CA8F7}
+\definecolor{brandBeige}{HTML}{EEE8E3}
+\definecolor{brandWhite}{HTML}{FFFFFF}
+\definecolor{brandLightGrey}{HTML}{C9C9C9}
+\definecolor{brandGrey}{HTML}{8C8C8C}
+\definecolor{brandDarkGrey}{HTML}{4A4A4A}
+\definecolor{brandBlack}{HTML}{000000}
+
+% Configuración de enlaces (usar colores ya definidos)
+\hypersetup{colorlinks=true, linkcolor=brandDarkBlue, urlcolor=brandLightBlue, citecolor=brandBlue}
+
+% Formato de encabezados ejecutivos
+\titleformat{\section}
+	{\color{brandDarkBlue}\Large\sffamily\bfseries}
+	{\thesection}{1em}
+	{}
+	[\vspace{0.2em}{\color{brandBlue}\titlerule[1.2pt]}]
+
+\titleformat{\subsection}
+	{\color{brandMediumBlue}\large\sffamily\bfseries}
+	{\thesubsection}{0.8em}
+	{}
+	[\vspace{0.1em}{\color{brandMediumBlue}\titlerule[0.8pt]}]
+
+\titleformat{\subsubsection}
+	{\color{brandBlue}\normalsize\sffamily\bfseries}
+	{\thesubsubsection}{0.6em}
+	{}
+	[]
+
+% Mapeo de caracteres Unicode usados en el texto
+\usepackage{amssymb}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{□}{\ensuremath{\Box}}
+
+% Configuración de listas profesionales
+\setlist[itemize,1]{label={\color{brandBlue}\textbullet}, leftmargin=1.5em, itemsep=0.3em}
+\setlist[itemize,2]{label={\color{brandMediumBlue}\textendash}, leftmargin=2em, itemsep=0.2em}
+\setlist[enumerate]{leftmargin=1.5em, itemsep=0.3em}
+
+\begin{document}
+
+% PORTADA EJECUTIVA
+\thispagestyle{empty}
+\begin{center}
+	\IfFileExists{assets/logo-coppel.png}{%
+		\includegraphics[width=0.35\textwidth]{assets/logo-coppel.png}%
+	}{%
+		\includesvg[width=0.35\textwidth]{assets/logo-coppel}%
+	}
+\end{center}
+
+\vspace{0.3cm}
+{\color{brandBlue}\noindent\rule{\linewidth}{2.5pt}}
+\vspace{0.5cm}
+
+\begin{center}
+{\Huge\sffamily\bfseries\color{brandDarkBlue} 
+Plataforma Interna de Scraping\\[0.3cm]
+\Large Análisis Competitivo de Precios --- MVP}
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{center}
+\begin{tabularx}{0.85\textwidth}{@{}>{ \bfseries\color{brandMediumBlue}}l X@{}}
+\toprule
+Versión: & 0.1 (para socializar con equipo y usuario final) \\
+\midrule
+Fecha: & 15/oct/2025 \\
+\midrule
+Patrocinador: & Luis Acosta / Dirección Estrategia \\
+\midrule
+Equipo responsable: & Ruíz / Lozas \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1cm}
+{\color{brandBlue}\noindent\rule{\linewidth}{1.5pt}}
+
+\newpage
+
+% Tabla de contenidos
+\tableofcontents
+\newpage
+
+
+\section{Resumen}
+
+\begin{itemize}
+\item \textbf{Objetivo:} Plataforma interna que extrae información pública de competidores (\textbf{precio}, \textbf{promoción}, \textbf{disponibilidad}, \textbf{vendedor}), la normaliza y la disponibiliza en interfaz simple y mediante descargas/API.
+
+\item \textbf{Alcance MVP:} \textbf{3--4 meses}, \textbf{3--4 competidores}, \textbf{2--3 categorías}, frecuencia \textbf{diaria} (sub-diaria cuando sea viable y responsable). Comparación por SKU con \emph{matching} básico (\textbf{exacto/variante}). Sitios de alta fricción entran en \textbf{Fase 2}.
+
+\item \textbf{Beneficios esperados:}
+\begin{itemize}
+\item Habilitar \emph{playbooks} de precio y reacción táctica ante movimientos de mercado
+\item Ganar trazabilidad histórica para negociar con marcas
+\item Reducir dependencia de proveedor actual que no cumple capacidades/SLAs
+\end{itemize}
+\end{itemize}
+
+\section{Antecedentes y problema}
+
+\begin{itemize}
+\item Dependencia de un tercero con resultados irregulares en \textbf{frescura}, \textbf{cobertura} y \textbf{precisión}
+\item Decisiones comerciales con \textbf{latencia} y poca evidencia histórica
+\item Necesidad de un \emph{pipeline} propio con alcance realista, riesgos controlados y KPIs claros
+\end{itemize}
+
+\section{Objetivo del MVP (3--4 meses)}
+
+\begin{itemize}
+\item Disponibilizar \emph{snapshots} programados (\textbf{diarios}; sub-diarios cuando sea viable)
+\item Comparar por SKU: \textbf{precio}, \textbf{precio lista}, \textbf{\% descuento}, envío (si visible), \textbf{disponibilidad} y tipo de vendedor (\textbf{1P/3P})
+\item UI simple: filtros, tabla comparativa, series de tiempo + descargar (CSV/Parquet) + API interna + \textbf{alertas por umbrales}
+\item \emph{Matching} v1 (exacto/variante) usando claves duras (\textbf{EAN/UPC/MPN/SKU}) y reglas simples (pack/talla/color)
+\end{itemize}
+
+\section{Alcance del MVP (incluye / no incluye)}
+
+\subsection*{INCLUYE}
+
+\begin{itemize}
+\item Extracción de listados de búsqueda y páginas de producto en \textbf{3--4 competidores} y \textbf{2--3 categorías}
+\item Normalización de moneda, marca, pack/talla, categoría estándar
+\item \emph{Matching} v1: exacto/variante
+\item UI con filtros, tabla comparativa, serie de tiempo y detalle con evidencias (URL y mini-captura)
+\item API/exports y alertas (p.~ej., caída/subida de precio $>x\%$ o cambio de disponibilidad)
+\end{itemize}
+
+\subsection*{NO INCLUYE}
+
+\begin{itemize}
+\item Similaridad avanzada (texto/imagen), \emph{share of search}, \emph{ratings/reviews}
+\item Cobertura masiva de todos los sitios y categorías
+\item Sitios con alta fricción (ej.: \emph{marketplaces} globales) $\leftarrow$ podría entrar en \textbf{Fase II}
+\end{itemize}
+
+\section{Casos de uso habilitados}
+
+\begin{itemize}
+\item \textbf{\emph{Playbooks} de precio:} Detectar \emph{gaps} y definir respuesta (mantener/igualar/contraatacar)
+\item \textbf{Oportunidad por OOS competidor:} Cuando el competidor queda sin stock
+\item \textbf{Negociación con marcas:} Evidencia histórica de movimientos de precio/promoción
+\item \textbf{Alertas operativas:} Eventos relevantes para equipos comerciales
+\end{itemize}
+
+\section{Requerimientos y supuestos}
+
+\begin{itemize}
+\item \textbf{Competidores iniciales:} 3--4 (definir con negocio)
+\item \textbf{Categorías iniciales:} 2--3 (definir con negocio)
+\item \textbf{SKUs canónicos priorizados:} 5,000--15,000 (con \emph{golden set} inicial de \textbf{500--1,000} para QA)
+\item \textbf{Frecuencia:} Diaria 01:00/06:00; menor a diario solo si el sitio lo permite y es responsable
+\item \textbf{Cumplimiento:} Solo información pública; revisión de términos y robots.txt por dominio; límites de ritmo por sitio
+\item \textbf{Anti-bot:} Cadencia conservadora, variación de agente de navegador y rotación de IP dentro de límites prudentes
+\item \textbf{Seguridad:} Sin PII; acceso por roles; registro de fuente (URL) y \emph{timestamp} por dato
+\end{itemize}
+
+\section{Entrega de datos y disponibilidad}
+
+\begin{itemize}
+\item \textbf{Interfaz web:} Filtros (competidor, categoría, marca, SKU, fecha), tabla comparativa y tendencias
+\item \textbf{Descarga:} CSV/Parquet del resultado filtrado
+\item \textbf{API interna:} Endpoints para consulta programática
+\item \textbf{Alertas:} Reglas simples (condición, umbral, destinatarios) con historial
+\item \textbf{Acuerdos operativos:} Ventana de actualización nocturna; tiempos de reintento ante fallas
+\end{itemize}
+
+\section{Arquitectura}
+
+\begin{itemize}
+\item \textbf{Extracción:} Automatización de navegador (capaz de cargar páginas dinámicas), con plantillas por sitio y reintentos
+\item \textbf{Orquestación:} Planificador de tareas y cola de trabajos con límites por dominio
+\item \textbf{Procesamiento:} Limpieza, normalización y validaciones (precios, moneda, disponibilidad)
+\item \textbf{Almacenamiento:} Archivos columnados (Parquet/Delta) por fecha/sitio y repositorio analítico (tipo \emph{warehouse}) para consultas
+\item \textbf{Publicación:} API interna, descargas y UI
+\item \textbf{Observabilidad:} Bitácoras, métricas, mini-capturas como evidencia y tableros de salud
+\end{itemize}
+
+
+
+
+\section{Modelo de datos}
+
+\textbf{Dimensiones (catálogos):}
+\begin{itemize}
+\item Producto canónico (marca, familia, clase, departamento, pack/talla/color)
+\item Sitio/competidor
+\item Vendedor (1P/3P)
+\item Categoría estándar
+\item Tiempo (fecha, semana, mes, año)
+\end{itemize}
+
+\textbf{Hechos (mediciones):}
+\begin{itemize}
+\item \textbf{Punto de precio:} precio, precio lista, \%descuento, costo de envío (si aplica), disponibilidad, vendedor, moneda, URL, fecha
+\item \textbf{Meta del proceso:} estado de extracción, código de respuesta, latencia, presencia de \emph{captcha} (para soporte)
+\end{itemize}
+
+\textbf{Vínculo de \emph{matching} (MVP):}
+\begin{itemize}
+\item Relación entre producto canónico y producto en sitio con tipo de coincidencia: \textbf{exacta} o \textbf{variante}
+\end{itemize}
+
+\section{KPIs y criterios de éxito (SLOs)}
+
+\textbf{Métricas operacionales:}
+\begin{itemize}
+\item \textbf{Cobertura:} $\ge 85\%$ de SKUs prioritarios con $\ge 1$ coincidencia
+\item \textbf{Frescura:} $\ge 95\%$ de SKUs con datos de las últimas \textbf{24 h}
+\item \textbf{Precisi\'{o}n (precio/promo):} $\ge 97\%$ en muestreo estratificado
+\item \textbf{Disponibilidad de procesos:} $\ge 97\%$
+\item \textbf{Tiempo de recuperación ante cambio de página:} $<24$ h
+\end{itemize}
+
+\textbf{Definición de éxito del MVP:}
+\begin{itemize}
+\item Cumplir estos indicadores en $\ge 2$ competidores y $\ge 2$ categor\'{i}as durante \textbf{4 semanas continuas}
+\end{itemize}
+
+\section{Plan de trabajo (12 semanas)}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}>{ \bfseries}l X@{}}
+\toprule
+\textbf{Fase} & \textbf{Hitos y tareas clave} \\
+\midrule
+\textbf{Semanas 0--2} & \textbf{Descubrimiento y base} \\
+Descubrimiento & \textbullet~Validar competidores y categorías; levantar \emph{golden set} (\textbf{500--1,000 SKUs}) \\
+ & \textbullet~Diseñar modelo de datos y \emph{mockups} de UI \\
+ & \textbullet~Revisar términos y robots.txt por dominio \\
+ & \textbullet~Definir KPIs y ``Definition of Done'' \\
+\midrule
+\textbf{Semanas 3--4} & \textbf{Infraestructura y primer sitio} \\
+Base técnica & \textbullet~Configurar repos, planificador, bitácoras y almacenamiento \\
+ & \textbullet~Implementar \textbf{primer sitio} (búsquedas + producto) y normalización \\
+ & \textbullet~UI v0 (tabla + filtros) y descarga básica \\
+\midrule
+\textbf{Semanas 5--6} & \textbf{Más sitios y \emph{matching}} \\
+Expansión & \textbullet~Implementar sitio 2 y sitio 3; control de calidad por muestreo \\
+ & \textbullet~\emph{Matching} v1 (exacto/variante) \\
+ & \textbullet~API y UI v1 (serie de tiempo) \\
+\midrule
+\textbf{Semanas 7--8} & \textbf{Robustez y alertas} \\
+Consolidación & \textbullet~Detector de cambios de página; reintentos inteligentes \\
+ & \textbullet~Alertas por umbrales \\
+ & \textbullet~Demostración con usuarios comerciales y ajustes \\
+\midrule
+\textbf{Semanas 9--12} & \textbf{Ampliación y cierre del MVP} \\
+Cierre MVP & \textbullet~Sumar categoría \#2 (y \#3 si aplica); pruebas de carga \\
+ & \textbullet~\textbf{Monitoreo de KPIs durante 4 semanas} \\
+ & \textbullet~\textbf{Decisión Go/No-Go} y backlog de Fase 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+\section{Equipo mínimo y roles}
+
+\begin{itemize}
+\item \textbf{Líder técnico / Datos Sr (1.0 FTE):} Arquitectura, orquestación, observabilidad, robustez
+\item \textbf{Ingeniero/a de datos (1.0 FTE):} Extracción, normalización, procesos
+\item \textbf{Ingeniero/a back/frontend (1.0 FTE):} API, autenticación, interfaz, descargas, alertas
+\item \textbf{PM/PO (0.75 FTE):} \emph{Roadmap}, riesgos, relación con usuarios y \emph{sponsors}
+\end{itemize}
+
+\textbf{Total estimado:} \textbf{3.75 FTE} para el MVP. (Fase 2 podría requerir \textbf{0.5--1.0 FTE} analista/ML para similaridad avanzada).
+
+\section{Riesgos y mitigaciones}
+
+\begin{itemize}
+\item \textbf{Defensas anti-extracción en algunos sitios}
+  \begin{itemize}
+  \item \emph{Mitigación:} Límites por dominio, horarios valle, pausas automáticas ante bloqueos, ventanas reducidas en sitios complejos
+  \end{itemize}
+\item \textbf{Cambios en estructura de páginas}
+  \begin{itemize}
+  \item \emph{Mitigación:} Detector de cambios, plantillas por sitio y guías de respuesta; \textbf{MTTR $<24$ h}
+  \end{itemize}
+\item \textbf{Calidad de comparación por SKU}
+  \begin{itemize}
+  \item \emph{Mitigación:} \emph{Golden set} y muestreo estratificado por categoría/competidor; reglas claras de variante
+  \end{itemize}
+\item \textbf{Cumplimiento legal/operativo}
+  \begin{itemize}
+  \item \emph{Mitigación:} Matriz por dominio (términos y \texttt{robots.txt}), solo info pública y ritmos responsables
+  \end{itemize}
+\item \textbf{Costo de conectividad/servicios (IP rotatoria)}
+  \begin{itemize}
+  \item \emph{Mitigación:} Medición por dominio (GB/mes), priorización de categorías, cacheo selectivo
+  \end{itemize}
+\end{itemize}
+
+\section{Costos (\emph{drivers} y escenarios)}
+
+\textbf{Componentes principales:}
+\begin{itemize}
+\item \textbf{Cómputo/almacenamiento:} Procesos nocturnos y archivos columnados; escala según páginas/día
+\item \textbf{Conectividad/IPs rotatorias:} Principal \emph{driver}; depende del peso de las páginas y frecuencia
+\item \textbf{Monitoreo/observabilidad:} Bitácoras, métricas y alertas
+\end{itemize}
+
+\textbf{Escenarios de alcance:}
+\begin{itemize}
+\item \textbf{Conservador:} \textbf{2 competidores} ${\times}$ \textbf{2 categorías}; frecuencia diaria
+\item \textbf{Base:} \textbf{3--4 competidores} ${\times}$ \textbf{2--3 categorías}; diaria (menor a diaria selectiva)
+\item \textbf{Ambicioso:} \textbf{4 competidores} ${\times}$ \textbf{3 categorías}; diaria/menor a diaria, mayor costo de conectividad
+\end{itemize}
+
+\section{Gobierno, auditoría y seguridad}
+
+\begin{itemize}
+\item \textbf{Comité quincenal:} Avance, riesgos, decisiones
+\item \textbf{Tablero de salud:} Cobertura, frescura, precisión, fallos por sitio, consumo de conectividad
+\item \textbf{Auditoría:} Cada registro con URL y \emph{timestamp}; evidencias (mini-capturas) en casos críticos
+\item \textbf{Seguridad:} Acceso por roles (SSO), cifrado en tránsito y en reposo, registros de acceso
+\end{itemize}
+
+\section{\emph{Checklist} para arrancar}
+
+\begin{itemize}
+\item[$\square$] Lista de competidores (\textbf{3--4}) y categorías (\textbf{2--3}), con prioridad
+\item[$\square$] \emph{Golden set} (\textbf{500--1,000 SKUs canónicos}) con EAN/UPC/MPN cuando exista
+\item[$\square$] Palabras de búsqueda por categoría (cómo busca el cliente)
+\item[$\square$] Posición legal interna: límites de frecuencia/uso por dominio
+\item[$\square$] Usuarios clave para validar la interfaz y los \emph{playbooks} (nombres y correos)
+\end{itemize}
+
+\section{Decisiones solicitadas al \emph{sponsor}}
+
+\begin{enumerate}
+\item \textbf{Aprobación del alcance del MVP} (secciones 3, 4 y 8/11)
+\item \textbf{Definición de competidores y categorías esta semana}
+\item \textbf{Inicio del Sprint 0 (2 semanas):} Descubrimiento, legal y base técnica
+\item \textbf{Primer hito visible (Semana 4):} Tabla comparativa funcional con un sitio
+\end{enumerate}
+
+\section{Glosario breve}
+
+\begin{itemize}
+\item \textbf{Extracción (\emph{scraping}):} Obtención automatizada de información pública mostrada en páginas
+\item \textbf{\emph{Snapshot}:} Captura de estado (precio/stock) en una fecha/hora
+\item \textbf{SKU canónico:} Identificador interno para comparar ``manzanas con manzanas''
+\item \textbf{\emph{Matching} exacto/variante:} Igual producto; variante = misma referencia con diferencias (talla, color, pack)
+\item \textbf{Sitio de alta fricción:} Página con defensas técnicas que requieren ritmos más bajos o ventanas acotadas
+\item \textbf{MVP (\emph{Minimum Viable Product}):} Producto mínimo viable con funcionalidad básica para validar valor
+\item \textbf{SLO (\emph{Service Level Objective}):} Objetivo de nivel de servicio; métrica cuantificable de calidad operacional
+\item \textbf{MTTR (\emph{Mean Time To Repair}):} Tiempo promedio de recuperación ante fallas o cambios
+\item \textbf{1P/3P:} Primera parte (vendedor directo/retailer) vs. tercera parte (marketplace/vendedor externo)
+\item \textbf{EAN/UPC/MPN:} Códigos de producto estándar (European/Universal Article Number, Manufacturer Part Number)
+\item \textbf{\emph{Golden set}:} Conjunto de referencia de SKUs prioritarios para calibración y validación
+\item \textbf{Normalización:} Proceso de estandarizar formatos (moneda, unidades, categorías) para comparación
+\item \textbf{\emph{Warehouse} analítico:} Repositorio centralizado de datos estructurados para consultas y análisis
+\item \textbf{Cobertura:} Porcentaje de SKUs objetivo con datos disponibles en competidores
+\item \textbf{Frescura:} Antigüedad de los datos; qué tan reciente es la última actualización
+\item \textbf{\emph{Gap} de precio:} Diferencia de precio entre producto propio y competencia
+\item \textbf{Elasticidad:} Sensibilidad de la demanda ante cambios de precio
+\item \textbf{\emph{Captcha}:} Mecanismo de seguridad para distinguir humanos de bots; puede bloquear extracción
+\item \textbf{\emph{Rate limiting}:} Límite de frecuencia de solicitudes por tiempo para evitar sobrecarga o bloqueo
+\item \textbf{Parquet/Delta:} Formatos de archivo columnar optimizados para consultas analíticas a gran escala
+\end{itemize}
+
+\section{Anexo A -- Variables para estimar ROI (llenar con negocio)}
+
+\begin{itemize}
+\item \textbf{Ventas de las categorías objetivo:} \% del total
+\item \textbf{Unidades/SKUs críticos:} Ticket promedio
+\item \textbf{Elasticidad de precio:} Aproximado
+\item \textbf{\% de tiempo con \emph{gap} detectable:} vs. competidor
+\item \textbf{\% de mejora de margen/venta al reaccionar:} \emph{bps}
+\end{itemize}
+
+\end{document}
