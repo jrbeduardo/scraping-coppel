@@ -1,0 +1,321 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0" version="29.0.3" pages="3">
+  <diagram id="nautilus-main" name="Arquitectura Principal">
+    <mxGraphModel dx="1558" dy="604" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TÍTULO -->
+        <mxCell id="title" value="⚙️ Arquitectura Nautilus - Plataforma de Monitoreo de Precios" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#05297A;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="800" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- CAPA 1: ORQUESTACIÓN -->
+        <mxCell id="orch-layer" value="🎯 ORQUESTACIÓN" style="swimlane;html=1;fillColor=#1C42E8;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=14;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="1440" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="prefect" value="⚡ Prefect&#xa;Orchestrator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="orch-layer">
+          <mxGeometry x="20" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="scheduler" value="⏰ Scheduler&#xa;3x/día" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="orch-layer">
+          <mxGeometry x="180" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="workflow" value="🔄 DAGs&#xa;Retry + DLQ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="orch-layer">
+          <mxGeometry x="340" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="monitoring" value="📊 Monitoring&#xa;Grafana + Prometheus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="orch-layer">
+          <mxGeometry x="500" y="40" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rabbitmq" value="📬 RabbitMQ&#xa;Message Queue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="orch-layer">
+          <mxGeometry x="680" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="metrics-box" value="📈 MÉTRICAS&#xa;95%+ frescura | 97%+ precisión&#xa;85%+ cobertura | 99%+ uptime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;fontSize=11;" vertex="1" parent="orch-layer">
+          <mxGeometry x="1200" y="40" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- CAPA 2: EXTRACCIÓN -->
+        <mxCell id="extract-layer" value="🌐 EXTRACCIÓN" style="swimlane;html=1;fillColor=#05297A;strokeColor=#081754;fontColor=#FFFFFF;fontStyle=1;fontSize=14;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="80" y="220" width="1440" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="playwright" value="🎭 Playwright&#xa;JS sites (20%)&#xa;Auto-scale 0-10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="extract-layer">
+          <mxGeometry x="20" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="http" value="⚡ HTTP&#xa;Static sites (80%)&#xa;60-70% ahorro" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="extract-layer">
+          <mxGeometry x="200" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="proxies" value="🔐 Proxies&#xa;70% DC | 25% Res | 5% Premium&#xa;$7,940 MXN/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="extract-layer">
+          <mxGeometry x="380" y="40" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="scraperapi" value="🤖 ScraperAPI&#xa;CAPTCHA + Anti-bot&#xa;$4-16K MXN/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="extract-layer">
+          <mxGeometry x="600" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="targets" value="🎯 Targets&#xa;3-4 competidores&#xa;1-5K SKUs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;dashed=1;dashPattern=8 8;" vertex="1" parent="extract-layer">
+          <mxGeometry x="780" y="40" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- CAPA 3: PROCESAMIENTO -->
+        <mxCell id="process-layer" value="⚙️ PROCESAMIENTO" style="swimlane;html=1;fillColor=#1C42E8;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=14;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="80" y="380" width="1440" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="polars" value="🚀 Polars&#xa;ETL 10-50x Pandas&#xa;Limpieza + Validación" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="process-layer">
+          <mxGeometry x="20" y="40" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sku-matching" value="🔍 SKU Matching&#xa;Tier 1: EAN/UPC (70%)&#xa;Tier 2: Fuzzy (RapidFuzz)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="process-layer">
+          <mxGeometry x="220" y="40" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="analytics" value="📊 Analytics&#xa;Tendencias + Alertas&#xa;Insights competencia" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="process-layer">
+          <mxGeometry x="440" y="40" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="redis" value="⚡ Redis&#xa;Cache + Rate limit&#xa;Real-time" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="process-layer">
+          <mxGeometry x="640" y="40" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- CAPA 4: ALMACENAMIENTO -->
+        <mxCell id="storage-layer" value="💾 ALMACENAMIENTO" style="swimlane;html=1;fillColor=#05297A;strokeColor=#081754;fontColor=#FFFFFF;fontStyle=1;fontSize=14;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="80" y="540" width="1440" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="gcs" value="☁️ GCS Data Lake&#xa;Parquet (123MB→10MB)&#xa;$0.40 MXN/GB/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="storage-layer">
+          <mxGeometry x="20" y="40" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="duckdb" value="🦆 DuckDB&#xa;OLAP queries&#xa;Sub-segundo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="storage-layer">
+          <mxGeometry x="240" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="postgres" value="🐘 PostgreSQL&#xa;Metadata + Catalog&#xa;Jobs + Users" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="storage-layer">
+          <mxGeometry x="420" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="backup" value="💿 Backup&#xa;90 días retention&#xa;RTO: 4h | RPO: 24h" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;dashed=1;dashPattern=8 8;" vertex="1" parent="storage-layer">
+          <mxGeometry x="600" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- CAPA 5: PRESENTACIÓN -->
+        <mxCell id="present-layer" value="🖥️ PRESENTACIÓN" style="swimlane;html=1;fillColor=#1C42E8;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=14;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="80" y="700" width="1440" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="fastapi" value="⚡ FastAPI&#xa;21K+ req/s&#xa;OpenAPI docs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="present-layer">
+          <mxGeometry x="20" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="react" value="⚛️ React&#xa;Recharts viz&#xa;Filtros + Alertas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="present-layer">
+          <mxGeometry x="200" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="reports" value="📄 Reports&#xa;PDF + Email&#xa;Slack notifications" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="present-layer">
+          <mxGeometry x="380" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="users" value="👥 Usuarios&#xa;Pricing | Comercial&#xa;Ejecutivos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;dashed=1;dashPattern=8 8;" vertex="1" parent="present-layer">
+          <mxGeometry x="560" y="40" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- COSTOS -->
+        <mxCell id="costs" value="💰 COSTOS&#xa;MVP: $1.8-3.4M MXN&#xa;OPEX: $12-18K MXN/mes&#xa;Post-MVP: $220-460K MXN/mes&#xa;Equipo: 3.75 FTE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="860" width="320" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- STACK TECNOLÓGICO -->
+        <mxCell id="stack" value="🔧 STACK&#xa;Playwright | Prefect | Polars&#xa;DuckDB | GCS | FastAPI | React" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1C42E8;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="860" width="320" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- CONEXIONES PRINCIPALES -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1C42E8;strokeWidth=3;endArrow=classic;endFill=1;" edge="1" parent="1" source="rabbitmq" target="playwright">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1C42E8;strokeWidth=3;endArrow=classic;endFill=1;" edge="1" parent="1" source="playwright" target="polars">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#05297A;strokeWidth=3;endArrow=classic;endFill=1;" edge="1" parent="1" source="polars" target="gcs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#05297A;strokeWidth=3;endArrow=classic;endFill=1;" edge="1" parent="1" source="gcs" target="fastapi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#F0D224;strokeWidth=3;endArrow=classic;endFill=1;" edge="1" parent="1" source="fastapi" target="react">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="nautilus-dataflow" name="Flujo de Datos">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title2" value="📊 Pipeline ETL - Flujo de Datos" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#05297A;" vertex="1" parent="1">
+          <mxGeometry x="450" y="20" width="500" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 1 -->
+        <mxCell id="step1" value="1️⃣ EXTRACCIÓN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1C42E8;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="100" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="step1-info" value="🌐 Scraping&#xa;• 3-4 competidores&#xa;• 1-5K SKUs&#xa;&#xa;Métodos:&#xa;🎭 Playwright 20%&#xa;⚡ HTTP 80%&#xa;&#xa;Datos: 💰 precio | 📦 stock&#xa;🏷️ marca | 🔗 URL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1C42E8;fontColor=#05297A;align=left;spacingLeft=10;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="200" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 2 -->
+        <mxCell id="step2" value="2️⃣ RAW DATA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="340" y="100" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="step2-info" value="📄 JSON/HTML&#xa;&#xa;Volumen:&#xa;• 1-5K rec/día&#xa;• 50-200MB/día&#xa;&#xa;Storage:&#xa;☁️ GCS raw/&#xa;⏱️ 7 días" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F0D224;fontColor=#05297A;align=left;spacingLeft=10;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="340" y="160" width="180" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 3 -->
+        <mxCell id="step3" value="3️⃣ TRANSFORMACIÓN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="580" y="100" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="step3-info" value="🚀 Polars ETL&#xa;&#xa;1. 🧹 Limpieza&#xa;2. 🔄 Normalización&#xa;3. 🔍 SKU Match&#xa;4. ✨ Enrichment&#xa;&#xa;Validación:&#xa;✅ Estructura&#xa;✅ Tipos&#xa;✅ Rangos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1CA8F7;fontColor=#05297A;align=left;spacingLeft=10;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="160" width="200" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 4 -->
+        <mxCell id="step4" value="4️⃣ CLEAN DATA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="840" y="100" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="step4-info" value="📦 Parquet&#xa;&#xa;Compresión:&#xa;123MB → 10-20MB&#xa;(85-90%)&#xa;&#xa;Particionado:&#xa;📅 fecha&#xa;🏢 competidor&#xa;📁 categoría" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F0D224;fontColor=#05297A;align=left;spacingLeft=10;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="160" width="180" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 5 -->
+        <mxCell id="step5" value="5️⃣ STORAGE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#05297A;strokeColor=#081754;fontColor=#FFFFFF;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="100" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="step5-info" value="☁️ GCS Data Lake&#xa;🦆 DuckDB&#xa;🐘 PostgreSQL&#xa;⚡ Redis&#xa;&#xa;Retención:&#xa;• Raw: 7d&#xa;• Proc: 90d&#xa;• Analytics: 2y" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;align=left;spacingLeft=10;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="160" width="180" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- ARROWS -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1C42E8;strokeWidth=4;endArrow=block;endFill=1;" edge="1" parent="1" source="step1" target="step2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#F0D224;strokeWidth=4;endArrow=block;endFill=1;" edge="1" parent="1" source="step2" target="step3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1CA8F7;strokeWidth=4;endArrow=block;endFill=1;" edge="1" parent="1" source="step3" target="step4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#05297A;strokeWidth=4;endArrow=block;endFill=1;" edge="1" parent="1" source="step4" target="step5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- MÉTRICAS -->
+        <mxCell id="quality" value="✅ CALIDAD&#xa;Completitud: 98%+ | Precisión: 97%+&#xa;Frescura: 95%+ &lt;24h | Unicidad: No dups" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="400" width="580" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="performance" value="⚡ PERFORMANCE&#xa;Extracción: 100-500 req/min | Polars: 1M rec &lt;30s&#xa;Storage: 50-200MB/día | API: 21K+ req/s &lt;200ms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1C42E8;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="400" width="580" height="80" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="nautilus-infra" name="Infraestructura GCP">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title3" value="☁️ Infraestructura Google Cloud Platform (GCP)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#05297A;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- GCP COMPUTE -->
+        <mxCell id="compute-box" value="💻 COMPUTE ENGINE" style="swimlane;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="640" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="vm1" value="⚡ Prefect Server&#xa;n1-std-2 | 2vCPU | 7.5GB&#xa;$800/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="compute-box">
+          <mxGeometry x="20" y="40" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vm2" value="🎭 Playwright Workers&#xa;e2-med | 0-10 pods&#xa;$600-6K/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="compute-box">
+          <mxGeometry x="220" y="40" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vm3" value="⚡ FastAPI + Process&#xa;n1-std-4 | 4vCPU | 15GB&#xa;$1,360/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="compute-box">
+          <mxGeometry x="420" y="40" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="gke" value="☸️ GKE Autopilot (opt)&#xa;Auto-scale | Pay-per-pod&#xa;$1-3K/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;dashed=1;dashPattern=8 8;" vertex="1" parent="compute-box">
+          <mxGeometry x="220" y="120" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- GCP STORAGE -->
+        <mxCell id="storage-box" value="💾 STORAGE" style="swimlane;whiteSpace=wrap;html=1;fillColor=#05297A;strokeColor=#081754;fontColor=#FFFFFF;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="740" y="80" width="580" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="gcs-cost" value="☁️ Cloud Storage (GCS)&#xa;$0.40/GB/mes | 50-200GB&#xa;$20-80/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="storage-box">
+          <mxGeometry x="20" y="40" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="disk" value="💿 Persistent Disks&#xa;200GB SSD | $3/GB&#xa;$600/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="storage-box">
+          <mxGeometry x="220" y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="snap" value="📸 Snapshots&#xa;100GB&#xa;$50/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="storage-box">
+          <mxGeometry x="400" y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- DATABASES -->
+        <mxCell id="db-box" value="🗄️ DATABASES" style="swimlane;whiteSpace=wrap;html=1;fillColor=#1C42E8;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="300" width="640" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudsql" value="🐘 Cloud SQL (PostgreSQL)&#xa;db-f1-micro | 1vCPU | 3.75GB&#xa;$600/mes (o self-hosted)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="db-box">
+          <mxGeometry x="20" y="40" width="280" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="memstore" value="⚡ Memorystore (Redis)&#xa;Basic 1GB&#xa;$600/mes (o self-hosted)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="db-box">
+          <mxGeometry x="320" y="40" width="300" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- NETWORKING -->
+        <mxCell id="net-box" value="🌐 NETWORKING" style="swimlane;whiteSpace=wrap;html=1;fillColor=#05297A;strokeColor=#081754;fontColor=#FFFFFF;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="740" y="300" width="580" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="lb" value="⚖️ Load Balancer&#xa;HTTPS + SSL&#xa;$360/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="net-box">
+          <mxGeometry x="20" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="monitor" value="📊 Monitoring&#xa;50GB logs | 1M metrics&#xa;$200/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="net-box">
+          <mxGeometry x="200" y="40" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc" value="🔒 VPC&#xa;Private network&#xa;Incluido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="net-box">
+          <mxGeometry x="400" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- SERVICIOS EXTERNOS -->
+        <mxCell id="ext-box" value="🔌 SERVICIOS EXTERNOS" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="460" width="900" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="proxy-cost" value="🔐 Proxies&#xa;70% DC: $600&#xa;25% Res: $5K&#xa;5% Premium: $2.3K&#xa;TOTAL: $7,940/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;align=left;spacingLeft=10;fontStyle=1;" vertex="1" parent="ext-box">
+          <mxGeometry x="20" y="40" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="scraper-cost" value="🤖 ScraperAPI&#xa;$4-16K/mes&#xa;Proxies + CAPTCHA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="ext-box">
+          <mxGeometry x="240" y="40" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="captcha-cost" value="🧩 2Captcha&#xa;$800/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="ext-box">
+          <mxGeometry x="440" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="email-cost" value="📧 SendGrid&#xa;$400/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="ext-box">
+          <mxGeometry x="600" y="40" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sentry-cost" value="🐛 Sentry&#xa;$400/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#05297A;fontColor=#05297A;fontStyle=1;" vertex="1" parent="ext-box">
+          <mxGeometry x="750" y="40" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- RESUMEN COSTOS -->
+        <mxCell id="summary" value="💰 RESUMEN COSTOS" style="swimlane;whiteSpace=wrap;html=1;fillColor=#1C42E8;strokeColor=#05297A;fontColor=#FFFFFF;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="660" width="1240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="opex" value="📊 OPEX MENSUAL&#xa;&#xa;GCP Infra: $5,390&#xa;• Compute: $2,760&#xa;• Storage: $670&#xa;• DBs: $1,200&#xa;• Network: $560&#xa;&#xa;Externos: $13.5-21.5K&#xa;• Proxies: $7,940&#xa;• ScraperAPI: $4-16K&#xa;• Otros: $1,600&#xa;&#xa;TOTAL: $18.9-26.9K/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;align=left;spacingLeft=10;fontSize=12;" vertex="1" parent="summary">
+          <mxGeometry x="20" y="40" width="280" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="capex" value="🏗️ CAPEX MVP&#xa;&#xa;Personal: $1.6-3M&#xa;• 2-3 ing + PM (4m)&#xa;&#xa;Setup: $40-100K&#xa;• Infra inicial&#xa;&#xa;Tools: $60-100K&#xa;• Proxies + Anti-bot&#xa;&#xa;TOTAL MVP: $1.8-3.4M" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1CA8F7;strokeColor=#05297A;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=12;" vertex="1" parent="summary">
+          <mxGeometry x="320" y="40" width="280" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="post-mvp" value="🚀 POST-MVP&#xa;&#xa;Scraping: $40-160K&#xa;Infra: $20-60K&#xa;Maint: $160-240K&#xa;(1 ing 50%)&#xa;&#xa;TOTAL: $220-460K/mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#05297A;strokeColor=#081754;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=12;" vertex="1" parent="summary">
+          <mxGeometry x="620" y="40" width="280" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="savings" value="💡 AHORRO&#xa;&#xa;vs Plataformas:&#xa;50-80%&#xa;&#xa;vs Scraping Admin:&#xa;$30-60K → $12-18K&#xa;&#xa;ROI: 4-6 meses" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0D224;strokeColor=#05297A;fontColor=#05297A;align=left;spacingLeft=10;fontSize=12;fontStyle=1;" vertex="1" parent="summary">
+          <mxGeometry x="920" y="40" width="300" height="140" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

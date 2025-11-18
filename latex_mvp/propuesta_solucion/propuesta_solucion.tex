@@ -14,6 +14,7 @@
 \setlength{\parindent}{0pt}
 \usepackage{graphicx}
 \usepackage{svg}
+\usepackage{float}
 \usepackage{titlesec}
 \usepackage{newunicodechar}
 \usepackage{enumitem}
@@ -107,9 +108,6 @@ Plataforma de Monitoreo de\\[0.3cm]
 Precios Competitivos\\[0.3cm]
 \Large Hoja de Ruta MVP de 3-4 Meses}
 
-\vspace{0.5cm}
-{\large\color{brandMediumBlue}\itshape
-``Explorando las profundidades del comercio electrónico''}
 \end{center}
 
 \vspace{0.8cm}
@@ -162,8 +160,8 @@ Proponemos un MVP usando stack tecnológico probado: Playwright para automatizac
 
 \begin{itemize}
 	\item \textbf{Cronograma:} 16 semanas hasta despliegue
-	\item \textbf{Presupuesto MVP:} \$90-170K USD
-	\item \textbf{Costos Operacionales:} \$600-900/mes
+	\item \textbf{Presupuesto MVP:} \$1.8-3.4M MXN
+	\item \textbf{Costos Operacionales:} \$12,000-18,000 MXN/mes
 	\item \textbf{Equipo:} 3.75 FTE
 	\item \textbf{Ahorro:} 50-80\% vs plataformas comerciales
 	\item \textbf{Stack:} Playwright, Prefect, Polars, DuckDB, FastAPI, React
@@ -177,9 +175,9 @@ El mercado de monitoreo de precios competitivos ofrece tanto plataformas comerci
 
 \subsection{Plataformas Comerciales}
 
-\textbf{Plataformas de nivel empresarial} como Competera, Intelligence Node y DataWeave proporcionan soluciones integrales con garantías de precisión de datos del 95-99\% y eliminan la complejidad técnica. La plataforma impulsada por IA de Competera logra 98\% de precisión SLA y afirma un potencial de mejora de margen del 6\%, mientras que DataWeave sobresale en coincidencia de SKU con 95\%+ de precisión usando extracción de atributos basada en LLM. Intelligence Node monitorea el conjunto de datos de precios más grande del mundo y sirve a grandes minoristas como Macy's y Lenovo. Estas plataformas típicamente cuestan \$750-\$5,000+ mensuales pero reducen el tiempo de desarrollo a semanas en lugar de meses.
+\textbf{Plataformas de nivel empresarial} como Competera, Intelligence Node y DataWeave proporcionan soluciones integrales con garantías de precisión de datos del 95-99\% y eliminan la complejidad técnica. La plataforma impulsada por IA de Competera logra 98\% de precisión SLA y afirma un potencial de mejora de margen del 6\%, mientras que DataWeave sobresale en coincidencia de SKU con 95\%+ de precisión usando extracción de atributos basada en LLM. Intelligence Node monitorea el conjunto de datos de precios más grande del mundo y sirve a grandes minoristas como Macy's y Lenovo. Estas plataformas típicamente cuestan \$15,000-\$100,000+ MXN mensuales pero reducen el tiempo de desarrollo a semanas en lugar de meses.
 
-\textbf{Soluciones de mercado medio} como Prisync ofrecen puntos de entrada más accesibles a \$99-\$799 mensuales para 100-5,000 productos, proporcionando seguimiento ilimitado de competidores con 3 actualizaciones diarias y motores de precios dinámicos. Minderest, el líder europeo, logra 99\%+ de calidad de datos y sirve a 11 de los 50 minoristas más grandes del mundo. Para empresas que priorizan velocidad al mercado y carecen de recursos técnicos profundos, estas plataformas proporcionan el camino más rápido hacia inteligencia competitiva.
+\textbf{Soluciones de mercado medio} como Prisync ofrecen puntos de entrada más accesibles a \$2,000-\$16,000 MXN mensuales para 100-5,000 productos, proporcionando seguimiento ilimitado de competidores con 3 actualizaciones diarias y motores de precios dinámicos. Minderest, el líder europeo, logra 99\%+ de calidad de datos y sirve a 11 de los 50 minoristas más grandes del mundo. Para empresas que priorizan velocidad al mercado y carecen de recursos técnicos profundos, estas plataformas proporcionan el camino más rápido hacia inteligencia competitiva.
 
 \subsection{Frameworks Open Source}
 
@@ -191,11 +189,11 @@ Scrapy sigue siendo la fundación para extracción de contenido estático, ofrec
 
 \subsection{Servicios de Scraping Administrados}
 
-\textbf{Proveedores premium} (Bright Data, Oxylabs) gestionan infraestructura completa: proxies residenciales, resolución de CAPTCHA y renderizado JavaScript. Costos: \$500-\$5,000/mes con tasas de éxito del 95-99\%.
+\textbf{Proveedores premium} (Bright Data, Oxylabs) gestionan infraestructura completa: proxies residenciales, resolución de CAPTCHA y renderizado JavaScript. Costos: \$10,000-\$100,000 MXN/mes con tasas de éxito del 95-99\%.
 
-\textbf{Alternativas económicas} (ScraperAPI, ScrapingBee) ofrecen acceso basado en API a \$49-\$599/mes, manejando rotación de proxies y anti-bot automáticamente.
+\textbf{Alternativas económicas} (ScraperAPI, ScrapingBee) ofrecen acceso basado en API a \$1,000-\$12,000 MXN/mes, manejando rotación de proxies y anti-bot automáticamente.
 
-\textbf{Recomendación MVP:} Usar ScraperAPI o ScrapingBee para sitios desafiantes y construir scrapers simples internamente. Costo estimado: \$200-\$800/mes con tasa de éxito del 95\%+.
+\textbf{Recomendación MVP:} Usar ScraperAPI o ScrapingBee para sitios desafiantes y construir scrapers simples internamente. Costo estimado: \$4,000-\$16,000 MXN/mes con tasa de éxito del 95\%+.
 
 \section{Arquitectura Técnica del Sistema}
 
@@ -217,15 +215,29 @@ Esta separación permite que el servicio de orquestación se ejecute continuamen
 
 Las instancias de Playwright en contenedores desplegadas vía Docker habilitan escalamiento horizontal, con cada contenedor manejando 5-10 contextos de navegador concurrentes. RabbitMQ distribuye trabajos de scraping a través del pool de workers, proporcionando encolado de tareas confiable con manejo de dead letter para intentos fallidos. Redis cachea datos accedidos frecuentemente y gestiona limitación de tasa, mientras que PostgreSQL almacena metadatos operacionales (estado de trabajos, catálogos de productos, reglas de alertas).
 
-Los datos scrapeados en crudo fluyen a S3 en formato Parquet, proporcionando almacenamiento columnar que comprime archivos CSV de 123MB a 10-20MB mientras habilita consultas analíticas rápidas.
+Los datos scrapeados en crudo fluyen a Google Cloud Storage (GCS) en formato Parquet, proporcionando almacenamiento columnar que comprime archivos CSV de 123MB a 10-20MB mientras habilita consultas analíticas rápidas.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{arquitectura_principal.png}
+	\caption{Arquitectura de 5 capas del sistema Nautilus: Orquestación, Extracción, Procesamiento, Almacenamiento y Presentación}
+	\label{fig:arquitectura_principal}
+\end{figure}
 
 \subsection{El pipeline de datos sigue principios de arquitectura lambda}
 
-El \textbf{enfoque de doble camino} separa procesamiento por lotes (scrapes diarios completos) del procesamiento de flujo (cambios de precio en tiempo real que exceden umbrales). Los datos scrapeados aterrizan en S3 particionados por fecha, competidor y categoría, habilitando consulta eficiente de períodos de tiempo específicos sin escanear el conjunto de datos completo.
+El \textbf{enfoque de doble camino} separa procesamiento por lotes (scrapes diarios completos) del procesamiento de flujo (cambios de precio en tiempo real que exceden umbrales). Los datos scrapeados aterrizan en GCS particionados por fecha, competidor y categoría, habilitando consulta eficiente de períodos de tiempo específicos sin escanear el conjunto de datos completo.
 
 DuckDB proporciona analítica SQL directamente sobre archivos Parquet sin requerir ETL, logrando rendimiento de consultas sub-segundo en millones de registros. Polars maneja transformaciones de datos 10-50x más rápido que Pandas a través de su núcleo Rust multi-hilo, haciéndolo ideal para procesar scrapes diarios de miles de productos.
 
 Para la escala inicial de Coppel (3-4 competidores, 2-3 categorías, probablemente 1,000-5,000 SKUs), Polars elimina la complejidad de gestión de clusters Spark mientras proporciona rendimiento suficiente. Apache Spark se vuelve necesario solo al escalar más allá de 50,000 SKUs o requerir streaming en tiempo real con latencia sub-minuto.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{flujo_datos.png}
+	\caption{Pipeline ETL de 5 pasos: Extracción, Raw Data, Transformación, Clean Data y Storage con métricas de calidad y performance}
+	\label{fig:flujo_datos}
+\end{figure}
 
 \subsection{Stack tecnológico optimizado para entrega de 3-4 meses}
 
@@ -233,7 +245,7 @@ Para la escala inicial de Coppel (3-4 competidores, 2-3 categorías, probablemen
 
 Playwright proporciona la ejecución más rápida, arquitectura moderna y herramientas de depuración listas para producción. Su soporte multi-lenguaje (JavaScript, Python, Java, .NET) ofrece flexibilidad, aunque la integración Python se adapta a las probables habilidades del equipo de datos de Coppel.
 
-\textbf{Consideración de costos:} Cada instancia de navegador requiere 2-4GB RAM; presupuestar 1-2 VMs más grandes (4 vCPU, 8GB RAM) para scraping basado en navegador mientras se usan solicitudes HTTP ligeras en micro instancias (\$5-10 mensuales) para sitios no protegidos reduce costos de infraestructura en 70\%.
+\textbf{Consideración de costos:} Cada instancia de navegador requiere 2-4GB RAM; presupuestar 1-2 VMs más grandes (4 vCPU, 8GB RAM) para scraping basado en navegador mientras se usan solicitudes HTTP ligeras en micro instancias (\$100-200 MXN mensuales) para sitios no protegidos reduce costos de infraestructura en 70\%.
 
 \subsubsection{Job orchestration: Prefect}
 
@@ -245,7 +257,7 @@ La combinación Polars + DuckDB elimina infraestructura pesada mientras proporci
 
 \subsubsection{Storage architecture}
 
-Parquet en S3 sirve como la \textbf{fundación del data lake}, almacenando snapshots históricos completos a \$0.023 por GB mensual. PostgreSQL mantiene datos operacionales (cuentas de usuario, metadatos de trabajos, catálogo de productos, reglas de alertas), mientras que Redis cachea datos calientes y gestiona características en tiempo real (actualizaciones de dashboard, alertas de umbral).
+Parquet en GCS sirve como la \textbf{fundación del data lake}, almacenando snapshots históricos completos a \$0.40 MXN por GB mensual. PostgreSQL mantiene datos operacionales (cuentas de usuario, metadatos de trabajos, catálogo de productos, reglas de alertas), mientras que Redis cachea datos calientes y gestiona características en tiempo real (actualizaciones de dashboard, alertas de umbral).
 
 Este enfoque de tres niveles separa cargas de trabajo analíticas (DuckDB consultando Parquet) de cargas de trabajo operacionales (transacciones PostgreSQL), optimizando tanto costo como rendimiento.
 
@@ -259,15 +271,15 @@ React con Recharts proporciona la arquitectura basada en componentes necesaria p
 
 \subsection{Costos estimados de infraestructura y asignación de equipo}
 
-\textbf{Costos operacionales mensuales} para la escala MVP de Coppel totalizan \$600-\$900:
+\textbf{Costos operacionales mensuales} para la escala MVP de Coppel totalizan \$12,000-\$18,000 MXN:
 
 \begin{itemize}
-	\item Infraestructura: \$142 (VMs, Redis, base de datos)
-	\item Proxies: \$397 (mezcla optimizada datacenter/residencial)
-	\item Servicios: \$80 (resolución CAPTCHA y monitoreo)
+	\item Infraestructura: \$2,840 MXN (VMs, Redis, base de datos)
+	\item Proxies: \$7,940 MXN (mezcla optimizada datacenter/residencial)
+	\item Servicios: \$1,600 MXN (resolución CAPTCHA y monitoreo)
 \end{itemize}
 
-Esto representa 50-80\% de ahorro versus externalizar a servicios de scraping administrados a \$1,500-\$3,000 mensuales para volumen equivalente.
+Esto representa 50-80\% de ahorro versus externalizar a servicios de scraping administrados a \$30,000-\$60,000 MXN mensuales para volumen equivalente.
 
 \textbf{Asignación de equipo} a través de los 3.75 FTE:
 
@@ -303,7 +315,7 @@ Estos sistemas logran 95\%+ de precisión en distinguir navegadores automatizado
 	\item Google Cache (gratis pero sin frescura)
 	\item Navegadores headless fortificados (Puppeteer stealth, undetected-chromedriver)
 	\item Solucionadores open-source (FlareSolverr, cloudscraper)
-	\item Servicios de solución premium (\$1,000-\$5,000/millón páginas)
+	\item Servicios de solución premium (\$20,000-\$100,000 MXN/millón páginas)
 \end{enumerate}
 
 \textbf{La perspectiva crítica:} Reserve soluciones costosas para el 15-20\% de sitios competidores con protección sofisticada, usando solicitudes HTTP ligeras o automatización de navegador básica para el 80\% restante.
@@ -318,22 +330,22 @@ Estos sistemas logran 95\%+ de precisión en distinguir navegadores automatizado
 \textbf{Nivel} & \textbf{Costo} \\
 \midrule
 Sin proxy & Gratis \\
-Proxies datacenter & \$0.10-\$0.50/GB \\
-Proxies residenciales & \$1-\$8/GB \\
-Proxies móviles & \$8-\$40/GB \\
-Desbloqueadores premium & \$1,000-\$5,000/millón req \\
+Proxies datacenter & \$2-\$10 MXN/GB \\
+Proxies residenciales & \$20-\$160 MXN/GB \\
+Proxies móviles & \$160-\$800 MXN/GB \\
+Desbloqueadores premium & \$20,000-\$100,000 MXN/millón req \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\textbf{Para scraping diario de 100,000 productos}, una mezcla optimizada de 80\% datacenter y 20\% residencial cuesta aproximadamente \$111 mensuales versus \$375 para todo residencial.
+\textbf{Para scraping diario de 100,000 productos}, una mezcla optimizada de 80\% datacenter y 20\% residencial cuesta aproximadamente \$2,220 MXN mensuales versus \$7,500 MXN para todo residencial.
 
 \textbf{Proveedores de proxy recomendados} basados en benchmarks 2025:
 
 \begin{itemize}
-	\item \textbf{Decodo} (Smartproxy): Mejor valor a 99.86\% éxito y \$3.50-\$1.50/GB
-	\item \textbf{Oxylabs}: Premium (99.82\% éxito, 0.41s respuesta) a \$4-\$2/GB
-	\item \textbf{SOAX/Bright Data}: Pools más grandes (155M+ IPs) a \$4-\$5/GB
+	\item \textbf{Decodo} (Smartproxy): Mejor valor a 99.86\% éxito y \$70-\$30 MXN/GB
+	\item \textbf{Oxylabs}: Premium (99.82\% éxito, 0.41s respuesta) a \$80-\$40 MXN/GB
+	\item \textbf{SOAX/Bright Data}: Pools más grandes (155M+ IPs) a \$80-\$100 MXN/GB
 \end{itemize}
 
 \subsection{La ingeniería de confiabilidad previene fallas silenciosas}
@@ -438,13 +450,20 @@ La gestión estratégica de proxies y optimización de infraestructura reducen c
 \toprule
 \textbf{Proveedor} & \textbf{Costo Mensual} \\
 \midrule
-AWS EC2 & \$108 \\
-DigitalOcean & \$96 \\
-Vultr & \$90 \\
-Hetzner (bare metal) & \$50-200 \\
+Google Cloud (GCP) & \$2,160 MXN \\
+DigitalOcean & \$1,920 MXN \\
+Vultr & \$1,800 MXN \\
+Hetzner (bare metal) & \$1,000-4,000 MXN \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{infraestructura_gcp.png}
+	\caption{Infraestructura Google Cloud Platform: Compute Engine, Storage, Databases, Networking y servicios externos con desglose de costos OPEX, CAPEX y Post-MVP}
+	\label{fig:infraestructura_gcp}
+\end{figure}
 
 \textbf{El premium de costo de navegador:} Scraping basado en navegador consume 2MB promedio por página versus 50-150KB para solicitudes HTTP---una diferencia de 10-40x. Usar navegadores exclusivamente para el 15-20\% de sitios que requieren JavaScript ahorra 60-80\% en costos de ancho de banda de proxy.
 
@@ -457,12 +476,12 @@ Hetzner (bare metal) & \$50-200 \\
 \toprule
 \textbf{Componente} & \textbf{Descripción} & \textbf{Costo} \\
 \midrule
-Infraestructura & VMs, Redis, PostgreSQL & \$142 \\
-Proxies & 70\% datacenter, 25\% residencial, 5\% premium & \$397 \\
-Servicios & CAPTCHA solving, monitoreo & \$80 \\
+Infraestructura & VMs, Redis, PostgreSQL & \$2,840 MXN \\
+Proxies & 70\% datacenter, 25\% residencial, 5\% premium & \$7,940 MXN \\
+Servicios & CAPTCHA solving, monitoreo & \$1,600 MXN \\
 \midrule
-\textbf{TOTAL} & & \textbf{\$619/mes} \\
-\textbf{Por 1K req} & & \textbf{\$0.21} \\
+\textbf{TOTAL} & & \textbf{\$12,380 MXN/mes} \\
+\textbf{Por 1K req} & & \textbf{\$4.13 MXN} \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -770,7 +789,7 @@ Combinar insights de casos de estudio y mejores prácticas técnicas rinde una h
 \begin{itemize}
 	\item Usar servicios administrados (ScraperAPI/ScrapingBee) para infraestructura anti-bot
 	\item Construir matching SKU personalizado, analítica, dashboard, integraciones
-	\item Equilibra velocidad, costo (\$200-800/mes vs \$2-5K comercial), control
+	\item Equilibra velocidad, costo (\$4,000-16,000 MXN/mes vs \$40-100K MXN comercial), control
 \end{itemize}
 
 \textbf{Presupuesto MVP estimado:}
@@ -780,12 +799,12 @@ Combinar insights de casos de estudio y mejores prácticas técnicas rinde una h
 \toprule
 \textbf{Concepto} & \textbf{Descripción} & \textbf{Monto} \\
 \midrule
-Personal & 2-3 ingenieros + PM (4 meses) & \$80-150K \\
-Plataforma scraping & Piloto y meses iniciales & \$2-10K \\
-Infraestructura & AWS/GCS, databases, monitoring & \$2-5K \\
-Herramientas/servicios & Proxies, anti-bot, analytics & \$3-5K \\
+Personal & 2-3 ingenieros + PM (4 meses) & \$1.6-3M MXN \\
+Plataforma scraping & Piloto y meses iniciales & \$40-200K MXN \\
+Infraestructura & GCP, databases, monitoring & \$40-100K MXN \\
+Herramientas/servicios & Proxies, anti-bot, analytics & \$60-100K MXN \\
 \midrule
-\textbf{TOTAL MVP} & & \textbf{\$90-170K} \\
+\textbf{TOTAL MVP} & & \textbf{\$1.8-3.4M MXN} \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -797,11 +816,11 @@ Herramientas/servicios & Proxies, anti-bot, analytics & \$3-5K \\
 \toprule
 \textbf{Concepto} & \textbf{Monto} \\
 \midrule
-Plataforma scraping & \$2-8K \\
-Infraestructura & \$1-3K \\
-Mantenimiento (1 ing 50\%) & \$8-12K \\
+Plataforma scraping & \$40-160K MXN \\
+Infraestructura & \$20-60K MXN \\
+Mantenimiento (1 ing 50\%) & \$160-240K MXN \\
 \midrule
-\textbf{TOTAL} & \textbf{\$11-23K/mes} \\
+\textbf{TOTAL} & \textbf{\$220-460K MXN/mes} \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -819,7 +838,7 @@ Mantenimiento (1 ing 50\%) & \$8-12K \\
 
 \section{Conclusión: Camino hacia Inteligencia de Precios Competitivos}
 
-Construir un MVP de monitoreo de precios competitivos en 3-4 meses demanda alcance enfocado, tecnologías probadas y desarrollo iterativo. La arquitectura recomendada---Playwright para automatización navegadores, Prefect para orquestación, Polars y DuckDB para procesamiento datos, Parquet en S3 para almacenamiento, FastAPI para backend y React para frontend---entrega capacidades listas para producción dentro restricciones cronograma y presupuesto.
+Construir un MVP de monitoreo de precios competitivos en 3-4 meses demanda alcance enfocado, tecnologías probadas y desarrollo iterativo. La arquitectura recomendada---Playwright para automatización navegadores, Prefect para orquestación, Polars y DuckDB para procesamiento datos, Parquet en GCS para almacenamiento, FastAPI para backend y React para frontend---entrega capacidades listas para producción dentro restricciones cronograma y presupuesto.
 
 Comenzando con 3-4 competidores y 1,000 SKUs, usando servicios scraping administrados para infraestructura mientras se construye coincidencia y analítica personalizadas, y siguiendo la hoja de ruta implementación por fases posiciona a Coppel para lograr las métricas requeridas de cobertura SKU del 85\%, frescura del 95\% y precisión del 97\%.
 
@@ -849,7 +868,7 @@ El marco legal apoya scraping ético de datos precios públicos al seguir mejore
 	\item Mantener documentación cumplimiento
 \end{itemize}
 
-El enfoque técnico equilibrando costo y rendimiento---usar solicitudes HTTP ligeras para sitios no protegidos, reservar automatización navegador para 20\% objetivos desafiantes, optimizar mezcla proxy e implementar caché---logra la confiabilidad requerida a costos operacionales de \$600-900 mensuales.
+El enfoque técnico equilibrando costo y rendimiento---usar solicitudes HTTP ligeras para sitios no protegidos, reservar automatización navegador para 20\% objetivos desafiantes, optimizar mezcla proxy e implementar caché---logra la confiabilidad requerida a costos operacionales de \$12,000-18,000 MXN mensuales.
 
 \textbf{El resultado:} Inteligencia competitiva lista para producción entregando insights precios accionables que mejoran posición mercado mientras opera dentro límites legales y éticos.
 
@@ -899,6 +918,8 @@ El enfoque técnico equilibrando costo y rendimiento---usar solicitudes HTTP lig
 	\item[\textbf{Parquet}] Formato de archivo columnar comprimido que optimiza el almacenamiento y consulta de grandes volúmenes de datos.
 
 	\item[\textbf{Data Lake}] Repositorio centralizado que almacena datos estructurados y no estructurados en su formato original para análisis posterior.
+
+	\item[\textbf{GCS}] Google Cloud Storage---servicio de almacenamiento de objetos en la nube de Google, compatible con APIs estándar S3 y optimizado para almacenamiento escalable de archivos Parquet.
 
 	\item[\textbf{OLAP}] Online Analytical Processing---sistemas optimizados para consultas analíticas complejas sobre grandes volúmenes de datos históricos.
 
@@ -1144,7 +1165,6 @@ Todos estos tienen documentación excelente, comunidades activas, y son de códi
 {\color{brandDarkGrey}\small
 Documento generado para Coppel --- Noviembre 2025 \\
 \textbf{Nautilus} --- Propuesta Técnica MVP Plataforma Monitoreo Precios Competitivos \\
-\textit{``Explorando las profundidades del comercio electrónico''}
 }
 \end{center}
 
